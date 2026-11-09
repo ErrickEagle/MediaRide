@@ -18,8 +18,20 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
 .links a{position:relative}.links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .35s}.links a:hover::after{transform:scaleX(1)}
 .pill{display:inline-flex;align-items:center;gap:14px;padding:6px 6px 6px 20px;border-radius:999px;font:600 16px var(--b);transition:transform .3s}
 .pill .dot{width:38px;height:38px;border-radius:999px;background:var(--orange);color:#fff;display:grid;place-items:center;flex:none;overflow:hidden}
-.pill .dot svg{width:18px;height:18px;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-.pill:hover .dot svg{transform:translateX(3px)}
+.pill .dot svg{width:18px;height:18px;flex:none;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+
+
+/* button hover (reference style): a wide orange ellipse rises from below to fill the pill; the arrow slides out right as a new one slides in */
+.pill{position:relative;overflow:hidden;isolation:isolate;transition:color .45s cubic-bezier(.2,.8,.2,1)}
+.pill::before{content:"";position:absolute;left:-25%;width:150%;height:200%;top:108%;border-radius:50%;background:var(--orange);z-index:-1;transition:top .55s cubic-bezier(.2,.8,.2,1)}
+.pill:hover::before,.pill:focus-visible::before{top:-50%}
+.pill:hover,.pill:focus-visible{color:#fff}
+.pill.light:hover,.pill.light:focus-visible{border-color:var(--orange);color:#fff}
+.pill .dot{position:relative}
+.pill .dot svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.pill .dot svg:first-child{transform:translate(-260%,-50%)}
+.pill:hover .dot svg:first-child,.pill:focus-visible .dot svg:first-child{transform:translate(-50%,-50%)}
+.pill:hover .dot svg:last-child,.pill:focus-visible .dot svg:last-child{transform:translate(160%,-50%)}
 .pill.light{background:rgba(255,255,255,.7);border:1px solid var(--line);color:var(--black);backdrop-filter:blur(8px)}
 .pill.dark{background:var(--black);color:#fff;padding:7px 7px 7px 24px}
 .pill.dark .dot{width:42px;height:42px}
@@ -52,20 +64,18 @@ h1 .dotc{color:var(--orange)}
 .grow-row{display:flex;justify-content:space-between;gap:40px;margin-top:34px}
 .grow-l{max-width:560px}
 .grow h2{margin:0;font:600 40px/52px var(--h);letter-spacing:-.04em;color:var(--black)}
-.grow h2 .hl{position:relative;display:inline-block;font-weight:500;font-style:italic;padding:0 4px;margin:0 2px}
+.grow h2 .hl{position:relative;display:inline-block;padding:0 4px;margin:0 2px}
 .grow h2 .hl::before{content:"";position:absolute;left:0;right:0;bottom:10px;height:16px;background:var(--orange);opacity:.85;z-index:-1;transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.8,.2,1) .2s}
 .grow.in h2 .hl::before{transform:scaleX(1)}
 .grow h2 .hl{z-index:0}
 .grow p{margin:22px 0 24px;max-width:500px;font:400 16px/22.4px var(--b);color:#696969}
 .pill.ghost{border:1px solid var(--line);color:var(--black);padding:7px 7px 7px 16px;gap:12px;position:relative;overflow:hidden;isolation:isolate}
-.pill.ghost .dot{width:32px;height:32px;position:static}
-.pill.ghost .dot svg{width:16px;height:16px;position:relative;z-index:1}
-.pill.ghost::before{content:"";position:absolute;right:7px;top:50%;width:32px;height:32px;margin-top:-16px;border-radius:999px;background:var(--orange);transform:scale(1);transition:transform .5s cubic-bezier(.2,.8,.2,1);z-index:-1}
-.pill.ghost:hover::before{transform:scale(9)}
-.pill.ghost:hover{color:#fff}
-.stats{display:grid;grid-template-columns:repeat(2,270px);column-gap:20px;row-gap:24px;align-content:start;margin-top:-2px}
+.pill.ghost .dot{width:32px;height:32px}
+.pill.ghost .dot svg{width:16px;height:16px}
+.pill.ghost:hover,.pill.ghost:focus-visible{color:#fff;border-color:var(--orange)}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(270px,auto));column-gap:40px;column-gap:20px;row-gap:24px;align-content:start;margin-top:-2px}
 .stat b{display:block;font:400 64px/79px var(--h);letter-spacing:-.04em;color:var(--black);font-variant-numeric:tabular-nums}
-.stat span{display:block;margin-top:15px;font:400 16px/22.4px var(--b);color:#121212}
+.stat span{display:block;white-space:nowrap;margin-top:15px;font:400 16px/22.4px var(--b);color:#121212}
 @media (max-width:1100px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.grow{padding:72px 0}.grow-img{aspect-ratio:4/3;border-radius:18px}.grow-row{flex-direction:column;gap:48px;margin-top:28px}
  .grow h2{font-size:32px;line-height:42px}.grow h2 .hl::before{bottom:8px;height:12px}.stat b{font-size:48px;line-height:58px}.stat span{font-size:15px;margin-top:8px}.stats{row-gap:32px}}
@@ -85,7 +95,7 @@ h1 .dotc{color:var(--orange)}
 <header class="nav" id="nav"><div class="wrap">
   <a href="#" aria-label="MediaRide home"><svg class="wordmark" viewBox="0 0 152 24.6" role="img" aria-label="MediaRide"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg></a>
   <nav class="links"><a href="#">Services</a><a href="#">Work</a><a href="#">Process</a><a href="#">About</a><a href="#">Contact</a></nav>
-  <a class="pill light" href="#"><span>Book a call</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a>
+  <a class="pill light" href="#"><span>Book a call</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a>
 </div></header>
 
 <section class="hero">
@@ -93,7 +103,7 @@ h1 .dotc{color:var(--orange)}
   <div class="wrap hero-in">
     <div class="hero-row">
       <h1><span class="ln">Every shoot, <span class="clip"><video src="v/pn8.mp4" poster="v/pn8.jpg" muted loop playsinline autoplay></video></span></span><span class="ln"><span>planned for feed<span class="dotc">.</span></span></span></h1>
-      <div class="side"><p>We film your launches, campaigns and events, then cut every shoot into clips for social, sales and your site.</p><a class="pill dark" href="#"><span>Book a call</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a></div>
+      <div class="side"><p>We film your launches, campaigns and events, then cut every shoot into clips for social, sales and your site.</p><a class="pill dark" href="#"><span>Book a call</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a></div>
     </div>
     <div class="trust"><b>Trusted by:</b><div class="marq"><div class="track"><img src="logos/row1_1.svg" alt=""><img src="logos/row1_2.svg" alt=""><img src="logos/row1_3.svg" alt=""><img src="logos/row1_4.svg" alt=""><img src="logos/row1_5.svg" alt=""><img src="logos/row2_1.svg" alt=""><img src="logos/row2_2.svg" alt=""><img src="logos/row2_3.svg" alt=""><img src="logos/row2_4.svg" alt=""><img src="logos/row1_1.svg" alt=""><img src="logos/row1_2.svg" alt=""><img src="logos/row1_3.svg" alt=""><img src="logos/row1_4.svg" alt=""><img src="logos/row1_5.svg" alt=""><img src="logos/row2_1.svg" alt=""><img src="logos/row2_2.svg" alt=""><img src="logos/row2_3.svg" alt=""><img src="logos/row2_4.svg" alt=""></div></div></div>
   </div>
@@ -104,12 +114,12 @@ h1 .dotc{color:var(--orange)}
     <div class="grow-l">
       <h2>One shoot, <span class="hl">weeks</span><br>of content to post.</h2>
       <p>We film your launches, campaigns and events, then cut every shoot into clips for social, sales and your site. One plan, one crew, a full month of content.</p>
-      <a class="pill ghost" href="#"><span>About us</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a>
+      <a class="pill ghost" href="#"><span>About us</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a>
     </div>
     <div class="stats">
       <div class="stat"><b data-to="2" data-suf="M">2M</b><span>Views on LinkedIn for Hiring Pro</span></div>
-      <div class="stat"><b data-to="60" data-suf="+">60+</b><span>Pieces of content from one Docker conference</span></div>
-      <div class="stat"><b data-to="60" data-suf="%+">60%+</b><span>Of Hook’s revenue influenced in one quarter</span></div>
+      <div class="stat"><b data-to="60" data-suf="+">60+</b><span>Clips from one Docker conference</span></div>
+      <div class="stat"><b data-to="60" data-suf="%+">60%+</b><span>Of Hook’s revenue in one quarter</span></div>
       <div class="stat"><b data-to="30" data-suf="%">30%</b><span>More clients for Hanke &amp; Apolonio</span></div>
     </div>
   </div>
