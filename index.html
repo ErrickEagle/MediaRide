@@ -1143,8 +1143,13 @@ document.documentElement.classList.add('loading');
 (function(){
   const num=$('#ldNum'), bar=$('#ldBar'), mark=$('.wordmark',loaderEl), o={v:0};
   const lt=gsap.timeline();
-  // 1.75s in total: logo in (0 to .4), bar 0 to 100 (.1 to 1.15), logo out (1.15 to 1.35), panel slides up (1.2 to 1.75)
-  lt.from(mark,{opacity:0,y:20,scale:.96,duration:.4,ease:'power3.out'})
+  // 1.75s in total: logo letters build (.05 to 1.1), bar 0 to 100 (.1 to 1.15), logo out (1.15 to 1.35), panel slides up (1.2 to 1.75)
+  // the logo builds itself while it loads: each letter rises out of a mask one after another, then the dot on the i pops in
+  const letters=$$('path',mark), dot=$('circle',mark);
+  gsap.set(mark,{overflow:'hidden'});
+  lt.from(letters,{y:28,duration:.42,ease:'power3.out',stagger:.07},.05)
+    .from(letters,{opacity:0,duration:.2,ease:'none',stagger:.07},.05)
+    .from(dot,{scale:0,transformOrigin:'50% 50%',duration:.32,ease:'back.out(3)'},.8)
     .to(o,{v:100,duration:1.05,ease:'power1.inOut',onUpdate:()=>{num.textContent=Math.round(o.v)+'%';bar.style.transform=`scaleX(${o.v/100})`;}},.1)
     .to([mark,'.ld-foot'],{opacity:0,y:-24,duration:.2,ease:'power2.in',stagger:.03},1.15)
     .to(loaderEl,{yPercent:-100,duration:.55,ease:'power4.inOut'},1.2)
