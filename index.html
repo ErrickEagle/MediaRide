@@ -7,7 +7,7 @@
 :root{
   --vh:1vh;
   --orange:#D46328; --orange-text:#B8501E; --ink:#292929; --ink-soft:#5C5955; --muted:#8C8C8C;
-  --black:#121212; --off:#F2F2F2; --white:#FFFFFF; --line:#E2E2E2; --line-dark:#2E2E2E;
+  --black:#050505; --head:#050505; --off:#F2F2F2; --white:#FFFFFF; --line:#E2E2E2; --line-dark:#2E2E2E;
   --heading:"Montserrat",system-ui,sans-serif; --body:"Open Sans",system-ui,sans-serif;
   --gut:max(16px, env(safe-area-inset-left, 0px));
   color-scheme:light;
@@ -19,7 +19,8 @@ img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer}
 .wrap{width:100%;max-width:1440px;margin:0 auto;padding-left:max(16px,min(80px,5.5vw),env(safe-area-inset-left,0px));padding-right:max(16px,min(80px,5.5vw),env(safe-area-inset-right,0px))}
-.h{font-family:var(--heading);font-weight:500;letter-spacing:-0.04em;margin:0;text-wrap:balance}
+:is(#intro,.trusted,#work,.tm,#foot) .h,.statement.ab-rev{color:var(--head)}
+.h{font-family:var(--heading);font-weight:600;letter-spacing:-0.04em;margin:0;text-wrap:balance}
 .label{font-family:var(--heading);font-weight:500;font-size:14px}
 .ic{width:1em;height:1em;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
 .proto-note{position:fixed;left:max(12px,env(safe-area-inset-left,0px));bottom:max(12px,env(safe-area-inset-bottom,0px));z-index:90;background:var(--ink);color:#fff;font:500 12px/1 var(--heading);padding:10px 14px;border-radius:999px;opacity:.88;pointer-events:none}
@@ -37,7 +38,8 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .menu a:hover,.menu button:hover{color:var(--orange-text)}
 .menu .chev{width:16px;height:16px;transition:transform .3s}
 .site-head.open .menu .chev{transform:rotate(180deg)}
-.menu .btn-orange{background:var(--orange);color:#fff !important;font-weight:500 !important;padding:9px 20px !important;border-radius:999px}
+/* nav Book a call: same size, font and shape as the hero's Book a Call (.btn-dark), in brand orange */
+.menu .btn-orange{background:var(--orange);color:#fff !important;font:600 17px var(--body) !important;padding:15px 22px !important;border-radius:999px;line-height:normal}
 /* wave hover (from the Inspiration Lab wave button): a second colour pill rises from below while the label waves out the top as a V and a new label waves in */
 [data-flip]{position:relative;overflow:hidden;isolation:isolate;--wv-ease:cubic-bezier(.6,0,.2,1)}
 .wv-fill{position:absolute;inset:-1px;border-radius:inherit;background:var(--wv-fill,var(--black));z-index:-1;pointer-events:none;transform:translateY(100%) scaleX(.78);transition:transform .5s var(--wv-ease) .06s}
@@ -77,6 +79,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .intro{position:sticky;top:0;height:calc(var(--vh) * 100);min-height:640px;overflow:hidden;background:#fff}
 .tiles{position:absolute;inset:0}
 .orbit{position:absolute;left:50%;top:calc(50% - 40px);width:0;height:0}
+.hring{position:absolute;left:0;top:0;width:0;height:0}
+.orbit.rings.d{transform:scale(var(--rs-d,1))}
+.orbit.rings.m{transform:scale(var(--rs-m,.46))}
 .tile{position:absolute;transform:translate(-50%,-50%) rotate(var(--r));opacity:0}
 .tile .pop{width:100%;height:100%}
 .tile{pointer-events:none}
@@ -105,7 +110,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .reel-play svg{width:26px;height:26px;fill:currentColor;stroke:none}
 .reel.live .reel-play{opacity:0;transform:scale(.6)}
 /* preloader: logo in the middle, a bar and a counter at the bottom, then the whole panel slides up */
-.loader{position:fixed;inset:0;z-index:200;background:var(--black);color:#fff;display:grid;place-items:center;will-change:transform}
+.loader{position:fixed;inset:0;z-index:200;background:#050505;color:#fff;display:grid;place-items:center;will-change:transform}
 .loader .wordmark{width:min(260px,58vw)}
 .loader .wordmark path[fill="#5C5955"]{fill:#fff}
 .ld-foot{position:absolute;left:0;right:0;bottom:0;padding:0 max(24px,env(safe-area-inset-right,0px)) max(28px,env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
@@ -128,7 +133,27 @@ html.loading,html.loading body{overflow:hidden}
 
 /* ---------- ABOUT ---------- */
 .about{background:#fff;padding:40px 0 120px}
-.about-statement{margin-left:min(420px,29vw);max-width:800px}
+.ab-reveal{display:grid;grid-template-columns:min(340px,24vw) 1fr;align-items:start;margin:40px 0 140px}
+.ab-lab{font:500 14px/20px var(--heading);color:var(--orange-text);padding-top:16px}
+.ab-rev{margin:0;font:600 clamp(32px,3.9vw,56px)/1.14 var(--heading);letter-spacing:-.04em;color:var(--ink);max-width:900px}
+.statement.ab-rev{font-weight:600}
+.ab-rev .ln{display:block}
+.ab-rev .rw{color:#B9B6B2;transition:none}
+.ab-rev .rw.or{color:var(--orange)}
+@media (prefers-reduced-motion:reduce){.ab-rev .rw{color:var(--black)}}
+/* about, V5: copy and button top left, 2 x 2 stats top right, one wide photo below (Figma Home · v4, About · V5) */
+.ab-top{display:flex;justify-content:space-between;align-items:flex-start;gap:64px}
+.ab-copy{display:flex;flex-direction:column;align-items:flex-start;gap:24px;max-width:540px}
+.about .kicker{color:var(--orange-text);font:500 14px/20px var(--heading)}
+.ab-h{font:600 52px/58px var(--heading);letter-spacing:-.04em;color:var(--ink);margin:0}
+.ab-h .or{color:var(--orange)}
+.ab-p{margin:0;max-width:500px;color:var(--ink-soft);font:400 16px/26px var(--body)}
+.ab-stats{display:grid;grid-template-columns:repeat(2,240px);gap:48px 56px}
+.ab-st b{display:block;font:600 72px/72px var(--heading);letter-spacing:-.04em;color:var(--ink);margin-bottom:10px}
+.ab-st span{display:block;font:400 16px/22px var(--body);color:var(--ink-soft)}
+.ab-photo{margin-top:64px;height:520px;border-radius:10px;overflow:hidden}
+.ab-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.about-statement{margin-left:min(420px,29vw);max-width:860px}
 .about-statement{--ind:0px}
 .about-statement .kicker{color:var(--orange-text);font:500 14px var(--heading);margin:0 0 10px var(--ind)}
 .statement{font:500 clamp(30px,3.4vw,48px)/1.18 var(--heading);letter-spacing:-.04em;margin:0 0 0 -.075em}
@@ -139,19 +164,19 @@ html.loading,html.loading body{overflow:hidden}
 .vpill{display:inline-block;width:2.4em;height:1em;border-radius:40px;overflow:hidden;vertical-align:middle;position:relative;background:#111}
 .vpill.s{width:1.9em}
 .vpill img,.vpill video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.about-body{margin:24px 0 0 var(--ind);max-width:420px;color:var(--ink-soft);font:400 15px/1.6 var(--body)}
-.about-btn{margin:24px 0 0 var(--ind);display:inline-block}
+.about-body{margin:24px 0 0 120px;max-width:420px;color:var(--ink-soft);font:400 15px/1.6 var(--body)}
+.about-btn{margin:24px 0 0 120px;display:inline-block}
 .cards4{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-top:120px;align-items:start}
-.c4{position:relative;height:425px;border-radius:10px;overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:26px 26px 28px}
+.c4{position:relative;height:425px;border-radius:10px;overflow:hidden;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:26px 26px 28px}
 .c4:nth-child(even){margin-top:137px}
 .c4 .bg{position:absolute;inset:0;z-index:0}
 .c4 .bg img,.c4 .bg video{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.1s cubic-bezier(.2,.8,.2,1)}
 .c4 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.3) 45%,rgba(0,0,0,.72) 100%)}
 .c4:hover .bg img,.c4:hover .bg video{transform:scale(1.04)}
 .c4>*:not(.bg){position:relative;z-index:1}
-.tag{align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:6px 14px;font:500 13px var(--heading)}
+.tag{align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:6px 14px;font:500 12px var(--heading)}
 @keyframes starSpin{to{transform:rotate(360deg)}}
-.c4 h3{font-size:26px;line-height:1.2;margin-bottom:12px}
+.c4 h3{font-size:24px;line-height:30px;letter-spacing:-.03em;margin-bottom:12px}
 .c4 p{margin:0;font:400 14px/1.55 var(--body);color:#D9D9D9}
 
 /* ---------- BIG LOGO ---------- */
@@ -163,24 +188,34 @@ html.loading,html.loading body{overflow:hidden}
 .biglogo .ltr:hover .ride{fill:var(--orange-text)}
 
 /* ---------- PROBLEM ---------- */
-.problem{position:relative;background:var(--black);color:#fff;height:2000px;padding-bottom:500px;display:flow-root}
-.pgrid{position:absolute;inset:0;pointer-events:none}
-.pgrid .wrap{height:100%;position:relative}
-.pgrid .plines{position:absolute;inset:0 max(16px,min(80px,5.5vw));border-left:1px solid #222;border-right:1px solid #222}
-.pgrid .pl{position:absolute;top:0;bottom:0;left:33.333%;border-left:1px solid #222}
-.pgrid .pl.b{left:66.666%}
-.p-sticky{position:sticky;top:calc(var(--vh) * 50 - 90px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;margin-top:350px;z-index:1}
-/* eyebrow: the small brand-colour label above a heading, text only */
-.eyebrow{display:block;color:var(--orange-text);font:500 14px/20px var(--heading)}
+.problem{position:relative;background:#050505;color:#F2F2F2;padding:120px 0 160px}
+.pp-head{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;margin-bottom:96px}
 .problem .eyebrow{color:var(--orange)}
-.p-sticky h2{font-size:clamp(32px,3.4vw,48px);line-height:1.15;max-width:440px;font-weight:400;letter-spacing:-.04em}
-.pcard{position:absolute;width:360px;z-index:2}
-.pcard .ptag{display:inline-block;background:#3A3A3A;color:#B3B3B3;font:500 11px/16px var(--heading);letter-spacing:.1em;padding:4px 10px}
-.pcard.l{text-align:right}.pcard.r{text-align:left}
-.pcard .pbox{text-align:left;border:1px solid #3A3A3A;background:var(--black);padding:28px}
-.pcard .pt{display:flex;gap:10px;align-items:center;font:500 20px/28px var(--heading);letter-spacing:-.04em}
-.pcard .pt .ic{color:var(--orange);width:20px;height:20px}
-.pcard p{margin:12px 0 0;color:var(--muted);font:400 15px/24px var(--body)}
+.pp-head h2{font-size:clamp(32px,3.4vw,48px);line-height:1.15;color:#F2F2F2;max-width:640px}
+.pp-head .dim{color:inherit}
+.pp{display:grid;grid-template-columns:380px 1fr;gap:60px}
+.pp-side{position:sticky;top:120px;height:min(680px,calc(var(--vh) * 100 - 160px));display:flex;flex-direction:column;justify-content:space-between}
+.pp-win{overflow:hidden}
+.pp-roll{will-change:transform}
+.pp-numwin{height:116px}
+.pp-n{height:116px;margin-bottom:20px;display:flex;align-items:flex-end;gap:6px}
+.pp-n span{font:700 116px/116px var(--heading);letter-spacing:-.07em;color:#333}
+.pp-n i{width:12px;height:12px;background:var(--orange);margin-bottom:19px}
+.pp-tabs{list-style:none;margin:28px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pp-tabs li{position:relative;display:flex;align-items:center;gap:10px;font:500 14px/18px var(--heading);color:#555;transition:color .35s}
+.pp-ic{width:16px;height:16px;color:var(--orange);stroke-width:1.75;flex:none;opacity:.5;transition:opacity .35s}
+.pp-tabs li.on .pp-ic{opacity:1}
+.pp-tabs li::before{display:none;content:"";position:absolute;left:0;top:9px;width:12px;height:1px;background:#555;transition:width .35s,background .35s}
+.pp-tabs li.on{color:#fff}.pp-tabs li.on::before{width:16px;background:#fff}
+.pp-twin{height:92px}
+.pp-twin h3{height:92px;margin:0 0 12px;font:600 40px/46px var(--heading);letter-spacing:-.05em;color:#F2F2F2;display:flex;align-items:flex-end}
+.pp-swin{height:84px;margin-top:12px}
+.pp-swin p{height:84px;margin:0 0 12px;font:500 17px/26px var(--body);color:#8F8F8F;max-width:340px}
+.pp-col{display:flex;flex-direction:column;gap:120px}
+.pp-img{margin:0;aspect-ratio:910/680;transform-origin:50% 50%}
+.pp-mask{width:100%;height:100%;border-radius:12px;overflow:hidden;background:#1E1E1E}
+.pp-mask img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:50% 50%}
+.pp-mob{display:none}
 
 /* ---------- WHY US ---------- */
 .why{position:sticky;top:0;height:calc(var(--vh) * 100);min-height:700px;background:var(--off);overflow:hidden;display:grid;place-items:center;padding-top:82px}
@@ -205,21 +240,25 @@ html.loading,html.loading body{overflow:hidden}
 .stat.l{text-align:right;right:calc(100% + 24px)}
 .stat.l span{width:max-content;margin-left:auto}.stat.r{left:calc(100% + 24px)}
 
-/* ---------- WHAT WE MAKE ---------- */
-.wwm-row{position:sticky;top:0;min-height:calc(var(--vh) * 100);padding:40px 0 120px;overflow:hidden}
-.wwm-row:nth-child(1),.wwm-row:nth-child(3){background:#fff}
-.wwm-row:nth-child(2){background:#F4F4F4}
-.wwm-head{margin-left:min(571px,40vw);font:500 14px var(--heading)}
-.wwm-grid{display:grid;grid-template-columns:345px 226px 1fr;margin-top:120px}
-.wwm-num{font:300 320px/300px var(--heading);letter-spacing:-.04em;overflow:hidden;height:300px;color:var(--ink)}
-.wwm-num span{display:block}
-.wwm-lab{padding-top:44px;font:500 14px var(--heading)}
-.wwm-content{padding-top:36px;display:flex;flex-direction:column;gap:36px;max-width:780px}
-.wwm-content h3{font-size:clamp(32px,3.4vw,48px);line-height:1.15}
-.wwm-still{width:288px;height:162px;border-radius:10px;overflow:hidden}
-.wwm-still img,.wwm-still video{width:100%;height:100%;object-fit:cover}
-.wwm-content p{margin:0;max-width:660px;color:var(--muted);font:400 16px/26px var(--body)}
-.wwm-content hr{border:0;height:1px;background:var(--line);margin:0;transform-origin:left}
+/* ---------- WHAT WE MAKE: built like the Services section on sanjaya.framer.ai, on white with light grey cards ---------- */
+.wwm{background:var(--off);padding:100px 0}
+.sv{display:grid;grid-template-columns:416px 1fr;gap:80px;align-items:start}
+.sv-head{position:sticky;top:100px;display:flex;flex-direction:column;align-items:flex-start;gap:0}
+.sv-label{display:inline-flex;align-items:center;gap:10px;font:500 14px/20px var(--heading);color:var(--orange-text);padding:0;margin-bottom:12px}
+.sv-head h2{font-size:48px;line-height:1.05;margin-bottom:24px}
+.sv-head p{margin:0;font:400 16px/24px var(--body);color:var(--ink-soft);max-width:400px}
+.sv-cards{display:flex;flex-direction:column;gap:24px}
+.sv-card{display:flex;gap:16px;justify-content:space-between;background:#fff;border-radius:12px;padding:12px}
+.sv-text{flex:1;max-width:340px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.sv-n{display:block;font:500 12px/14px var(--heading);color:var(--ink-soft);margin-bottom:8px}
+.sv-top h3{font-size:32px;line-height:1.2;margin-bottom:10px}
+.sv-top p{margin:0;font:400 16px/22px var(--body);color:var(--ink-soft)}
+.sv-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.sv-list li{display:flex;align-items:center;gap:10px;font:500 14px/18px var(--heading);color:var(--ink-soft)}
+.sv-list .ic{width:18px;height:18px;flex:none;color:var(--orange-text);stroke-width:1.75}
+.sv-media{width:380px;flex:none;display:flex;align-items:stretch}
+.sv-img{width:100%;min-height:300px;border-radius:8px;overflow:hidden;background:#E2E2E2}
+.sv-img video,.sv-img img{width:100%;height:100%;object-fit:cover;display:block}
 
 /* ---------- BREAKDOWN ---------- */
 .bd{position:relative;padding:140px 0 125px;color:#fff;overflow:hidden;z-index:2}
@@ -310,13 +349,15 @@ html.loading,html.loading body{overflow:hidden}
 .rp{position:absolute;left:0;top:0}
 .rc{position:absolute;width:183px;height:133px;margin:-66px -91px;border-radius:14px;overflow:hidden;opacity:0}
 .rc img,.rc video{width:100%;height:100%;object-fit:cover}
-.cta-copy{position:absolute;left:50%;top:540px;transform:translateX(-50%);text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;width:min(92vw,520px)}
-.cta-link{display:flex;align-items:center;gap:18px;font:500 clamp(36px,3.4vw,48px)/1.15 var(--heading);letter-spacing:-.04em;color:var(--ink)}
+.cta-copy{position:absolute;left:50%;top:480px;transform:translateX(-50%);text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;width:min(92vw,620px)}
+.cta-h{font-size:clamp(32px,3.4vw,48px);line-height:1.15;color:var(--head);margin:0}
+.cta-copy .cta-btn{margin-top:12px}
+.cta-link{display:flex;align-items:center;gap:18px;font:500 clamp(36px,3.4vw,48px)/1.15 var(--heading);letter-spacing:-.04em;color:var(--head)}
 .cta-arrow{width:44px;height:44px;border-radius:99px;background:var(--orange);color:#fff;display:grid;place-items:center;flex:none;transition:background .3s}
 .cta-arrow .ic{width:18px;height:18px;transform:translate(-.5px,-1px) rotate(-45deg);transition:transform .5s cubic-bezier(.2,.8,.2,1)}
 .cta-link:hover .cta-arrow{background:var(--orange-text)}
 .cta-link:hover .cta-arrow .ic{transform:translate(0,-1px) rotate(0deg)}
-.cta-copy p{margin:0;color:var(--ink-soft);font:400 18px/28px var(--body);max-width:300px}
+.cta-copy p{margin:0;color:var(--ink-soft);font:400 18px/28px var(--body);max-width:440px}
 
 /* ---------- FOOTER ---------- */
 .foot{background:var(--black);color:#fff;padding:96px 0 40px;position:relative;overflow:hidden}
@@ -356,10 +397,12 @@ html.loading,html.loading body{overflow:hidden}
   .menu{gap:22px}
   .mega-grid{grid-template-columns:1fr 1fr 1.2fr}
   .feat{grid-template-columns:1fr 1fr;gap:40px}
-  .wwm-grid{grid-template-columns:200px 160px 1fr}.wwm-num{font-size:200px;line-height:190px;height:190px}
+  .sv{grid-template-columns:320px 1fr;gap:48px}.sv-media{width:280px}
 }
 /* mobile pieces that only exist below 900 */
-.mnav-btn,.fcol a.m-only,.hero-fade,.orbit.m{display:none}
+.mnav-btn,.fcol a.m-only,.orbit.m{display:none}
+/* fade to white under the headline, from Figma: starts 84px below the headline centre, 539px tall */
+.hero-fade{position:absolute;left:0;right:0;top:calc(50% - 40px + 84px);height:max(539px,calc(50% + 40px));background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.85) 34%,#fff 55%);z-index:1;pointer-events:none}
 .mnav-btn{width:40px;height:40px;place-items:center;justify-items:end;background:none;border:0;padding:0;color:var(--ink)}
 .mnav-btn .ic{width:26px;height:26px;stroke-width:1.75}
 .mmenu{position:fixed;inset:0;z-index:100;background:#fff;display:flex;flex-direction:column;visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .6s cubic-bezier(.7,0,.2,1),visibility 0s .6s}
@@ -399,7 +442,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   /* hero + reel */
   .intro-wrap{height:calc(var(--vh) * 240)}
   .intro{min-height:560px}
-  .orbit.d{display:none}.orbit.m{display:block;top:337px}
+  .orbit.d{display:none}.orbit.m{display:block;top:322px}
   .tile .spin{border-radius:6px}
   .hero-fade{display:block;position:absolute;left:0;right:0;top:374px;height:426px;background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.85) 34%,#fff 55%);z-index:1;pointer-events:none}
   .hero-copy{top:214px;transform:translateX(-50%);gap:20px;width:min(321px,calc(100% - 40px))}
@@ -419,6 +462,17 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .logo-tile img{max-height:22px}.logo-tile img.tall{max-height:36px}
   /* about */
   .about{padding:24px 0 72px}
+  .ab-rev .ln{display:inline}
+  .about-body,.about-btn{margin-left:0}
+  .ab-lab{padding-top:0}
+  .ab-rev{font-size:min(30px,7.8vw);line-height:1.2}
+  .ab-top{flex-direction:column;gap:48px}
+  .ab-h{font-size:min(36px,9.4vw);line-height:1.15}
+  .ab-p{font-size:15px;line-height:24px}
+  .ab-stats{grid-template-columns:1fr 1fr;gap:32px 20px;width:100%}
+  .ab-st b{font-size:min(48px,12vw);line-height:1}
+  .ab-st span{font-size:14px;line-height:20px}
+  .ab-photo{margin-top:40px;height:auto;aspect-ratio:4/3}
   .about-statement{margin-left:0;max-width:none}
   .about-statement{--ind:0px}
   .about-statement .kicker{margin-bottom:12px}
@@ -434,16 +488,19 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .c4 h3{font-size:24px;line-height:30px;margin-bottom:10px}
   .c4 p{font-size:14px;line-height:22px}
   /* problem */
-  .problem{height:auto;padding:120px 0 140px}
-  .p-sticky{position:relative;top:0;margin:0 auto;padding:0 20px 56px;gap:18px}
-  .p-sticky .wordmark{width:130px}
-  .p-sticky h2{font-size:30px;line-height:36px;max-width:330px}
-  .pcard{position:relative;left:auto !important;top:auto !important;width:min(290px,calc(100% - 100px));margin:0 0 56px 20px}
-  .pcard.r{margin-left:auto;margin-right:20px}
-  .pcard:last-of-type{margin-bottom:0}
-  .pcard .pbox{padding:24px}
-  .pcard .pt{font-size:18px;line-height:26px}
-  .pcard p{font-size:15px;line-height:24px}
+  .problem{padding:88px 0 96px}
+  .pp-head{margin-bottom:48px}
+  .pp-head{gap:14px}
+  .pp-head h2{font-size:30px;line-height:36px;max-width:350px}
+  .pp{display:block}
+  .pp-side{display:none}
+  .pp-col{gap:56px}
+  .pp-img{aspect-ratio:auto}
+  .pp-mask{aspect-ratio:4/3}
+  .pp-mob{display:block;margin-top:20px}
+  .pp-mob .pp-mn{display:block;font:700 56px/1 var(--heading);letter-spacing:-.06em;color:#333;margin-bottom:12px}
+  .pp-mob h3{font:600 26px/32px var(--heading);letter-spacing:-.04em;color:#F2F2F2;margin-bottom:8px}
+  .pp-mob p{margin:0;font:400 15px/24px var(--body);color:#8F8F8F}
   /* why us: same squeeze as desktop, stats in a 2 by 2 grid under the card */
   .why-wrap{height:calc(var(--vh) * 200)}
   .why{min-height:0;padding:0}
@@ -456,15 +513,17 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .stat b{font-size:min(52px,13vw);line-height:56px}
   .stat span{margin-top:8px;font-size:12px;line-height:18px;letter-spacing:0;white-space:normal;width:auto !important;margin-left:0 !important}
   /* what we make: rows still stack and stick */
-  .wwm-row{padding:48px 0 64px}
-  .wwm-head{margin-left:0}
-  .wwm-grid{grid-template-columns:auto 1fr;column-gap:24px;margin-top:24px}
-  .wwm-num{font-size:150px;line-height:140px;height:140px}
-  .wwm-lab{padding-top:22px}
-  .wwm-content{grid-column:1/-1;padding-top:24px;gap:24px}
-  .wwm-content h3{font-size:28px;line-height:34px}
-  .wwm-still{width:100%;height:auto;aspect-ratio:350/197}
-  .wwm-content p{font-size:15px;line-height:24px}
+  .wwm{padding:72px 0}
+  .sv{display:block}
+  .sv-head{position:relative;top:0;margin-bottom:40px}
+  .sv-head h2{font-size:32px;line-height:38px;margin-bottom:16px}
+  .sv-head p{font-size:15px;line-height:24px}
+  .sv-cards{gap:16px}
+  .sv-card{flex-direction:column-reverse;padding:10px}
+  .sv-media{width:100%}
+  .sv-img{aspect-ratio:4/3}
+  .sv-text{max-width:none;padding:14px 10px 10px;gap:28px}
+  .sv-top h3{font-size:26px}
   /* how one shoot */
   .bd{padding:80px 0}
   .bd h2{font-size:30px;line-height:36px;max-width:350px;margin-bottom:40px}
@@ -502,11 +561,12 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .rv p{font-size:16px;line-height:26px}
   .who img{width:48px;height:48px}
   /* call to action */
-  .cta{height:426px}
+  .cta{height:480px}
   .ring{top:341px}
   .ring-mask{-webkit-mask-image:linear-gradient(#000 62%,transparent 90%);mask-image:linear-gradient(#000 62%,transparent 90%)}
   .rc{width:91px;height:67px;margin:-33px -45px;border-radius:10px}
-  .cta-copy{top:246px;gap:12px;width:min(260px,calc(100% - 40px))}
+  .cta-copy{top:206px;gap:12px;width:min(320px,calc(100% - 40px))}
+  .cta-h{font-size:30px;line-height:36px}
   .cta-link{font-size:36px;line-height:42px;gap:14px}
   .cta-arrow{width:40px;height:40px}
   .cta-copy p{font-size:16px;line-height:26px;max-width:260px}
@@ -535,11 +595,8 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .why-box{width:calc(100% - 32px)}
   .why-card{padding:24px}
   .why-card h2{font-size:28px;line-height:34px}
-  .pcard{width:calc(100% - 72px);margin-left:16px}.pcard.r{margin-right:16px}
   .cards4{margin:24px -16px 0;padding:0 16px;scroll-padding:0 16px}
   .c4{width:260px}
-  .wwm-num{font-size:130px;line-height:122px;height:122px}
-  .wwm-content h3{font-size:26px;line-height:32px}
   .bd h2,.tm-head h2{font-size:28px;line-height:34px}
   .panel .br h3{font-size:24px;line-height:30px}
   .reviews{padding:0 16px}
@@ -549,6 +606,83 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){
   *{transition:none !important;animation:none !important}
 }
+
+/* process (how) */
+.hw{position:relative;z-index:2;background:#050505;color:#F2F2F2}
+.hw-stage{min-height:100vh;display:flex;align-items:center;padding:120px 0;box-sizing:border-box}
+.hw-stage>.wrap{width:100%}
+.hw .eyebrow{color:var(--orange);font:500 14px/20px var(--heading)}
+.hw-head{display:flex;flex-direction:column;align-items:flex-start;gap:20px;margin-bottom:64px}
+.hw-head h2{font-size:clamp(32px,3.4vw,48px);line-height:1.15;color:#F2F2F2;max-width:620px}
+.hw-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.hw-card{position:relative;aspect-ratio:3/4;max-height:62vh;border-radius:12px;background:#111;border:1px solid #1E1E1E;padding:28px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;cursor:pointer;outline:0;transition:border-color .4s}
+.hw-card:hover,.hw-card:focus-visible{border-color:#2E2E2E}
+.hw-top{display:flex;align-items:center;gap:10px}
+.hw-ic{width:20px;height:20px;color:var(--orange);flex:none}
+.hw-step{font:600 16px var(--heading);letter-spacing:-.02em;color:#8F8F8F;white-space:nowrap}
+.hw-line{flex:1;height:0;border-top:2px dotted var(--orange)}
+.hw-body h3{font-size:32px;line-height:1.1;color:#F2F2F2;margin:0 0 14px}
+.hw-body p{margin:0;font:400 16px/24px var(--body);color:#8F8F8F;max-width:260px}
+.hw-top,.hw-body{position:relative;z-index:1;transition:opacity .3s ease}
+.hw-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .5s ease,transform .9s cubic-bezier(.2,.8,.2,1);z-index:2;pointer-events:none;background:#111}
+.hw-card.on .hw-vid{opacity:1;transform:scale(1)}
+.hw-card.on .hw-top,.hw-card.on .hw-body{opacity:0}
+@media (max-width:1200px) and (min-width:901px){.hw-body h3{font-size:26px}.hw-card{padding:22px}.hw-body p{font-size:15px;line-height:22px}}
+@media (max-width:900px){.hw-stage{min-height:0;padding:80px 0}.hw-head{gap:14px;margin-bottom:40px}.hw-head h2{font-size:30px;line-height:36px;max-width:350px}
+  .hw-grid{grid-template-columns:1fr;gap:12px}.hw-card{aspect-ratio:auto;max-height:none;min-height:300px;padding:22px}.hw-body h3{font-size:26px}.hw-body p{font-size:15px;line-height:22px}}
+
+/* footer v2: simple and minimal */
+.foot{background:#050505;color:#E2E2E2;padding:72px 0 40px;position:relative;overflow:hidden}
+.ft-top{display:grid;grid-template-columns:1.25fr 1fr .9fr;gap:40px;align-items:start}
+.ft-l{font:400 12px/16px var(--heading);color:#8C8C8C;letter-spacing:.01em}
+.ft-row{display:flex;align-items:center;gap:14px;margin-bottom:20px}
+.ft-ic{stroke-width:1.75}
+.ft-ic-mail{color:var(--orange-text)}
+.ft-ic-tel{color:#fff}
+.ft-ic-mail,.ft-ic-tel{width:26px;height:26px}
+.ft-mail{font:500 28px/1.1 var(--heading);letter-spacing:-.04em;color:var(--orange);background:linear-gradient(var(--orange),var(--orange)) 0 100%/0 2px no-repeat;transition:background-size .4s}
+.ft-mail:hover{background-size:100% 2px}
+.ft-tel{font:500 28px/1.1 var(--heading);letter-spacing:-.04em;color:#E2E2E2}
+.ft-links{display:flex;gap:48px}
+.ft-col{display:flex;flex-direction:column;gap:6px}
+.ft-col .ft-l{margin-bottom:12px}
+.ft-col a{display:inline-flex;align-items:center;gap:8px;font:500 24px/32px var(--heading);letter-spacing:-.04em;color:#E2E2E2;transition:color .2s}
+.ft-col a .ic{width:14px;height:14px;color:#8C8C8C;transition:transform .3s,color .2s}
+.ft-col a:hover{color:var(--orange)}.ft-col a:hover .ic{color:var(--orange);transform:translate(2px,-2px)}
+.ft-news p{margin:0 0 32px;font:400 15px/22px var(--body);color:#E2E2E2}
+.ft-news input{width:100%;background:transparent;border:0;border-bottom:1px solid #2E2E2E;padding:0 0 16px;font:500 20px var(--heading);letter-spacing:-.02em;color:#fff;outline:0;border-radius:0;-webkit-appearance:none;color-scheme:dark;transition:border-color .3s}
+.ft-news input::placeholder{color:#6B6B6B;opacity:1}
+.ft-news input:focus{border-color:var(--orange)}
+.ft-news button{margin-top:16px;width:100%;height:52px;border:1px solid #2E2E2E;border-radius:999px;background:transparent;color:#E2E2E2;font:600 15px var(--body);cursor:pointer;--wv-fill:var(--orange);position:relative;overflow:hidden}
+.ft-news button:hover{border-color:var(--orange)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ft-bot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-top:72px}
+.ft-copy{font:400 12px/16px var(--heading);color:#8C8C8C}
+.ft-legal{display:flex;gap:8px;margin-top:8px;font:400 14px var(--body);color:#E2E2E2}
+.ft-legal span{color:#5C5955}.ft-legal a:hover{color:var(--orange)}
+@media (max-width:900px){
+  .foot{padding:56px 0 32px}
+  .ft-top{grid-template-columns:1fr;gap:48px}
+  .ft-row{gap:12px;margin-bottom:16px}
+  .ft-ic-mail,.ft-ic-tel{width:22px;height:22px}
+  .ft-mail,.ft-tel{font-size:min(24px,6.4vw)}
+  .ft-links{gap:56px}
+  .ft-col a{font-size:22px;line-height:30px}
+  .ft-bot{flex-direction:column;align-items:flex-start;margin-top:48px}
+}
+
+/* one eyebrow style everywhere: same as Our Process */
+.kicker,.eyebrow,.sv-label,.label.eyebrow{color:var(--orange) !important;font:500 14px/20px var(--heading);letter-spacing:0;text-transform:none}
+
+/* one icon colour everywhere: brand orange, Lucide at 1.75 stroke */
+.mega-item .ic,.mega-item.on .ic,.sv-list .ic,.hw-ic,.ft-ic,.ft-ic-mail,.ft-ic-tel,.ft-col a .ic,.reel-label .ic{color:var(--orange) !important;stroke-width:1.75}
+.play,.reel-ctl{color:var(--orange)}
+.ft-row .ft-ic-tel{color:#E2E2E2 !important}
+.ft-loc{display:flex;align-items:center;gap:6px}
+.ft-loc .ic{width:14px;height:14px;color:#8C8C8C;stroke-width:1.75}
+.arrows button,.arrows button.next{background:var(--black);border-color:var(--black);color:var(--orange)}
+.arrows button:hover{background:var(--orange);border-color:var(--orange);color:#fff}
+.arrows .ic{stroke-width:1.75}
 </style>
 
 
@@ -641,34 +775,37 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
     <div class="wrap">
       <div class="about-statement">
         <div class="kicker">About MediaRide</div>
-        <p class="statement" id="statement">
-          <span class="ln"><span>MediaRide is a video studio</span></span>
-          <span class="ln"><span>for go to market <span class="vpill"><video class="lv" data-src="v/pilln8.mp4" poster="v/pilln8.jpg" muted loop playsinline preload="none"></video></span> teams <span class="grey">that</span></span></span>
-          <span class="ln"><span class="grey">plans every clip before we film,</span></span>
-          <span class="ln"><span class="grey">so one <span class="vpill s"><video class="lv" data-src="v/pilln12.mp4" poster="v/pilln12.jpg" muted loop playsinline preload="none"></video></span> shoot fills every feed.</span></span>
-        </p>
+        <p class="statement ab-rev" id="abRev"><span class="ln"><span class="rw">MediaRide</span> <span class="rw">is</span> <span class="rw">a</span> <span class="rw">video</span> <span class="rw">studio</span> <span class="rw">for</span></span> <span class="ln"><span class="rw">go</span> <span class="rw">to</span> <span class="rw">market</span> <span class="rw">teams</span> <span class="rw">that</span> <span class="rw">plans</span> <span class="rw">every</span></span> <span class="ln"><span class="rw">clip</span> <span class="rw">before</span> <span class="rw">we</span> <span class="rw">film,</span> <span class="rw">so</span> <span class="rw">one</span> <span class="rw">shoot</span></span> <span class="ln"><span class="rw">fills</span> <span class="rw">every</span> <span class="rw">feed.</span></span></p>
         <p class="about-body ab-fade">We film your launches, campaigns and events, then cut every shoot into clips for social, sales and your site.</p>
         <a href="#how" class="btn-dark about-btn ab-fade" data-flip>Learn more</a>
       </div>
-      <div class="cards4" id="cards4">
-        <article class="c4"><div class="bg"><img src="img/card_approach.jpg" alt=""></div><span class="tag">Our approach</span><div><h3 class="h">Plan first, film second</h3><p>We map every clip with your team before the camera comes out, so nothing gets shot without somewhere to go.</p></div></article>
-        <article class="c4"><div class="bg"><img src="img/card_feed.jpg" alt=""></div><span class="tag">Built for the feed</span><div><h3 class="h">Made for posting, not the archive</h3><p>Every shoot is shaped around where it will live: LinkedIn, sales decks, your site.</p></div></article>
-        <article class="c4"><div class="bg"><img src="img/card_team.jpg" alt=""></div><span class="tag">Our team</span><div><h3 class="h">One crew, start to finish</h3><p>The people who plan your shoot also film, edit and cut it. No handoffs, nothing lost.</p></div></article>
-        <article class="c4"><div class="bg"><img src="img/card_yours.jpg" alt=""></div><span class="tag">Your team</span><div><h3 class="h">We think like marketers</h3><p>We've worked with go to market teams at LinkedIn, Apollo, Cisco and Docker. We know what a launch needs.</p></div></article>
-      </div>
+      <div class="cards4" id="cards4"><article class="c4"><div class="bg"><img src="img/card_v2_1.jpg" alt=""></div><div><h3 class="h">Planned before we film.</h3><p>Every clip is mapped with your team before the camera rolls.</p></div></article><article class="c4"><div class="bg"><img src="img/card_v2_2.jpg" alt=""></div><div><h3 class="h">Made for every feed.</h3><p>Cut for LinkedIn, sales decks and your site from day one.</p></div></article><article class="c4"><div class="bg"><img src="img/card_v2_3.jpg" alt=""></div><div><h3 class="h">One crew, start to finish.</h3><p>The people who plan your shoot also film, edit and cut it.</p></div></article><article class="c4"><div class="bg"><img src="img/card_v2_4.jpg" alt=""></div><div><h3 class="h">We think like marketers.</h3><p>We know what a launch needs, and we deliver it fast.</p></div></article></div>
     </div>
   </section>
 
-  <!-- 6 PROBLEM -->
+  <!-- 6 PROBLEM: built like the "Latest work" section on nakula.framer.website.
+       Left column sticks: rolling number, list, rolling title and text. Right column: one image per problem
+       that grows from 60% to full size as it reaches the middle of the screen. -->
   <section class="problem" id="problem">
-    <div class="pgrid"><div class="wrap"><div class="plines"><i class="pl a"></i><i class="pl b"></i></div></div></div>
-    <div class="p-sticky">
-      <span class="eyebrow">Sound familiar?</span>
-      <h2 class="h">Your business is growing, but your systems aren’t!</h2>
+    <div class="wrap">
+      <div class="pp-head">
+        <span class="eyebrow">Sound Familiar</span>
+        <h2 class="h">You film the moment.<br><span class="dim">Then the feed goes quiet.</span></h2>
+      </div>
+      <div class="pp">
+        <div class="pp-side">
+          <div class="pp-nav">
+            <div class="pp-win pp-numwin"><div class="pp-roll" id="ppNum"><div class="pp-n"><span>01</span><i></i></div><div class="pp-n"><span>02</span><i></i></div><div class="pp-n"><span>03</span><i></i></div></div></div>
+            <ul class="pp-tabs" id="ppTabs"><li class="on"><svg class="ic pp-ic" viewBox="0 0 24 24"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>Stuck on a drive</li><li class=""><svg class="ic pp-ic" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>One launch, one video</li><li class=""><svg class="ic pp-ic" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg>A feed full of slides</li></ul>
+          </div>
+          <div class="pp-ts">
+            <div class="pp-win pp-twin"><div class="pp-roll" id="ppTitle"><h3 class="h">Stuck on a drive</h3><h3 class="h">One launch, one video</h3><h3 class="h">A feed full of slides</h3></div></div>
+            <div class="pp-win pp-swin"><div class="pp-roll" id="ppSub"><p>Your event ended last week. The footage is still sitting on a drive, and nobody has the time to cut it.</p><p>Your launch got one video. Your feed needed a month of posts to keep the story going.</p><p>Your team posts every week. Most of it is a screenshot or a slide, and people scroll right past it.</p></div></div>
+          </div>
+        </div>
+        <div class="pp-col"><figure class="pp-img"><div class="pp-mask"><img src="img/prob_1.jpg" alt="" loading="lazy"></div><figcaption class="pp-mob"><span class="pp-mn">01.</span><h3 class="h">Stuck on a drive</h3><p>Your event ended last week. The footage is still sitting on a drive, and nobody has the time to cut it.</p></figcaption></figure><figure class="pp-img"><div class="pp-mask"><img src="img/prob_2.jpg" alt="" loading="lazy"></div><figcaption class="pp-mob"><span class="pp-mn">02.</span><h3 class="h">One launch, one video</h3><p>Your launch got one video. Your feed needed a month of posts to keep the story going.</p></figcaption></figure><figure class="pp-img"><div class="pp-mask"><img src="img/prob_3.jpg" alt="" loading="lazy"></div><figcaption class="pp-mob"><span class="pp-mn">03.</span><h3 class="h">A feed full of slides</h3><p>Your team posts every week. Most of it is a screenshot or a slide, and people scroll right past it.</p></figcaption></figure></div>
+      </div>
     </div>
-    <div class="pcard l" data-speed="-260" data-x="l" data-y="300"><span class="ptag">Problem 01</span><div class="pbox"><div class="pt"><svg class="ic" viewBox="0 0 24 24"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>Footage stuck on a drive</div><p>Your event ended last week. The footage is still on a drive.</p></div></div>
-    <div class="pcard r" data-speed="-520" data-x="r" data-y="820"><span class="ptag">Problem 02</span><div class="pbox"><div class="pt"><svg class="ic" viewBox="0 0 24 24"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>One launch, one video</div><p>Your launch got one video. Your feed needed a month of posts.</p></div></div>
-    <div class="pcard l" data-speed="-360" data-x="l" data-y="1340"><span class="ptag">Problem 03</span><div class="pbox"><div class="pt"><svg class="ic" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg>A feed full of slides</div><p>Your team posts every week. Most of it is a screenshot or a slide.</p></div></div>
   </section>
 
   <!-- 7 WHY US -->
@@ -689,24 +826,42 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 
   <!-- 8 WHAT WE MAKE -->
   <section class="wwm" id="work">
-    <div class="wwm-row"><div class="wrap"><div class="wwm-head">(What we make)</div><div class="wwm-grid"><div class="wwm-num"><span>1</span></div><div class="wwm-lab">(Event coverage)</div><div class="wwm-content"><h3 class="h">Event coverage planned for the feed before we film.</h3><div class="wwm-still"><video class="lv" data-src="v/wn9.mp4" poster="v/wn9.jpg" muted loop playsinline preload="none"></video></div><p>We plan the clips before the event, film the talks, the floor and the people, then deliver a recap and a month of posts for LinkedIn, Reels and Shorts.</p><hr></div></div></div></div><div class="wwm-row"><div class="wrap"><div class="wwm-head">(What we make)</div><div class="wwm-grid"><div class="wwm-num"><span>2</span></div><div class="wwm-lab">(Stories)</div><div class="wwm-content"><h3 class="h">Stories behind your launches, founders and customers.</h3><div class="wwm-still"><video class="lv" data-src="v/w31.mp4" poster="v/w31.jpg" muted loop playsinline preload="none"></video></div><p>Launch videos, product and founder stories, and customer stories, each cut into versions for social, your sales deck and your site.</p><hr></div></div></div></div><div class="wwm-row"><div class="wrap"><div class="wwm-head">(What we make)</div><div class="wwm-grid"><div class="wwm-num"><span>3</span></div><div class="wwm-lab">(Monthly)</div><div class="wwm-content"><h3 class="h">Monthly video support that keeps your channels full.</h3><div class="wwm-still"><video class="lv" data-src="v/w19.mp4" poster="v/w19.jpg" muted loop playsinline preload="none"></video></div><p>Regular shoots and edits on a set rhythm, so your team always has something new to post, tied to a launch or not.</p><hr></div></div></div></div>
+    <div class="wrap sv">
+      <div class="sv-head">
+        <span class="sv-label">What We Make</span>
+        <h2 class="h">Built to fill<br>your social feed</h2>
+        <p>Every project is planned for social before we film, so one shoot turns into weeks of posts for LinkedIn, sales and your site.</p>
+      </div>
+      <div class="sv-cards"><article class="sv-card"><div class="sv-text"><div class="sv-top"><span class="sv-n">01</span><h3 class="h">Event coverage, built for social</h3><p>One event, a month of posts.</p></div><ul class="sv-list"><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg>Recap and sizzle reels</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>Speaker highlights</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>Floor interviews</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>Behind the scenes clips</li></ul></div><div class="sv-media"><div class="sv-img"><video class="lv" data-src="v/wn9.mp4" poster="v/wn9.jpg" muted loop playsinline preload="none"></video></div></div></article><article class="sv-card"><div class="sv-text"><div class="sv-top"><span class="sv-n">02</span><h3 class="h">Stories for go to market teams</h3><p>One hero piece, cut for every channel.</p></div><ul class="sv-list"><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>Launch videos</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Product and founder stories</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Campaign and ad video</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 12a2 2 0 0 0 2-2V8H8"/><path d="M14 12a2 2 0 0 0 2-2V8h-2"/></svg>Customer stories</li></ul></div><div class="sv-media"><div class="sv-img"><video class="lv" data-src="v/w31.mp4" poster="v/w31.jpg" muted loop playsinline preload="none"></video></div></div></article><article class="sv-card"><div class="sv-text"><div class="sv-top"><span class="sv-n">03</span><h3 class="h">Monthly video support</h3><p>Your channels, kept full every week.</p></div><ul class="sv-list"><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>Regular shoots and edits</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>Tied to a launch or campaign</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>You keep all the footage</li><li><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>Fast turnaround when it matters</li></ul></div><div class="sv-media"><div class="sv-img"><video class="lv" data-src="v/w19.mp4" poster="v/w19.jpg" muted loop playsinline preload="none"></video></div></div></article></div>
+    </div>
   </section>
 
-  <!-- 9+10 HOW ONE SHOOT / BREAKDOWN -->
-  <section class="bd" id="how">
-    <div class="bd-bg"><canvas id="bdShader" aria-hidden="true"></canvas></div>
-    <div class="wrap">
-      <h2 class="h bd-in">How one shoot becomes a month of content</h2>
-      <div class="bd-row">
-        <div class="panel bd-in" id="panelL">
-          <div class="lr"><span><svg class="ic" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Event recap</span><span>01</span></div>
-          <div class="collage"><div class="slider-l" id="sliderL"></div></div>
-          <div class="br"><div><h3 class="h">The recap is where we start.</h3><p>We film the whole event and cut the recap first. While your customers are there, we can film their stories too.</p></div><span class="circle-btn"><svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div>
-        </div>
-        <div class="panel bd-in" id="panelR">
-          <div class="lr"><span><svg class="ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg>Social clips</span><span>02</span></div>
-          <div class="collage slider-r" id="sliderR"></div>
-          <div class="br"><div><h3 class="h">Then it becomes a month of posts.</h3><p>We plan a full set of clips before the event, so your team has something to post every week after.</p></div><span class="circle-btn"><svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></span></div>
+  <!-- 9 PROCESS: how one shoot becomes a month of content -->
+  <section class="hw" id="how">
+    <div class="hw-stage">
+      <div class="wrap">
+        <div class="hw-head"><span class="eyebrow">Our Process</span><h2 class="h">One shoot, a month of content</h2></div>
+        <div class="hw-grid">
+        <article class="hw-card" tabindex="0">
+          <video class="hw-vid" data-src="v/vn17.mp4" poster="v/vn17.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <div class="hw-top"><svg class="ic hw-ic" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg><span class="hw-step">Step 1</span></div>
+          <div class="hw-body"><h3 class="h">Plan<br>the shoot</h3><p>We map every clip with your team before the camera rolls.</p></div>
+        </article>
+        <article class="hw-card" tabindex="0">
+          <video class="hw-vid" data-src="v/pn8.mp4" poster="v/pn8.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <div class="hw-top"><svg class="ic hw-ic" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg><span class="hw-step">Step 2</span></div>
+          <div class="hw-body"><h3 class="h">Film<br>the event</h3><p>One crew captures the stage, the room and your customers.</p></div>
+        </article>
+        <article class="hw-card" tabindex="0">
+          <video class="hw-vid" data-src="v/pn13.mp4" poster="v/pn13.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <div class="hw-top"><svg class="ic hw-ic" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg><span class="hw-step">Step 3</span></div>
+          <div class="hw-body"><h3 class="h">Cut<br>the recap</h3><p>The recap ships first, while the event is still fresh.</p></div>
+        </article>
+        <article class="hw-card" tabindex="0">
+          <video class="hw-vid" data-src="v/v13.mp4" poster="v/v13.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <div class="hw-top"><svg class="ic hw-ic" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg><span class="hw-step">Step 4</span></div>
+          <div class="hw-body"><h3 class="h">Post<br>all month</h3><p>A full set of clips is ready to post every week after.</p></div>
+        </article>
         </div>
       </div>
     </div>
@@ -715,7 +870,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   <!-- 11 TESTIMONIALS -->
   <section class="tm">
     <div class="wrap">
-      <div class="tm-head tm-in"><span class="label">(What clients say)</span><h2 class="h">Real stories from real teams.</h2><p>Go to market teams on what changed after one shoot.</p></div>
+      <div class="tm-head tm-in"><span class="label eyebrow">What Clients Say</span><h2 class="h">Real stories from real teams.</h2><p>Go to market teams on what changed after one shoot.</p></div>
       <div class="feat tm-in">
         <div class="feat-media" id="featMedia"><video id="featImg" src="v/f31.mp4" poster="v/f31.jpg" muted loop playsinline preload="metadata"></video><button class="play" aria-label="Play testimonial"><svg viewBox="0 0 24 24"><polygon points="7 4 20 12 7 20 7 4"/></svg></button><button class="pause">Pause</button><div class="prog"><i></i></div></div>
         <div class="feat-copy">
@@ -736,8 +891,9 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   <section class="cta" id="contact">
     <div class="ring-mask"><div class="ring" id="ring"></div></div>
     <div class="cta-copy">
-      <a class="cta-link" href="#contact">Book a call <span class="cta-arrow"><svg class="ic" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span></a>
-      <p>Got a launch or an event coming up? Bring the plan.</p>
+      <h2 class="h cta-h">Let's plan your next shoot</h2>
+      <p>Tell us what's coming up. We'll map the clips with you and plan the shoot around them.</p>
+      <a href="#contact" class="btn-dark cta-btn" data-flip>Book a call</a>
     </div>
   </section>
 </main>
@@ -745,20 +901,25 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 <!-- 13 FOOTER -->
 <footer class="foot" id="foot">
   <div class="wrap">
-    <div class="foot-top">
-      <div>
-        <div class="fcols">
-          <div class="fcol"><div class="fl">(Menu)</div><a href="#top">Home</a><a href="#work" class="m-only">Services</a><a href="#how">How it works</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
-          <div class="fcol"><div class="fl">(Legal)</div><a href="#top">Privacy policy</a><a href="#top">Terms</a></div>
-        </div>
-        <div class="touch"><div class="fl">(Get in touch)</div><a class="mail" href="#contact">luke@mediaride.com</a><div class="tel">415.504.2260</div><a class="li" href="https://www.linkedin.com" aria-label="LinkedIn"><svg class="ic" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a></div>
+    <div class="ft-top">
+      <div class="ft-contact">
+        <div class="ft-row"><svg class="ic ft-ic ft-ic-mail" viewBox="0 0 24 24" aria-label="Email"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><a class="ft-mail" href="mailto:luke@mediaride.com">luke@mediaride.com</a></div>
+        <div class="ft-row"><svg class="ic ft-ic ft-ic-tel" viewBox="0 0 24 24" aria-label="Phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span class="ft-tel">415.504.2260</span></div>
       </div>
-      <form class="news" onsubmit="event.preventDefault();setWave(this.querySelector('button'),'Subscribed');">
-        <div><h3 class="h"><em>New work</em> and event video tips</h3><p>Fresh projects, shoot breakdowns and ideas for your next event, from the MediaRide team.</p></div>
-        <div><label for="em">Email</label><input id="em" type="email" placeholder="Your email"><button type="submit" data-flip><span class="lbl">Subscribe</span><svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></button></div>
+      <div class="ft-links">
+        <div class="ft-col"><span class="ft-l">Links</span><a href="#top">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#how">Process</a><a href="#contact">Contact</a></div>
+        <div class="ft-col"><span class="ft-l">Socials</span><a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn <svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram <svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube <svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
+      </div>
+      <form class="ft-news" onsubmit="event.preventDefault();setWave(this.querySelector('button'),'Subscribed');">
+        <p>Sign up for new work and<br>event video tips from our team</p>
+        <label for="em" class="sr">Email</label><input id="em" type="email" placeholder="Enter email address">
+        <button type="submit" data-flip>Subscribe</button>
       </form>
     </div>
-    <div class="foot-bot"><div class="copy">© 2026 MediaRide · San Francisco, CA</div><svg class="wordmark" viewBox="0 0 152 24.6" role="img" aria-label="MediaRide"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="dot ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg></div>
+    <div class="ft-bot">
+      <div><div class="ft-copy">© 2026 MediaRide. All rights reserved</div><div class="ft-legal"><a href="#top">Privacy Policy</a><span>•</span><a href="#top">Terms of Service</a></div></div>
+      <div class="ft-copy ft-loc"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>San Francisco, CA</div>
+    </div>
   </div>
 </footer>
 
@@ -796,7 +957,26 @@ const mkOrbit=(list,cls)=>{const o=document.createElement('div');o.className='or
     const v=VIDT[hash], media=`<video class="lv" data-src="v/${v}.mp4" poster="v/${v}.jpg" muted loop playsinline preload="none"></video>`;
     t.innerHTML=`<div class="pop"><div class="spin">${media}</div></div>`; o.appendChild(t); sp[ord]=t;});
   return {o,sp};};
-const OD=mkOrbit(TILES,'d'), OM=mkOrbit(TILES_M,'m');
+/* V3 hero: three exact circles of upright clips (from Figma "Home · v4" hero, node 381:571).
+   radii 345 / 598 / 851 at the 1440 design, 8 / 14 / 20 clips, shapes 1:1, 16:9, 9:16 in turn */
+const RINGS=[{r:345,n:8,off:.5},{r:598,n:14,off:0},{r:851,n:20,off:.5}], RSZ=[[138,138],[180,101],[101,180]];
+const mkRings=cls=>{const o=document.createElement('div');o.className='orbit rings '+cls;tilesEl.appendChild(o);const sp=[],rings=[];let k=0;
+  RINGS.forEach((rg,ri)=>{const ring=document.createElement('div');ring.className='hring';o.appendChild(ring);rings.push(ring);
+    for(let i=0;i<rg.n;i++){const a=-Math.PI/2+(i+rg.off)*2*Math.PI/rg.n, [w,h]=RSZ[(i+ri)%3];
+      const t=document.createElement('div');t.className='tile';
+      t.style.cssText=`left:${(rg.r*Math.cos(a)).toFixed(1)}px;top:${(rg.r*Math.sin(a)).toFixed(1)}px;width:${w}px;height:${h}px;transform:translate(-50%,-50%)`;
+      const v='s'+SV[k++%SV.length];
+      t.innerHTML=`<div class="pop"><div class="spin"><video class="lv" data-src="v/${v}.mp4" poster="v/${v}.jpg" muted loop playsinline preload="none"></video></div></div>`;
+      ring.appendChild(t);sp.push(t);}});
+  return {o,sp,rings};};
+const OD=mkRings('d'), OM=mkRings('m');
+/* the circles scale with the screen: the 1440 x 806 design is 1, bigger screens grow them so the third circle shows,
+   smaller heights shrink them a little; phones use a smaller copy of the same circles */
+const ringScale=()=>{const w=innerWidth/Z,h=innerHeight/Z;
+  const d=Math.max(.8,Math.min(2.2,Math.min(w/1440,h/806)));
+  const m=Math.min(w,500)/390*.6;
+  document.documentElement.style.setProperty('--rs-d',d.toFixed(3));document.documentElement.style.setProperty('--rs-m',m.toFixed(3));};
+ringScale(); addEventListener('resize',ringScale);
 /* arrow buttons: arrow flies out top right, a new one comes in from bottom left */
 $$('.circle-btn').forEach(c=>{const a=c.querySelector('.ic');a.classList.add('a');const b=a.cloneNode(true);b.classList.replace('a','b');c.appendChild(b);});
 /* wave hover on buttons: split the label into letters twice; the letter near the middle moves first and the rest follow outward */
@@ -818,9 +998,9 @@ fill($('#row1'),r1,'a'); fill($('#row2'),r2,'b');
 const L=[['side','pn3'],['stack','pn7','pn8','pn9'],['side','pn10'],['stack','pn12','pn13','pn14'],['side','pn24'],['stack','pn27','pn1','pn11']];
 const vt=(h,cls,hov=1)=>`<div class="vt ${cls}"><video class="lv" ${hov?'data-hover ':''}data-src="v/${h}.mp4" poster="v/${h}.jpg" muted loop playsinline preload="none"></video><span class="rec"><i></i>Playing</span><span class="bar"></span></div>`;
 const lHTML=L.map(g=>g[0]==='side'?vt(g[1],'cl-side'):`<div class="cl-stack">${vt(g[1],'cl-main')}<div class="cl-sq">${vt(g[2],'')}${vt(g[3],'')}</div></div>`).join('');
-$('#sliderL').innerHTML=lHTML+lHTML;
+if($('#sliderL'))$('#sliderL').innerHTML=lHTML+lHTML;
 const R=['vn29','vn6','v47','vn17','vn4','v13','vn25'];
-$('#sliderR').innerHTML=R.map(h=>vt(h,'rv-item',0)).join('');
+if($('#sliderR'))$('#sliderR').innerHTML=R.map(h=>vt(h,'rv-item',0)).join('');
 // hover to play
 document.addEventListener('mouseover',e=>{const v=e.target.closest('.vt');if(v&&!v.classList.contains('playing')){v.classList.add('playing');}});
 document.addEventListener('mouseout',e=>{const v=e.target.closest('.vt');if(v&&!v.contains(e.relatedTarget)){v.classList.remove('playing');}});
@@ -925,6 +1105,20 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
 })();
 
 
+/* ---------- process cards: a pure video plays over the card while it is hovered (tap on touch screens) ---------- */
+(()=>{const cards=$$('.hw-card'); if(!cards.length) return;
+  const load=()=>cards.forEach(c=>{const v=c.querySelector('video'); if(!v.src){v.preload='auto'; v.src=v.dataset.src;}});
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){load();o.disconnect();}},{rootMargin:'600px 0px'}).observe($('#how'));
+  const hover=matchMedia('(hover: hover)').matches;
+  cards.forEach(c=>{const v=c.querySelector('video');
+    const on=()=>{cards.forEach(o=>{if(o!==c&&o.classList.contains('on')){o.classList.remove('on');o.querySelector('video').pause();}});
+      if(!v.src)v.src=v.dataset.src; c.classList.add('on'); try{v.currentTime=0;}catch(e){} const p=v.play(); p&&p.catch(()=>{});};
+    const off=()=>{c.classList.remove('on'); setTimeout(()=>{if(!c.classList.contains('on'))v.pause();},500);};
+    if(hover){c.addEventListener('mouseenter',on); c.addEventListener('mouseleave',off); c.addEventListener('focus',on); c.addEventListener('blur',off);}
+    else c.addEventListener('click',()=>c.classList.contains('on')?off():on());
+  });
+})();
+
 /* ---------- lazy loops: every clip loads when it nears the screen, plays while visible, pauses when it leaves ---------- */
 (()=>{const io=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
     if(e.isIntersecting){if(!v.src){v.src=v.dataset.src;} if(!v.hasAttribute('data-hover')||v.closest('.vt.playing')){const p=v.play();p&&p.catch(()=>{});}}
@@ -949,11 +1143,12 @@ document.documentElement.classList.add('loading');
 (function(){
   const num=$('#ldNum'), bar=$('#ldBar'), mark=$('.wordmark',loaderEl), o={v:0};
   const lt=gsap.timeline();
-  lt.from(mark,{opacity:0,y:24,scale:.96,duration:.7,ease:'power3.out'})
-    .to(o,{v:100,duration:2.3,ease:'power1.inOut',onUpdate:()=>{num.textContent=Math.round(o.v)+'%';bar.style.transform=`scaleX(${o.v/100})`;}},.15)
-    .to([mark,'.ld-foot'],{opacity:0,y:-30,duration:.45,ease:'power2.in',stagger:.05},'+=.1')
-    .to(loaderEl,{yPercent:-100,duration:.9,ease:'power4.inOut'},'-=.15')
-    .add(finishLoad,'-=.5')
+  // 1.75s in total: logo in (0 to .4), bar 0 to 100 (.1 to 1.15), logo out (1.15 to 1.35), panel slides up (1.2 to 1.75)
+  lt.from(mark,{opacity:0,y:20,scale:.96,duration:.4,ease:'power3.out'})
+    .to(o,{v:100,duration:1.05,ease:'power1.inOut',onUpdate:()=>{num.textContent=Math.round(o.v)+'%';bar.style.transform=`scaleX(${o.v/100})`;}},.1)
+    .to([mark,'.ld-foot'],{opacity:0,y:-24,duration:.2,ease:'power2.in',stagger:.03},1.15)
+    .to(loaderEl,{yPercent:-100,duration:.55,ease:'power4.inOut'},1.2)
+    .add(finishLoad,1.45)
     .add(()=>loaderEl.remove());
 })();
 gsap.registerPlugin(ScrollTrigger);
@@ -974,6 +1169,7 @@ gsap.ticker.add(()=>{const dy=scrollY-lastY; lastY=scrollY; scrollBoost+=(Math.m
 
 // left breakdown slider: smooth right to left loop, images drift inside their frames (parallax)
 (function(){
+  if(!$('#sliderL'))return;
   const track=$('#sliderL'), wrap=track.parentElement, vts=$$('.vt',track);
   let x=0, speed={v:1}, half=0;
   const measure=()=>{half=track.scrollWidth/2;}; measure(); addEventListener('resize',measure);
@@ -991,6 +1187,7 @@ gsap.ticker.add(()=>{const dy=scrollY-lastY; lastY=scrollY; scrollBoost+=(Math.m
 
 // right breakdown slider: continuous coverflow moving left to right; the clip reaching the middle grows and pops
 (function(){
+  if(!$('#sliderR'))return;
   const items=$$('#sliderR .vt'), n=items.length;
   let BIG,SM,GAP,near,step;
   const dims=()=>{const m=innerWidth<=900; BIG=m?{w:176,h:264}:{w:256,h:384}; SM=m?{w:112,h:150}:{w:164,h:216}; GAP=m?12:20; near=BIG.w/2+GAP+SM.w/2; step=SM.w+GAP;};
@@ -1021,7 +1218,8 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   const {isD}=ctx.conditions;
   const OB=isD?OD:OM, spiral=OB.sp, orbit=OB.o;
   // 1. hero intro: headline + buttons, then tiles, then slow spin on own axis
-  const tl=gsap.timeline({paused:true}); whenLoaded(()=>tl.play());
+  // the hero is fully built behind the loader, so it is already there when the loader lifts (no intro animation)
+  const tl=gsap.timeline({paused:true});
   tl.from('.hero-copy .line>span',{yPercent:110,duration:1,ease:'power4.out',stagger:.12})
     .from('.hero-copy .hc',{y:24,opacity:0,duration:.8,ease:'power3.out',stagger:.1},'-=.75')
     .add('rings','-=.3');
@@ -1029,7 +1227,11 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   tl.to(spiral,{opacity:1,duration:.5,ease:'power2.out',stagger:.045},'rings')
     .from(spiral.map(s=>s.firstElementChild),{scale:.3,duration:.8,ease:'back.out(1.8)',stagger:.045},'rings');
   // the whole spiral turns a full 360 clockwise around the headline, slowly and forever
-  tl.add(()=>gsap.to(orbit,{rotation:360,duration:160,ease:'none',repeat:-1}),'rings+=.4');
+  // each circle turns slowly, alternating direction; every clip counter-turns so it always stays upright
+  tl.add(()=>OB.rings.forEach((r,i)=>{const dir=i%2?-1:1, dur=140+i*50;
+    gsap.to(r,{rotation:360*dir,duration:dur,ease:'none',repeat:-1});
+    gsap.to(r.querySelectorAll('.spin'),{rotation:-360*dir,duration:dur,ease:'none',repeat:-1});}),'rings+=.4');
+  tl.progress(1);
 
   // 2. reel: rises from the bottom to the middle of the headline, the text and tiles blur away under it,
   //    then it grows to cover the whole screen edge to edge and starts playing
@@ -1071,22 +1273,31 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   const placeReel=()=>{if(intro.progress()<0.001){gsap.set(media,{height:MH()});gsap.set(reel,{left:L0(),width:W0(),top:T0()});}};
   ScrollTrigger.addEventListener('refresh',placeReel); const onR=()=>setTimeout(placeReel,200); addEventListener('resize',onR);
 
-  // 4. about: lines reveal one by one (desktop) or the statement rises in (mobile), then body, then cards
-  if(isD) gsap.from('#statement .ln>span',{yPercent:105,opacity:0,duration:1.1,ease:'power4.out',stagger:.16,scrollTrigger:{trigger:'#statement',start:'top 80%'}});
-  else gsap.from('#statement',{y:40,opacity:0,duration:1.1,ease:'power3.out',scrollTrigger:{trigger:'#statement',start:'top 85%'}});
+  // about statement: words start light grey and turn near black one by one as you scroll; scrolling back fades them again
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches)
+    gsap.to('#abRev .rw',{color:'#050505',ease:'none',stagger:.1,scrollTrigger:{trigger:'#abRev',start:'top 75%',end:'bottom 40%',scrub:.6}});
   gsap.from('.ab-fade',{y:20,opacity:0,duration:.8,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'.about-body',start:'top 88%'}});
   gsap.from('.c4',isD?{y:90,opacity:0,duration:1.1,ease:'power3.out',stagger:.12,scrollTrigger:{trigger:'#cards4',start:'top 82%'}}
                      :{x:80,opacity:0,duration:1,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#cards4',start:'top 85%'}});
 
-  // 6. problem: desktop cards travel past the sticky headline at different speeds; mobile cards rise in one by one
+  // 6. problem: same mechanics as the reference. Each image grows from 60% to full size (its photo counter-zooms
+  //    from 160% so it looks steady) as it reaches the middle; between images the number, title and text roll up one slot.
   if(isD){
-    const posCards=()=>{if(!matchMedia('(min-width: 901px)').matches)return; const pr=$('#problem').getBoundingClientRect(), z=pr.width/$('#problem').offsetWidth||1, l1=($('.pl.a').getBoundingClientRect().left-pr.left)/z, l2=($('.pl.b').getBoundingClientRect().left-pr.left)/z;
-      $$('.pcard').forEach(c=>{c.style.top=c.dataset.y+'px'; c.style.left=(c.dataset.x==='l'? l1+1-c.offsetWidth : l2)+'px';});};
-    posCards(); addEventListener('resize',posCards); {const ro=new ResizeObserver(posCards); ro.observe($('.plines')); ro.observe($('#problem'));}   // also re-run when the scrollbar appears after the preloader
-    $$('.pcard').forEach(c=>gsap.fromTo(c,{y:300},{y:+c.dataset.speed,ease:'none',scrollTrigger:{trigger:'#problem',start:'top bottom',end:'bottom top',scrub:true}}));
+    const imgs=$$('.pp-img'), steps={num:136,title:104,sub:96};
+    const roll=(i)=>[['#ppNum',steps.num],['#ppTitle',steps.title],['#ppSub',steps.sub]];
+    imgs.forEach((im,i)=>{
+      const tl=gsap.timeline({scrollTrigger:{trigger:im,start:'top bottom',end:'center 55%',scrub:.4}});
+      tl.fromTo(im,{scale:.6},{scale:1,ease:'none'},0).fromTo(im.querySelector('img'),{scale:1.6},{scale:1,ease:'none'},0);
+      if(i>0){
+        const rt=gsap.timeline({scrollTrigger:{trigger:im,start:'top 85%',end:'top 45%',scrub:.4,
+          onUpdate:self=>$$('#ppTabs li').forEach((li,k)=>li.classList.toggle('on',k===(self.progress>.5?i:i-1)))}});
+        roll(i).forEach(([sel,st])=>rt.fromTo(sel,{y:-st*(i-1)},{y:-st*i,ease:'power2.inOut',immediateRender:false},0));
+      }
+    });
+    gsap.from('.pp-head>*',{y:40,opacity:0,duration:1,ease:'power3.out',stagger:.12,scrollTrigger:{trigger:'#problem',start:'top 75%'}});
   } else {
-    gsap.from('.p-sticky',{y:30,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:'#problem',start:'top 75%'}});
-    $$('.pcard').forEach(c=>gsap.from(c,{y:70,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
+    gsap.from('.pp-head>*',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#problem',start:'top 80%'}});
+    $$('.pp-img').forEach(m=>gsap.from(m,{y:60,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:m,start:'top 88%'}}));
   }
 
   // 7. why us: the grey closes in from every side at once, squeezing the black down to the card, then the stats appear
@@ -1106,33 +1317,38 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
         {y:30,opacity:0},{y:0,opacity:1,stagger:{each:.22,onStart(){countUp(this.targets()[0].querySelector('b'));}},duration:.4,ease:'power3.out'},'<')
      .to({},{duration:.3});
 
-  // 8. what we make: rows stick and stack; a row taller than the screen sticks once its bottom is in view
-  const rows=$$('.wwm-row');
-  const setTops=()=>rows.forEach(r=>{r.style.top=Math.min(0,Math.round(VH()-r.offsetHeight))+'px';});
-  setTops(); ScrollTrigger.addEventListener('refreshInit',setTops);
-  rows.forEach((row,i,all)=>{
-    const t=gsap.timeline({scrollTrigger:{trigger:row,start:'top 65%'}});
-    t.from($('.wwm-head',row),{opacity:0,y:16,duration:.6})
-     .from($('.wwm-num span',row),{yPercent:100,duration:1.2,ease:'power4.out'},'<.1')
-     .from($('.wwm-lab',row),{opacity:0,x:-12,duration:.6},'<.2')
-     .from($('h3',row),{y:40,opacity:0,duration:.9,ease:'power3.out'},'<.1')
-     .from($('.wwm-still',row),{clipPath:'inset(0 100% 0 0 round 10px)',duration:1,ease:'power3.inOut'},'<.15')
-     .from($('p',row),{opacity:0,y:16,duration:.7},'<.3')
-     .from($('hr',row),{scaleX:0,duration:1,ease:'power3.inOut'},'<');
-    // the row underneath shrinks back and its content dims; its background stays solid so nothing shows through the next row
-    if(i<all.length-1){const st={trigger:all[i+1],start:'top bottom',end:'top top',scrub:true};
-      gsap.to(row,{scale:.94,ease:'none',transformOrigin:'50% 0%',scrollTrigger:st});
-      gsap.to($('.wrap',row),{opacity:.4,ease:'none',scrollTrigger:{...st}});}
+  // 8. what we make: heading sticks on the left; each card slides in from the right and fades up one by one,
+  //    then its picture opens from 80% (the clip inside settles from 120%), like the reference
+  gsap.from('.sv-head>*',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'.sv',start:'top 75%',toggleActions:'play none none reverse'}});
+  $$('.sv-card').forEach(c=>{
+    // tied to the scroll like the reference: each card enters from the right, dim, and glides into place as you scroll;
+    // the heavy scrub makes it trail the scroll slowly, and scrolling up pushes it back out to the right
+    const st={trigger:c,start:'top bottom',end:'top 45%',scrub:1.6};
+    gsap.fromTo(c,{x:isD?220:0,y:isD?40:60,opacity:.15},{x:0,y:0,opacity:1,ease:'power2.out',scrollTrigger:st});
+    gsap.fromTo(c.querySelector('.sv-img'),{scale:.8},{scale:1,ease:'power2.out',scrollTrigger:{...st}});
+    gsap.fromTo(c.querySelector('.sv-img video'),{scale:1.2},{scale:1,ease:'power2.out',scrollTrigger:{...st}});
   });
 
   // 9. how one shoot: appear
-  gsap.from('.bd-in',{y:60,opacity:0,duration:1,ease:'power3.out',stagger:.15,scrollTrigger:{trigger:'#how',start:'top 70%'}});
+  // 9. process: on desktop the section pins; the title starts in the middle and rises to the top left,
+  //    then the four steps slide in from the right one after another until they fill the width
+  if(isD){
+    const hw=$('#how'), head=$('.hw-head'), grid=$('.hw-grid');
+    const tl=window._hwtl=gsap.timeline({scrollTrigger:{trigger:hw,start:'top top',end:'+=120%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    tl.fromTo(head,{y:()=>innerHeight/2-(head.offsetTop+head.offsetHeight/2),scale:1.15,transformOrigin:'0% 50%'},{y:0,scale:1,ease:'power2.inOut',duration:1})
+      .fromTo('.hw-card',{x:(i,el)=>{const cards=grid.children, step=cards[1].offsetLeft-cards[0].offsetLeft; return i<2?step*2:innerWidth-(grid.getBoundingClientRect().left+el.offsetLeft)+(i-2)*80;},opacity:i=>i<2?1:0},{x:0,opacity:1,ease:'power3.inOut',duration:1.1,stagger:.12},.1)
+      .to({},{duration:.25});
+    ScrollTrigger.sort();
+  } else {
+    gsap.from('.hw-head>*',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#how',start:'top 80%'}});
+    $$('.hw-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
+  }
   // 11. testimonials: appear
   gsap.from('.tm-in',{y:50,opacity:0,duration:1,ease:'power3.out',stagger:.15,scrollTrigger:{trigger:'.tm',start:'top 72%'}});
   gsap.from('.rv',{y:40,opacity:0,duration:.8,ease:'power3.out',stagger:.06,scrollTrigger:{trigger:'.reviews',start:'top 88%'}});
 
   return ()=>{media.removeEventListener('click',toggle);vid&&vid.pause();ScrollTrigger.removeEventListener('refresh',placeReel);ScrollTrigger.removeEventListener('refreshInit',setTops);removeEventListener('resize',onR);
-    rows.forEach(r=>r.style.top='');$$('.pcard').forEach(c=>{c.style.top='';c.style.left='';});blk.style.clipPath='';};
+    rows.forEach(r=>r.style.top='');blk.style.clipPath='';};
 });
 
 /* ===== all sizes: arc + footer ===== */
@@ -1147,12 +1363,12 @@ gsap.from('.cta-copy',{y:30,opacity:0,duration:.9,ease:'power3.out',scrollTrigge
 
 // 13. footer: the dot on the i pops in, then floats
 const dot=$('.foot .dot');
-gsap.set(dot,{scale:0,transformOrigin:'50% 50%'});
+if(dot){gsap.set(dot,{scale:0,transformOrigin:'50% 50%'});
 ScrollTrigger.create({trigger:'#foot',start:'top 75%',once:true,onEnter:()=>{
   gsap.timeline().to(dot,{scale:.35,duration:.25,ease:'power2.out',delay:.3})
     .to(dot,{scale:1.6,duration:.3,ease:'power2.out'})
     .to(dot,{scale:1,duration:.6,ease:'elastic.out(1,.45)'})
     .to(dot,{y:-2.6,duration:1.4,ease:'sine.inOut',repeat:-1,yoyo:true});
-}});
+}});}
 })();
 </script>
