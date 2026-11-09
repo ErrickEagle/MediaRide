@@ -84,7 +84,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .why-wrap{position:relative;height:calc(var(--vh) * 240)}
 .intro{position:sticky;top:0;height:calc(var(--vh) * 100);min-height:640px;overflow:hidden;background:#fff}
 .tiles{position:absolute;inset:0}
-.orbit{position:absolute;left:50%;top:calc(50% - 40px);width:0;height:0}
+.orbit{position:absolute;left:50%;top:calc(50% + 32px);width:0;height:0}
 .hring{position:absolute;left:0;top:0;width:0;height:0}
 .orbit.rings.d{transform:scale(var(--rs-d,1))}
 .orbit.rings.m{transform:scale(var(--rs-m,.46))}
@@ -93,9 +93,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tile{pointer-events:none}
 .tile .spin{width:100%;height:100%;border-radius:10px;overflow:hidden}
 .tile img,.tile video{width:100%;height:100%;object-fit:cover;display:block}
-.hero-copy{position:absolute;left:50%;top:calc(50% - 40px);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;width:min(92vw,620px);z-index:2}
+.hero-copy{position:absolute;left:50%;top:calc(50% + 32px);transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px;width:min(92vw,620px);z-index:2}
+.hero-copy>div{margin-top:8px}
 .pill-soft{font:400 16px var(--heading);background:var(--off);padding:6px 14px;border-radius:999px}
-.hero-copy h1{font-size:clamp(40px,4.2vw,60px);line-height:1.02;letter-spacing:-.06em}
+.hero-copy h1{font-size:clamp(40px,4.2vw,60px);line-height:1.2;letter-spacing:-.06em}
 .hero-copy .line{display:block;overflow:hidden;padding-bottom:.16em;margin-bottom:-.16em}
 .hero-copy .line>span{display:block}
 .actions{display:flex;gap:20px;align-items:center}
@@ -408,7 +409,7 @@ html.loading,html.loading body{overflow:hidden}
 /* mobile pieces that only exist below 900 */
 .mnav-btn,.fcol a.m-only,.orbit.m{display:none}
 /* fade to white under the headline, from Figma: starts 84px below the headline centre, 539px tall */
-.hero-fade{position:absolute;left:0;right:0;top:calc(50% - 40px + 84px);height:max(539px,calc(50% + 40px));background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.85) 34%,#fff 55%);z-index:1;pointer-events:none}
+.hero-fade{position:absolute;left:0;right:0;top:calc(50% + 32px + 84px);height:max(539px,calc(50% + 40px));background:linear-gradient(rgba(255,255,255,0),rgba(255,255,255,.85) 34%,#fff 55%);z-index:1;pointer-events:none}
 .mnav-btn{width:40px;height:40px;place-items:center;justify-items:end;background:none;border:0;padding:0;color:var(--ink)}
 .mnav-btn .ic{width:26px;height:26px;stroke-width:1.75}
 .mmenu{position:fixed;inset:0;z-index:100;background:#fff;display:flex;flex-direction:column;visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .6s cubic-bezier(.7,0,.2,1),visibility 0s .6s}
@@ -689,6 +690,11 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .arrows button,.arrows button.next{background:var(--black);border-color:var(--black);color:#fff}
 .arrows button:hover{background:var(--orange);border-color:var(--orange);color:#fff}
 .arrows .ic{stroke-width:1.75}
+
+/* footer from Figma V5: 70px sides on desktop; mobile links and socials split into two even columns */
+@media (min-width:901px){.foot .wrap{padding-left:max(16px,min(70px,4.9vw));padding-right:max(16px,min(70px,4.9vw))}}
+@media (max-width:900px){.ft-links{display:grid;grid-template-columns:220px 1fr;gap:0}}
+@media (max-width:379px){.ft-links{grid-template-columns:55% 1fr}}
 </style>
 
 
