@@ -1,0 +1,112 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MediaRide | Home V3</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,500&family=Open+Sans:wght@400;600&display=swap">
+<style>
+:root{--orange:#D46328;--orange-2:#B8501E;--ink:#292929;--soft:#5C5955;--black:#050505;--off:#F2F2F2;--line:#E2E2E2;--h:"Montserrat",system-ui,sans-serif;--b:"Open Sans",system-ui,sans-serif;color-scheme:light}
+*{box-sizing:border-box}html,body{margin:0;background:#fff;color:var(--ink);font-family:var(--b);-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
+.wrap{max-width:1440px;margin:0 auto;padding-left:max(16px,min(80px,5.5vw),env(safe-area-inset-left,0px));padding-right:max(16px,min(80px,5.5vw),env(safe-area-inset-right,0px))}
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:10;padding-top:env(safe-area-inset-top,0px);transition:background .3s,box-shadow .3s}
+.nav.solid{background:rgba(255,255,255,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:82px}
+.wordmark{width:152px;height:auto;display:block}
+.links{display:flex;gap:36px;font:400 16px var(--h);color:#121212}
+.links a{position:relative}.links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--orange);transform:scaleX(0);transform-origin:left;transition:transform .35s}.links a:hover::after{transform:scaleX(1)}
+.pill{display:inline-flex;align-items:center;gap:14px;padding:6px 6px 6px 20px;border-radius:999px;font:600 16px var(--b);transition:transform .3s}
+.pill .dot{width:38px;height:38px;border-radius:999px;background:var(--orange);color:#fff;display:grid;place-items:center;flex:none;overflow:hidden}
+.pill .dot svg{width:18px;height:18px;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.pill:hover .dot svg{transform:translateX(3px)}
+.pill.light{background:rgba(255,255,255,.7);border:1px solid var(--line);color:var(--black);backdrop-filter:blur(8px)}
+.pill.dark{background:var(--black);color:#fff;padding:7px 7px 7px 24px}
+.pill.dark .dot{width:42px;height:42px}
+/* hero */
+.hero{position:relative;min-height:max(760px,100svh);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.bg{position:absolute;inset:0 0 auto 0;height:100%;z-index:0}
+.bg canvas{width:100%;height:100%;display:block}
+.bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,0) 52%,rgba(255,255,255,.9) 74%,#fff 86%)}
+.hero-in{position:relative;z-index:1;padding-bottom:40px}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+h1{margin:0;font:600 clamp(44px,6.1vw,88px)/1.08 var(--h);letter-spacing:-.05em;color:var(--black)}
+h1 .ln{display:flex;align-items:center;gap:.22em;flex-wrap:wrap}
+h1 .clip{display:inline-block;width:1.22em;height:.98em;border-radius:.18em;overflow:hidden;background:#ddd;flex:none;position:relative;top:.04em}
+h1 .clip video{width:100%;height:100%;object-fit:cover;display:block}
+h1 .dotc{color:var(--orange)}
+.side{display:flex;flex-direction:column;align-items:flex-end;gap:20px;text-align:right;max-width:340px;padding-bottom:10px}
+.side p{margin:0;font:400 16px/24px var(--b);color:var(--soft)}
+.trust{display:flex;align-items:center;gap:40px;border-top:1px solid var(--line);margin-top:72px;padding-top:24px}
+.trust b{font:500 13px var(--h);letter-spacing:.14em;text-transform:uppercase;color:var(--black);white-space:nowrap}
+.marq{flex:1;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.track{display:flex;gap:64px;width:max-content;animation:mq 38s linear infinite}
+.track img{height:22px;width:auto;opacity:.55;filter:grayscale(1)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.next{height:60vh;display:grid;place-items:center;color:#8C8C8C;font:500 14px var(--h)}
+@media (max-width:900px){
+ .links{display:none}.nav .wrap{height:64px}.wordmark{width:124px}
+ .pill.light span{display:none}.pill.light{padding:4px}
+ .hero{min-height:100svh}
+ .hero-row{flex-direction:column;align-items:flex-start;gap:28px}
+ .side{align-items:flex-start;text-align:left}
+ .trust{margin-top:44px;gap:20px}.trust b{font-size:11px}
+ .track{gap:40px}.track img{height:18px}
+}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+</style>
+
+<header class="nav" id="nav"><div class="wrap">
+  <a href="#" aria-label="MediaRide home"><svg class="wordmark" viewBox="0 0 152 24.6" role="img" aria-label="MediaRide"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg></a>
+  <nav class="links"><a href="#">Services</a><a href="#">Work</a><a href="#">Process</a><a href="#">About</a><a href="#">Contact</a></nav>
+  <a class="pill light" href="#"><span>Book a call</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a>
+</div></header>
+
+<section class="hero">
+  <div class="bg"><canvas id="silk" aria-hidden="true"></canvas></div>
+  <div class="wrap hero-in">
+    <div class="hero-row">
+      <h1><span class="ln">Every shoot, <span class="clip"><video src="v/pn8.mp4" poster="v/pn8.jpg" muted loop playsinline autoplay></video></span></span><span class="ln"><span>planned for feed<span class="dotc">.</span></span></span></h1>
+      <div class="side"><p>We film your launches, campaigns and events, then cut every shoot into clips for social, sales and your site.</p><a class="pill dark" href="#"><span>Book a call</span><i class="dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></i></a></div>
+    </div>
+    <div class="trust"><b>Trusted by:</b><div class="marq"><div class="track"><img src="logos/row1_1.svg" alt=""><img src="logos/row1_2.svg" alt=""><img src="logos/row1_3.svg" alt=""><img src="logos/row1_4.svg" alt=""><img src="logos/row1_5.svg" alt=""><img src="logos/row2_1.svg" alt=""><img src="logos/row2_2.svg" alt=""><img src="logos/row2_3.svg" alt=""><img src="logos/row2_4.svg" alt=""><img src="logos/row1_1.svg" alt=""><img src="logos/row1_2.svg" alt=""><img src="logos/row1_3.svg" alt=""><img src="logos/row1_4.svg" alt=""><img src="logos/row1_5.svg" alt=""><img src="logos/row2_1.svg" alt=""><img src="logos/row2_2.svg" alt=""><img src="logos/row2_3.svg" alt=""><img src="logos/row2_4.svg" alt=""></div></div></div>
+  </div>
+</section>
+<div class="next">Next sections follow here</div>
+
+<script>
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('solid',scrollY>20),{passive:true});
+/* silk: slow flowing white folds, drawn on the GPU */
+(()=>{const cv=document.getElementById('silk');const gl=cv.getContext('webgl',{antialias:false,premultipliedAlpha:false});if(!gl)return;
+const vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+const fs=`precision highp float;uniform vec2 r;uniform float t;
+float h(vec2 p){
+  float w=sin(p.x*1.3+t*.22)*1.1+sin(p.x*2.9-t*.17+1.3)*.35+sin(p.x*.6+t*.09)*.6;
+  float y=p.y+w*.18;
+  return sin(y*9.0+w*1.4)*.5+sin(y*19.0+sin(p.x*2.1+t*.28)*2.2)*.12+sin(y*3.4-t*.12+w)*.45;
+}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
+  float a=-.38;p=mat2(cos(a),-sin(a),sin(a),cos(a))*p;p*=1.35;
+  float e=.004;float v=h(p);
+  vec2 n=vec2(h(p+vec2(e,0.))-v,h(p+vec2(0.,e))-v)/e;
+  vec3 N=normalize(vec3(-n*.05,1.));vec3 L=normalize(vec3(-.45,.55,.7));
+  float d=clamp(dot(N,L),0.,1.);float s=pow(clamp(dot(reflect(-L,N),vec3(0.,0.,1.)),0.,1.),36.);
+  vec3 base=vec3(.84,.84,.845);vec3 hi=vec3(1.);
+  vec3 c=mix(base,hi,smoothstep(.3,.98,d));c+=s*.55;
+  c=mix(c,vec3(.97,.955,.945),.18*smoothstep(-1.,1.,v));
+  c=mix(c,vec3(1.),smoothstep(.55,1.,uv.y)*.25);
+  gl_FragColor=vec4(clamp(c,0.,1.),1.);
+}`;
+const sh=(ty,src)=>{const s=gl.createShader(ty);gl.shaderSource(s,src);gl.compileShader(s);return s;};
+const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
+const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+const loc=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+const ur=gl.getUniformLocation(pr,'r'),ut=gl.getUniformLocation(pr,'t');
+const RED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const size=()=>{const s=Math.min(devicePixelRatio,1.5)*.6;const w=Math.round(cv.clientWidth*s),h=Math.round(cv.clientHeight*s);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h;gl.viewport(0,0,w,h);}};
+let on=true,t0=performance.now();
+const draw=()=>{size();gl.uniform2f(ur,cv.width,cv.height);gl.uniform1f(ut,RED?6.:(performance.now()-t0)/1000+6.);gl.drawArrays(gl.TRIANGLES,0,3);if(on&&!RED)requestAnimationFrame(draw);};
+new IntersectionObserver(es=>{const v=es[0].isIntersecting;if(v&&!on){on=true;draw();}on=v;}).observe(cv);draw();
+})();
+</script>
