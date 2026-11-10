@@ -1430,47 +1430,6 @@ ScrollTrigger.create({trigger:'#foot',start:'top 75%',once:true,onEnter:()=>{
     .to(dot,{y:-2.6,duration:1.4,ease:'sine.inOut',repeat:-1,yoyo:true});
 }});}
 })();
-/* whole-page colour switch, tied to the scroll itself (no timed fade): as a dark section rises to the middle of the screen,
-   the whole page blends to black in step with your scroll, and back to white for light sections. A soft follow on top
-   (each frame closes 12% of the gap) takes the edge off fast flicks, so the change is felt more than seen.
-   Sections whose own colour doesn't match fade back in proportion, so text never sits on the wrong background.
-   The hero, the Why us scene and the footer keep their own colours (the footer is short, so the closing section stays readable above it); Why us starts black (its black panel) and ends light, so both edges meet seamlessly. */
-(()=>{if(!window.gsap||!window.ScrollTrigger) return;
-  const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const q=x=>document.querySelector(x);
-  const rgb=c=>(c.match(/\d+(\.\d+)?/g)||[255,255,255]).slice(0,3).map(Number);
-  const BLACK=[5,5,5];
-  const themed=['.trusted','.about','.problem','.wwm','.hw','.tm','.cta'].map(q).filter(Boolean)
-    .map(el=>{const c=rgb(getComputedStyle(el).backgroundColor);const dark=(.299*c[0]+.587*c[1]+.114*c[2])/255<.35;return {el,c,dark,d:dark?1:0};});
-  const intro=q('.intro-wrap'), why=q('.why-wrap'), bodyC=rgb(getComputedStyle(document.body).backgroundColor);
-  // segments in page order: [element, darkness at top, darkness at bottom, light colour]
-  let segs=[];
-  const build=()=>{const list=[];
-    if(intro) list.push({box:intro,d0:0,d1:0,L:bodyC});
-    themed.forEach(t=>list.push({box:t.el.parentElement&&t.el.parentElement.classList.contains('pin-spacer')?t.el.parentElement:t.el,d0:t.d,d1:t.d,L:t.dark?[255,255,255]:t.c}));
-    if(why) list.push({box:why,d0:1,d1:0,L:rgb(getComputedStyle(q('.why')||why).backgroundColor)});
-    list.forEach(sg=>{const r=sg.box.getBoundingClientRect();sg.top=r.top+scrollY;sg.bot=sg.top+r.height;});
-    list.sort((x,y)=>x.top-y.top); segs=list;};
-  const ss=t=>t<=0?0:t>=1?1:t*t*(3-2*t);
-  const lerp=(x,y,t)=>x+(y-x)*t, mix=(A,B,t)=>A.map((v,i)=>lerp(v,B[i],t));
-  // target darkness + light colour at the middle line of the screen
-  const target=()=>{const vh=innerHeight, c=scrollY+vh*.5, w=vh*.35;
-    let k=segs.findIndex(sg=>c<sg.bot); if(k<0) k=segs.length-1;
-    const sg=segs[k], span=Math.max(1,sg.bot-sg.top), f=Math.min(1,Math.max(0,(c-sg.top)/span));
-    let d=lerp(sg.d0,sg.d1,f), L=sg.L;
-    const prev=segs[k-1], next=segs[k+1];
-    if(prev&&c<sg.top+w){const t=ss((c-(sg.top-w))/(2*w)); d=lerp(prev.d1,d,t); L=mix(prev.L,L,t);}
-    else if(next&&c>sg.bot-w){const t=ss((c-(sg.bot-w))/(2*w)); d=lerp(d,next.d0,t); L=mix(L,next.L,t);}
-    return {d,L};};
-  let cur=null;
-  const paint=({d,L})=>{const col=mix(L,BLACK,d).map(Math.round), css=`rgb(${col})`;
-    document.body.style.backgroundColor=css;
-    themed.forEach(t=>{t.el.style.backgroundColor=css; t.el.style.opacity=(1-.88*Math.min(1,Math.abs(t.d-d)*1.15)).toFixed(3);});};
-  const tick=()=>{const tg=target(); if(!cur||RM){cur=tg;} else {const k=.12; cur={d:lerp(cur.d,tg.d,k),L:mix(cur.L,tg.L,k)};}
-    paint(cur);};
-  ScrollTrigger.addEventListener('refresh',()=>{build();});
-  build(); gsap.ticker.add(tick);
-})();
 /* floating Book a call: shows once the hero has scrolled away, hides again over the closing section and footer */
 (()=>{const fab=document.getElementById('fab'); if(!fab) return;
   const upd=()=>{const past=scrollY>innerHeight*1.2, end=document.getElementById('contact').getBoundingClientRect().top<innerHeight*.85;
