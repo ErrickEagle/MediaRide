@@ -697,6 +697,8 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .arrows button,.arrows button.next{background:var(--black);border-color:var(--black);color:#fff}
 .arrows button:hover{background:var(--orange);border-color:var(--orange);color:#fff}
 .arrows .ic{stroke-width:1.75}
+/* Safari adds its own button padding and the arrowhead side reads heavier: zero the padding and nudge each arrow ~1px toward its tail so it looks centred */
+.arrows button{padding:0;-webkit-appearance:none;appearance:none;line-height:0}.arrows .ic{display:block}.arrows .prev .ic{transform:translateX(1px)}.arrows .next .ic{transform:translateX(-1px)}
 
 /* footer from Figma V5: 70px sides on desktop; mobile links and socials split into two even columns */
 @media (min-width:901px){.foot .wrap{padding-left:max(16px,min(70px,4.9vw));padding-right:max(16px,min(70px,4.9vw))}}
