@@ -216,7 +216,7 @@ html.ld-skip .loader{display:none}
 .pp-num{font:700 72px/1 var(--heading);letter-spacing:-.06em;color:#2E2E2E}
 .pp-txt h3{margin:0;font:600 40px/46px var(--heading);letter-spacing:-.04em;color:#F2F2F2}
 .pp-txt p{margin:16px 0 0;font:400 17px/27px var(--body);color:#8F8F8F;max-width:420px}
-.pp-txt p.pp-fix{margin-top:32px;padding-left:16px;border-left:2px solid var(--orange);font:500 18px/26px var(--heading);letter-spacing:-.02em;color:#F2F2F2}
+.pp-txt p.pp-fix{margin-top:32px;display:flex;align-items:center;gap:12px;font:500 18px/26px var(--heading);letter-spacing:-.02em;color:#F2F2F2}
 
 /* ---------- WHY US ---------- */
 .why{position:sticky;top:0;height:calc(var(--vh) * 100);min-height:700px;background:var(--off);overflow:hidden;display:grid;place-items:center;padding-top:82px}
@@ -628,6 +628,64 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .hw-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .5s ease,transform .9s cubic-bezier(.2,.8,.2,1);z-index:2;pointer-events:none;background:#111}
 .hw-card.on .hw-vid{opacity:1;transform:scale(1)}
 .hw-card.on .hw-top,.hw-card.on .hw-body{opacity:0}
+.pp-fix .ic{width:20px;height:20px;color:var(--orange);stroke-width:1.75;flex:none}
+/* why us: what sets us apart */
+.ws{position:relative;z-index:2;background:var(--off);color:#111}
+.ws-stage{position:relative;height:calc(var(--vh,1vh) * 100);min-height:720px;overflow:hidden}
+.ws-head{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;text-align:center;z-index:3;pointer-events:none}
+.ws .eyebrow{color:var(--orange) !important;font:500 14px/20px var(--heading)}
+.ws-title{margin:0;display:flex;gap:.28em;white-space:nowrap;font-size:clamp(44px,5vw,76px);line-height:1.05;letter-spacing:-.04em;color:#111}
+.ws-title span{display:inline-block}
+.ws-title b{font-weight:inherit;color:var(--orange)}
+.ws-main{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:40px;box-sizing:border-box;padding-top:40px}
+.ws-tag{margin:0;max-width:720px;text-align:center;font-size:clamp(28px,2.6vw,40px);line-height:1.15;letter-spacing:-.04em;color:#111}
+.ws-grid{width:100%;max-width:1200px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.ws-card{position:relative;height:min(560px,calc(var(--vh,1vh) * 100 - 260px));min-height:440px;background:#111;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;color:#F2F2F2;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black)}
+.ws-c2{z-index:2}
+.ws-txt{padding:28px 28px 0;position:relative;z-index:2}
+.ws-n{font:500 18px/1 var(--heading);letter-spacing:-.02em;color:#F2F2F2}
+.ws-n i{font-style:normal;color:var(--orange)}
+.ws-txt h4{margin:16px 0 10px;font-size:30px;line-height:1.1;letter-spacing:-.04em;color:#F2F2F2}
+.ws-txt p{margin:0;font:400 16px/24px var(--body);color:#8F8F8F;max-width:300px}
+.ws-art{position:relative;flex:1;min-height:0}
+/* 01: a shot plan, one shot lifted off the list */
+.ws-plan{position:absolute;left:24px;right:24px;top:36px;bottom:-40px;background:#E9E9E9;border-radius:10px;padding:18px 18px 0;color:#111;-webkit-mask-image:linear-gradient(#000 55%,transparent 96%);mask-image:linear-gradient(#000 55%,transparent 96%)}
+.ws-plan-h{display:flex;justify-content:space-between;align-items:baseline;font:600 22px/1 var(--heading);letter-spacing:-.03em}
+.ws-plan-h em{font-style:normal;font-weight:500;color:#8F8F8F}
+.ws-slot{height:58px;margin:18px 0 10px;border:1.5px dashed #BDBDBD;border-radius:10px}
+.ws-row{background:#DCDCDC;border-radius:10px;padding:12px 14px;margin-bottom:10px}
+.ws-row small,.ws-lift small{display:block;font:500 12px/1 var(--body);color:#8F8F8F;margin-bottom:6px}
+.ws-row span,.ws-lift span{font:600 15px/1.2 var(--heading);letter-spacing:-.02em;color:#111}
+.ws-lift{position:absolute;left:6px;right:-14px;top:58px;background:#fff;border-radius:10px;padding:13px 16px;box-shadow:0 18px 40px rgba(0,0,0,.35);transform:rotate(3deg);animation:wsFloat 5s ease-in-out infinite}
+.ws-grab{position:absolute;right:18px;bottom:-12px;width:26px;height:26px;color:#111;fill:#fff;stroke-width:1.6}
+@keyframes wsFloat{0%,100%{transform:rotate(3deg) translateY(0)}50%{transform:rotate(1.5deg) translateY(-6px)}}
+/* 02: a wall of client logos */
+.ws-logos{position:absolute;inset:36px 0 0;display:flex;justify-content:center;gap:12px;-webkit-mask-image:linear-gradient(#000 45%,transparent 92%);mask-image:linear-gradient(#000 45%,transparent 92%)}
+.ws-col{display:flex;flex-direction:column;gap:12px;flex:none}
+.ws-col:nth-child(1),.ws-col:nth-child(3){margin-top:40px}
+.ws-tile{width:112px;height:76px;background:#fff;border-radius:10px;display:grid;place-items:center}
+.ws-tile img{max-width:76px;max-height:26px;width:auto;height:auto}
+/* 03: a cut playing on a phone */
+.ws-phone{position:absolute;left:50%;top:30px;width:200px;height:410px;margin-left:-100px;border-radius:32px;background:#000;border:6px solid #E9E9E9;overflow:hidden;transform:rotate(7deg);box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.ws-phone video{width:100%;height:100%;object-fit:cover;display:block}
+.ws-notch{position:absolute;top:8px;left:50%;width:58px;height:16px;margin-left:-29px;border-radius:99px;background:#000;z-index:2}
+.ws-chip{position:absolute;left:24px;top:120px;display:flex;align-items:center;gap:8px;background:#fff;color:#111;border-radius:999px;padding:10px 14px;font:600 13px/1 var(--heading);letter-spacing:-.01em;box-shadow:0 14px 30px rgba(0,0,0,.35);animation:wsFloat2 6s ease-in-out infinite}
+.ws-chip i{width:8px;height:8px;border-radius:99px;background:var(--orange)}
+.ws-chip b{font-weight:500;color:#8F8F8F;margin-left:4px}
+@keyframes wsFloat2{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.ws-lift,.ws-chip{animation:none}}
+@media (max-width:1200px) and (min-width:901px){.ws-txt h4{font-size:26px}.ws-txt p{font-size:15px;line-height:22px}.ws-txt{padding:24px 22px 0}.ws-tile{width:96px;height:66px}.ws-tile img{max-width:66px}}
+@media (max-width:900px){
+  .ws-stage{height:auto;min-height:0;padding:80px 0}
+  .ws-head{position:static;padding:0 20px 12px;gap:14px}
+  .ws-title{font-size:32px;line-height:38px;white-space:normal;display:block}
+  .ws-main{height:auto;padding-top:0;gap:28px}
+  .ws-tag{font-size:20px;line-height:28px;font-weight:500;color:#555}
+  .ws-grid{grid-template-columns:1fr;gap:16px}
+  .ws-card{height:500px;min-height:0}
+  .ws-txt h4{font-size:26px}.ws-txt p{font-size:15px;line-height:22px}
+  .ws-logos{gap:10px}.ws-col{gap:10px}.ws-tile{width:96px;height:66px}.ws-tile img{max-width:66px;max-height:22px}
+}
 /* process: one 4:3 film that splits into the four step cards as you scroll (desktop) */
 .hw-stage{position:relative}
 .hw-split{display:none;position:absolute;inset:0;pointer-events:none;z-index:3}
@@ -828,15 +886,15 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
       <div class="pp-rows">
         <article class="pp-row">
           <div class="pp-media"><video class="lv" muted loop playsinline preload="none" poster="m/prob_event.jpg" data-src="m/prob_event.mp4" aria-hidden="true"></video></div>
-          <div class="pp-txt"><span class="pp-num">01</span><div class="pp-body"><h3 class="h">Stuck on a drive</h3><p>Your event ended last week. The footage is still sitting on a drive, and nobody has the time to cut it.</p><p class="pp-fix">One event, a month of posts.</p></div></div>
+          <div class="pp-txt"><span class="pp-num">01</span><div class="pp-body"><h3 class="h">Stuck on a drive</h3><p>Your event ended last week. The footage is still sitting on a drive, and nobody has the time to cut it.</p><p class="pp-fix"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg><span>One event, a month of posts.</span></p></div></div>
         </article>
         <article class="pp-row rev">
           <div class="pp-media"><video class="lv" muted loop playsinline preload="none" poster="m/prob_launch.jpg" data-src="m/prob_launch.mp4" aria-hidden="true"></video></div>
-          <div class="pp-txt"><span class="pp-num">02</span><div class="pp-body"><h3 class="h">One launch, one video</h3><p>Your launch got one video. Your feed needed a month of posts to keep the story going.</p><p class="pp-fix">One hero piece, cut for every channel.</p></div></div>
+          <div class="pp-txt"><span class="pp-num">02</span><div class="pp-body"><h3 class="h">One launch, one video</h3><p>Your launch got one video. Your feed needed a month of posts to keep the story going.</p><p class="pp-fix"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg><span>One hero piece, cut for every channel.</span></p></div></div>
         </article>
         <article class="pp-row">
           <div class="pp-media"><video class="lv" muted loop playsinline preload="none" poster="m/prob_team.jpg" data-src="m/prob_team.mp4" aria-hidden="true"></video></div>
-          <div class="pp-txt"><span class="pp-num">03</span><div class="pp-body"><h3 class="h">A feed full of slides</h3><p>Your team posts every week. Most of it is a screenshot or a slide, and people scroll right past it.</p><p class="pp-fix">Your channels, kept full every week.</p></div></div>
+          <div class="pp-txt"><span class="pp-num">03</span><div class="pp-body"><h3 class="h">A feed full of slides</h3><p>Your team posts every week. Most of it is a screenshot or a slide, and people scroll right past it.</p><p class="pp-fix"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg><span>Your channels, kept full every week.</span></p></div></div>
         </article>
       </div>
     </div>
@@ -902,6 +960,37 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
           <div class="hw-top"><svg class="ic hw-ic" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg><span class="hw-step">Step 4</span></div>
           <div class="hw-body"><h3 class="h">Post<br>all month</h3><p>A full set of clips is ready to post every week after.</p></div>
         </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 WHY US: what sets us apart. The title splits, one card rises, then the other two slide out from behind it -->
+  <section class="ws" id="why-us">
+    <div class="ws-stage">
+      <div class="ws-head"><span class="eyebrow">Why us</span><h2 class="h ws-title"><span class="ws-a">What sets us <b>apart</b></span> <span class="ws-b">from others</span></h2></div>
+      <div class="ws-main wrap">
+        <h3 class="h ws-tag">We don’t settle for average, and neither should you.</h3>
+        <div class="ws-grid">
+          <article class="ws-card ws-c1">
+            <div class="ws-txt"><span class="ws-n"><i>/</i>01<i>.</i></span><h4 class="h">Planned for the feed</h4><p>Every clip is planned for social before we film.</p></div>
+            <div class="ws-art"><div class="ws-plan">
+              <div class="ws-plan-h"><span>Shot plan</span><em>(12)</em></div>
+              <div class="ws-slot"></div>
+              <div class="ws-row"><small>Instagram · 9:16</small><span>Booth highlights</span></div>
+              <div class="ws-row"><small>YouTube · Shorts</small><span>Speaker soundbites</span></div>
+              <div class="ws-lift"><small>LinkedIn · 16:9</small><span>Keynote recap, week 1</span><svg class="ic ws-grab" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 11.5V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v1.4"/><path d="M14 10V8a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 9.9V9a2 2 0 0 0-2-2a2 2 0 0 0-2 2v5"/><path d="M6 14a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M18 11a2 2 0 1 1 4 0v3a8 8 0 0 1-8 8h-4a8 8 0 0 1-8-8 2 2 0 1 1 4 0"/></svg></div>
+            </div></div>
+          </article>
+          <article class="ws-card ws-c2">
+            <div class="ws-txt"><span class="ws-n"><i>/</i>02<i>.</i></span><h4 class="h">Trusted by the best</h4><p>Social video for LinkedIn, Apollo, Cisco, Docker and many others.</p></div>
+            <div class="ws-art"><div class="ws-logos"><div class="ws-col"><span class="ws-tile"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="ws-tile"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="ws-tile"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span></div><div class="ws-col"><span class="ws-tile"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="ws-tile"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="ws-tile"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span></div><div class="ws-col"><span class="ws-tile"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="ws-tile"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="ws-tile"><img src="logos/row2_2.svg" alt="Hanke and Apolonio" loading="lazy"></span></div></div></div>
+          </article>
+          <article class="ws-card ws-c3">
+            <div class="ws-txt"><span class="ws-n"><i>/</i>03<i>.</i></span><h4 class="h">One team, start to finish</h4><p>One team plans, shoots, edits and cuts. Nothing gets lost in a handoff.</p></div>
+            <div class="ws-art"><div class="ws-phone"><span class="ws-notch"></span><video class="lv" muted loop playsinline preload="none" poster="m/why_phone.jpg" data-src="m/why_phone.mp4" aria-hidden="true"></video></div>
+              <div class="ws-chip"><i></i>Cut 03 of 12<b>0:15</b></div></div>
+          </article>
         </div>
       </div>
     </div>
@@ -1421,6 +1510,25 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   } else {
     gsap.from('.hw-head>*,.hw-hero-m',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#how',start:'top 80%'}});
     $$('.hw-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
+  }
+  // 10. why us: on desktop the section pins. "What sets us apart" splits apart and fades, the line and the middle card rise in,
+  //     then the two other cards slide out from behind the middle one, one to the left and one to the right.
+  if(isD){
+    const c1=$('.ws-c1'), c2=$('.ws-c2'), dx=()=>c2.offsetLeft-c1.offsetLeft;
+    const wt=window._wstl=gsap.timeline({scrollTrigger:{trigger:'#why-us',start:'top top',end:'+=240%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    wt.to('.ws-a',{x:()=>-innerWidth*.2,ease:'power2.inOut',duration:1},0)
+      .to('.ws-b',{x:()=>innerWidth*.2,ease:'power2.inOut',duration:1},0)
+      .to('.ws-head',{opacity:0,ease:'power1.in',duration:.45},.6)
+      .fromTo('.ws-tag',{y:40,opacity:0},{y:0,opacity:1,ease:'power2.out',duration:.6},.95)
+      .fromTo('.ws-c2',{y:()=>innerHeight*.65,opacity:0},{y:0,opacity:1,ease:'power3.out',duration:1},.95)
+      .fromTo('.ws-c1,.ws-c3',{opacity:0},{opacity:1,ease:'none',duration:.15},2.15)
+      .fromTo('.ws-c1',{x:()=>dx(),scale:.94},{x:0,scale:1,ease:'power3.inOut',duration:1.1},2.15)
+      .fromTo('.ws-c3',{x:()=>-dx(),scale:.94},{x:0,scale:1,ease:'power3.inOut',duration:1.1},2.15)
+      .to({},{duration:.4});
+    ScrollTrigger.sort();
+  } else {
+    gsap.from('.ws-head>*,.ws-tag',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#why-us',start:'top 80%'}});
+    $$('.ws-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
   }
   // 11. testimonials: appear
   gsap.from('.tm-in',{y:50,opacity:0,duration:1,ease:'power3.out',stagger:.15,scrollTrigger:{trigger:'.tm',start:'top 72%'}});
