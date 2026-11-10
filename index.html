@@ -1430,6 +1430,27 @@ ScrollTrigger.create({trigger:'#foot',start:'top 75%',once:true,onEnter:()=>{
     .to(dot,{y:-2.6,duration:1.4,ease:'sine.inOut',repeat:-1,yoyo:true});
 }});}
 })();
+/* whole-page colour switch: when a dark section reaches the middle of the screen the whole page turns black,
+   when a light one does it turns back to white; sections that don't match the current colour fade back so text never sits on the wrong background */
+(()=>{if(!window.gsap||!window.ScrollTrigger) return;
+  const els=['.trusted','.about','.problem','.wwm','.hw','.tm','.cta','.foot'].map(q=>document.querySelector(q)).filter(Boolean);
+  const lum=c=>{const m=c.match(/\d+(\.\d+)?/g)||[255,255,255];return (0.299*m[0]+0.587*m[1]+0.114*m[2])/255;};
+  const info=els.map(el=>{const bg=getComputedStyle(el).backgroundColor;return {el,bg,dark:lum(bg)<.35};});
+  const bodyBg=getComputedStyle(document.body).backgroundColor;
+  const D=matchMedia('(prefers-reduced-motion: reduce)').matches?0:.75, E='power2.inOut';
+  let cur=-2;
+  const apply=i=>{if(cur===i) return; cur=i;
+    if(i<0){ // back in the hero or the Why us scene: every section keeps its own colour
+      gsap.to(document.body,{backgroundColor:bodyBg,duration:D,ease:E,overwrite:'auto'});
+      info.forEach(o=>gsap.to(o.el,{backgroundColor:o.bg,opacity:1,duration:D,ease:E,overwrite:'auto'})); return;}
+    const t=info[i];
+    gsap.to(document.body,{backgroundColor:t.bg,duration:D,ease:E,overwrite:'auto'});
+    info.forEach(o=>gsap.to(o.el,{backgroundColor:t.bg,opacity:o.dark===t.dark?1:.12,duration:D,ease:E,overwrite:'auto'}));};
+  const active=new Set();
+  const pick=()=>{const list=[...active]; apply(list.length?Math.max(...list):-1);};
+  info.forEach((o,i)=>{const sp=o.el.parentElement&&o.el.parentElement.classList.contains('pin-spacer')?o.el.parentElement:o.el;
+    ScrollTrigger.create({trigger:sp,start:'top 55%',end:'bottom 55%',onToggle:st=>{st.isActive?active.add(i):active.delete(i); pick();}});});
+})();
 /* floating Book a call: shows once the hero has scrolled away, hides again over the closing section and footer */
 (()=>{const fab=document.getElementById('fab'); if(!fab) return;
   const upd=()=>{const past=scrollY>innerHeight*1.2, end=document.getElementById('contact').getBoundingClientRect().top<innerHeight*.85;
