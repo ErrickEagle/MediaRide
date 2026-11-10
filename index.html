@@ -181,6 +181,9 @@ html.loading,html.loading body{overflow:hidden}
 .c4 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.3) 45%,rgba(0,0,0,.72) 100%)}
 .c4:hover .bg img,.c4:hover .bg video{transform:scale(1.04)}
 .c4>*:not(.bg){position:relative;z-index:1}
+/* keep the 10px corners on phones too: Safari drops overflow clipping on rounded cards while they slide or zoom */
+.c4{isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);mask-image:radial-gradient(white,black)}
+.c4 .bg{border-radius:inherit;overflow:hidden}
 .tag{align-self:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:6px 14px;font:500 12px var(--heading)}
 @keyframes starSpin{to{transform:rotate(360deg)}}
 .c4 h3{font-size:24px;line-height:30px;letter-spacing:-.03em;margin-bottom:12px}
