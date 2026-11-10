@@ -212,16 +212,11 @@ html.ld-skip .loader{display:none}
 .pp-row.rev .pp-media{order:2}
 .pp-media{position:relative;background:#1E1E1E;min-height:100%}
 .pp-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.pp-txt{padding:56px 64px;display:flex;flex-direction:column;justify-content:center}
-.pp-num{display:flex;align-items:center;gap:10px;font:600 14px/1 var(--heading);letter-spacing:-.02em;color:#F2F2F2}
-.pp-num .ic{width:20px;height:20px;color:var(--orange);stroke-width:1.75}
-.pp-txt h3{margin:28px 0 0;font:600 40px/46px var(--heading);letter-spacing:-.04em;color:#F2F2F2}
-.pp-txt h3 b{color:var(--orange);font-weight:inherit}
-.pp-txt p{margin:16px 0 0;font:400 17px/27px var(--body);color:#8F8F8F;max-width:440px}
-.pp-foot{margin-top:48px;padding-top:24px;border-top:1px solid #2E2E2E}
-.pp-fl{display:block;font:500 13px/1 var(--heading);color:#8F8F8F;margin-bottom:14px}
-.pp-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
-.pp-tags li{font:500 14px/1 var(--body);color:#E2E2E2;border:1px solid #2E2E2E;border-radius:999px;padding:10px 14px}
+.pp-txt{padding:48px 56px;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.pp-num{font:700 72px/1 var(--heading);letter-spacing:-.06em;color:#2E2E2E}
+.pp-txt h3{margin:0;font:600 40px/46px var(--heading);letter-spacing:-.04em;color:#F2F2F2}
+.pp-txt p{margin:16px 0 0;font:400 17px/27px var(--body);color:#8F8F8F;max-width:420px}
+.pp-txt p.pp-fix{margin-top:32px;padding-left:16px;border-left:2px solid var(--orange);font:500 18px/26px var(--heading);letter-spacing:-.02em;color:#F2F2F2}
 
 /* ---------- WHY US ---------- */
 .why{position:sticky;top:0;height:calc(var(--vh) * 100);min-height:700px;background:var(--off);overflow:hidden;display:grid;place-items:center;padding-top:82px}
@@ -502,11 +497,11 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .pp-row{grid-template-columns:1fr;min-height:0}
   .pp-row.rev .pp-media{order:0}
   .pp-media{aspect-ratio:4/3;min-height:0}
-  .pp-txt{padding:24px 20px 24px}
-  .pp-txt h3{margin-top:18px;font-size:26px;line-height:32px}
+  .pp-txt{padding:24px 20px 28px;gap:20px}
+  .pp-num{font-size:48px}
+  .pp-txt h3{font-size:26px;line-height:32px}
   .pp-txt p{margin-top:10px;font-size:15px;line-height:24px}
-  .pp-foot{margin-top:24px;padding-top:18px}
-  .pp-tags li{font-size:13px;padding:9px 12px}
+  .pp-txt p.pp-fix{margin-top:20px;font-size:16px;line-height:24px}
   /* why us: same squeeze as desktop, stats in a 2 by 2 grid under the card */
   .why-wrap{height:calc(var(--vh) * 200)}
   .why{min-height:0;padding:0}
@@ -633,7 +628,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .hw-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .5s ease,transform .9s cubic-bezier(.2,.8,.2,1);z-index:2;pointer-events:none;background:#111}
 .hw-card.on .hw-vid{opacity:1;transform:scale(1)}
 .hw-card.on .hw-top,.hw-card.on .hw-body{opacity:0}
-@media (max-width:1200px) and (min-width:901px){.pp-txt{padding:44px 40px}.pp-txt h3{font-size:34px;line-height:40px}.hw-body h3{font-size:26px}.hw-card{padding:22px}.hw-body p{font-size:15px;line-height:22px}}
+@media (max-width:1200px) and (min-width:901px){.pp-txt{padding:40px}.pp-txt h3{font-size:34px;line-height:40px}.hw-body h3{font-size:26px}.hw-card{padding:22px}.hw-body p{font-size:15px;line-height:22px}}
 @media (max-width:900px){.hw-stage{min-height:0;padding:80px 0}.hw-head{gap:14px;margin-bottom:40px}.hw-head h2{font-size:30px;line-height:36px;max-width:350px}
   .hw-grid{grid-template-columns:1fr;gap:12px}.hw-card{aspect-ratio:auto;max-height:none;min-height:240px;padding:22px}.hw-body h3{font-size:26px}.hw-body p{font-size:15px;line-height:22px}}
 
@@ -822,15 +817,15 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
       <div class="pp-rows">
         <article class="pp-row">
           <div class="pp-media"><video class="lv" muted loop playsinline preload="none" poster="m/prob_event.jpg" data-src="m/prob_event.mp4" aria-hidden="true"></video></div>
-          <div class="pp-txt"><span class="pp-num"><svg class="ic" viewBox="0 0 24 24"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg>Problem 01</span><h3 class="h">Stuck on a drive<b>.</b></h3><p>Your event ended last week. The footage is still sitting on a drive, and nobody has the time to cut it.</p><div class="pp-foot"><span class="pp-fl">How we fix it</span><ul class="pp-tags"><li>Event coverage</li><li>Fast turnaround</li></ul></div></div>
+          <div class="pp-txt"><span class="pp-num">01</span><div class="pp-body"><h3 class="h">Stuck on a drive</h3><p>Your event ended last week. The footage is still sitting on a drive, and nobody has the time to cut it.</p><p class="pp-fix">One event, a month of posts.</p></div></div>
         </article>
         <article class="pp-row rev">
           <div class="pp-media"><video class="lv" muted loop playsinline preload="none" poster="m/prob_launch.jpg" data-src="m/prob_launch.mp4" aria-hidden="true"></video></div>
-          <div class="pp-txt"><span class="pp-num"><svg class="ic" viewBox="0 0 24 24"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Problem 02</span><h3 class="h">One launch, one video<b>.</b></h3><p>Your launch got one video. Your feed needed a month of posts to keep the story going.</p><div class="pp-foot"><span class="pp-fl">How we fix it</span><ul class="pp-tags"><li>Launch videos</li><li>Social clips</li></ul></div></div>
+          <div class="pp-txt"><span class="pp-num">02</span><div class="pp-body"><h3 class="h">One launch, one video</h3><p>Your launch got one video. Your feed needed a month of posts to keep the story going.</p><p class="pp-fix">One hero piece, cut for every channel.</p></div></div>
         </article>
         <article class="pp-row">
           <div class="pp-media"><video class="lv" muted loop playsinline preload="none" poster="m/prob_team.jpg" data-src="m/prob_team.mp4" aria-hidden="true"></video></div>
-          <div class="pp-txt"><span class="pp-num"><svg class="ic" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></svg>Problem 03</span><h3 class="h">A feed full of slides<b>.</b></h3><p>Your team posts every week. Most of it is a screenshot or a slide, and people scroll right past it.</p><div class="pp-foot"><span class="pp-fl">How we fix it</span><ul class="pp-tags"><li>Customer stories</li><li>Monthly support</li></ul></div></div>
+          <div class="pp-txt"><span class="pp-num">03</span><div class="pp-body"><h3 class="h">A feed full of slides</h3><p>Your team posts every week. Most of it is a screenshot or a slide, and people scroll right past it.</p><p class="pp-fix">Your channels, kept full every week.</p></div></div>
         </article>
       </div>
     </div>
@@ -1339,7 +1334,7 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   $$('.pp-row').forEach(r=>{const tl=gsap.timeline({scrollTrigger:{trigger:r,start:'top 82%'}});
     tl.from(r,{y:isD?70:40,opacity:0,duration:1,ease:'power3.out'},0)
       .from(r.querySelector('.pp-media video'),{scale:1.15,duration:1.4,ease:'power3.out'},0)
-      .from(r.querySelectorAll('.pp-txt>*'),{y:24,opacity:0,duration:.8,ease:'power3.out',stagger:.08},.2);});
+      .from(r.querySelectorAll('.pp-num,.pp-body>*'),{y:24,opacity:0,duration:.8,ease:'power3.out',stagger:.08},.2);});
 
   // 7. why us: the grey closes in from every side at once, squeezing the black down to the card, then the stats appear
   const why=gsap.timeline({scrollTrigger:{trigger:'.why-wrap',start:'top top',end:'bottom bottom',scrub:1,invalidateOnRefresh:true}});
