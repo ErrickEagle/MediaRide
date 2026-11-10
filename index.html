@@ -656,7 +656,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .ft-col a{display:inline-flex;align-items:center;gap:8px;font:500 24px/32px var(--heading);letter-spacing:-.04em;color:#E2E2E2;transition:color .2s}
 .ft-col a .ic{width:14px;height:14px;color:#8C8C8C;transition:transform .3s,color .2s}
 .ft-col a:hover{color:var(--orange)}.ft-col a:hover .ic{color:var(--orange);transform:translate(2px,-2px)}
-.ft-news p{margin:0 0 32px;font:400 15px/22px var(--body);color:#E2E2E2}
+.ft-news p{margin:0 0 24px;max-width:267px;font:400 18px/26px var(--body);letter-spacing:-.02em;color:#E2E2E2}
 .ft-news input{width:100%;background:transparent;border:0;caret-color:var(--orange);padding:0 0 16px;font:500 20px var(--heading);letter-spacing:-.02em;color:#fff;outline:0;border-radius:0;-webkit-appearance:none;color-scheme:dark;transition:border-color .3s}
 .ft-news input::placeholder{color:#6B6B6B;opacity:1}
 .ft-news input:focus{border-color:var(--orange)}
@@ -676,6 +676,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .ft-links{gap:56px}
   .ft-col a{font-size:22px;line-height:30px}
   .ft-bot{flex-direction:column;align-items:flex-start;margin-top:48px}
+  .ft-news p{max-width:none}
 }
 
 /* one eyebrow style everywhere: same as Our Process */
@@ -923,7 +924,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
         <div class="ft-col"><span class="ft-l">Socials</span><a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn <svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram <svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a><a href="https://www.youtube.com" target="_blank" rel="noopener">YouTube <svg class="ic" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg></a></div>
       </div>
       <form class="ft-news" onsubmit="event.preventDefault();setWave(this.querySelector('button'),'Subscribed');">
-        <p>Sign up for new work and<br>event video tips from our team</p>
+        <p>Sign up for new work and event video tips from our team</p>
         <label for="em" class="sr">Email</label><input id="em" type="email" placeholder="Enter email address">
         <button type="submit" data-flip>Subscribe</button>
       </form>
