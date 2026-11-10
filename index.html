@@ -126,9 +126,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ld-bar{height:3px;background:rgba(255,255,255,.14);border-radius:3px;overflow:hidden}
 .ld-bar i{display:block;height:100%;width:100%;background:var(--orange);transform-origin:0 50%;transform:scaleX(0)}
 html.loading,html.loading body{overflow:hidden}
-.loader{display:none}
-main,.site-head{transition:filter .6s ease}
-html.loading main,html.loading .site-head{filter:blur(12px)}
+.loader{transform-origin:50% 0;border-radius:0}
+.loader .wordmark{will-change:transform}
+html.ld-skip .loader{display:none}
 
 /* ---------- TRUSTED BY ---------- */
 .trusted{padding:120px 0 140px;background:#fff}
@@ -1180,7 +1180,7 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
   if(REDUCED) $$('video.lv').forEach(v=>v.removeAttribute('loop'));
 })();
 
-/* ---------- preloader: about 3 seconds, logo in the middle, bar and counter at the bottom, then it slides up ---------- */
+/* ---------- preloader: 1.25s, logo in the middle, bar and counter at the bottom, then it slides up ---------- */
 const loaderEl=$('#loader'), onLoaded=[]; let loaded=false;
 const whenLoaded=f=>{loaded?f():onLoaded.push(f);};
 const finishLoad=()=>{if(loaded)return; loaded=true; document.documentElement.classList.remove('loading'); onLoaded.splice(0).forEach(f=>f());};
@@ -1189,25 +1189,26 @@ scrollTo(0,0);
 if(REDUCED || !window.gsap){ loaderEl.remove(); finishLoad(); $$('.tile,.rc').forEach(e=>e.style.opacity=1); return; }
 document.documentElement.classList.add('loading');
 (function(){
-  // no loading screen: the page shows straight away, lightly blurred, and sharpens as soon as fonts are in (0.6s at most)
-  loaderEl.remove(); let done=false;
-  const reveal=()=>{if(done)return; done=true; finishLoad();};
-  (document.fonts?document.fonts.ready:Promise.resolve()).then(()=>setTimeout(reveal,150)); setTimeout(reveal,600);
-  return;
+  // 1.25s intro, every step overlaps the next so it never pauses:
+  // logo letters rise out of a mask (0 to .7), the counter and bar run 0 to 100 (0 to .9),
+  // the logo lifts away (.8 to 1), and the panel slides up with a curved bottom edge (.85 to 1.25).
+  // Smart: on a repeat visit in the same tab session it skips straight to the page.
+  let seen=false; try{seen=sessionStorage.getItem('mr-seen')==='1'; sessionStorage.setItem('mr-seen','1');}catch(e){}
+  if(seen){ document.documentElement.classList.add('ld-skip'); loaderEl.remove(); finishLoad(); return; }
   const num=$('#ldNum'), bar=$('#ldBar'), mark=$('.wordmark',loaderEl), o={v:0};
-  const lt=gsap.timeline();
-  // 1.75s in total: logo letters build (.05 to 1.1), bar 0 to 100 (.1 to 1.15), logo out (1.15 to 1.35), panel slides up (1.2 to 1.75)
-  // the logo builds itself while it loads: each letter rises out of a mask one after another, then the dot on the i pops in
   const letters=$$('path',mark), dot=$('circle',mark);
   gsap.set(mark,{overflow:'hidden'});
-  lt.from(letters,{y:28,duration:.42,ease:'power3.out',stagger:.07},.05)
-    .from(letters,{opacity:0,duration:.2,ease:'none',stagger:.07},.05)
-    .from(dot,{scale:0,transformOrigin:'50% 50%',duration:.32,ease:'back.out(3)'},.8)
-    .to(o,{v:100,duration:1.05,ease:'power1.inOut',onUpdate:()=>{num.textContent=Math.round(o.v)+'%';bar.style.transform=`scaleX(${o.v/100})`;}},.1)
-    .to([mark,'.ld-foot'],{opacity:0,y:-24,duration:.2,ease:'power2.in',stagger:.03},1.15)
-    .to(loaderEl,{yPercent:-100,duration:.55,ease:'power4.inOut'},1.2)
-    .add(finishLoad,1.45)
-    .add(()=>loaderEl.remove());
+  const lt=gsap.timeline();
+  lt.from(letters,{yPercent:120,duration:.45,ease:'power3.out',stagger:.035},0)
+    .from(letters,{opacity:0,duration:.25,ease:'none',stagger:.035},0)
+    .from(dot,{scale:0,transformOrigin:'50% 50%',duration:.3,ease:'back.out(3)'},.5)
+    .from('.ld-foot',{opacity:0,y:12,duration:.3,ease:'power2.out'},0)
+    .to(o,{v:100,duration:.9,ease:'power2.inOut',onUpdate:()=>{num.textContent=Math.round(o.v)+'%';bar.style.transform=`scaleX(${o.v/100})`;}},0)
+    .to(mark,{y:-30,opacity:0,duration:.25,ease:'power2.in'},.8)
+    .to('.ld-foot',{y:-16,opacity:0,duration:.2,ease:'power2.in'},.8)
+    .to(loaderEl,{yPercent:-100,borderBottomLeftRadius:'50% 140px',borderBottomRightRadius:'50% 140px',duration:.4,ease:'power3.inOut'},.85)
+    .add(finishLoad,1)
+    .add(()=>loaderEl.remove(),1.25);
 })();
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ignoreMobileResize:true});
