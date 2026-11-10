@@ -628,6 +628,17 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .hw-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .5s ease,transform .9s cubic-bezier(.2,.8,.2,1);z-index:2;pointer-events:none;background:#111}
 .hw-card.on .hw-vid{opacity:1;transform:scale(1)}
 .hw-card.on .hw-top,.hw-card.on .hw-body{opacity:0}
+/* process: one 4:3 film that splits into the four step cards as you scroll (desktop) */
+.hw-stage{position:relative}
+.hw-split{display:none;position:absolute;inset:0;pointer-events:none;z-index:3}
+.hw-strip{position:absolute;overflow:hidden;background:#1E1E1E}
+.hw-strip canvas{display:block;width:100%;height:100%}
+.hw-src{position:absolute;width:2px;height:2px;opacity:0;pointer-events:none}
+.hw-top,.hw-body{opacity:var(--in,1);transform:translateY(calc((1 - var(--in,1)) * 24px))}
+.hw-hero-m{display:none}
+@media (min-width:901px){.hw-split{display:block}.hw-head{position:relative;z-index:4}.hw-head h2{max-width:460px}}
+@media (max-width:900px){.hw-hero-m{display:block;position:relative;aspect-ratio:4/3;border-radius:10px;overflow:hidden;background:#1E1E1E;margin-bottom:12px;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black)}
+  .hw-hero-m video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}}
 @media (max-width:1200px) and (min-width:901px){.pp-txt{padding:40px}.pp-txt h3{font-size:34px;line-height:40px}.hw-body h3{font-size:26px}.hw-card{padding:22px}.hw-body p{font-size:15px;line-height:22px}}
 @media (max-width:900px){.hw-stage{min-height:0;padding:80px 0}.hw-head{gap:14px;margin-bottom:40px}.hw-head h2{font-size:30px;line-height:36px;max-width:350px}
   .hw-grid{grid-template-columns:1fr;gap:12px}.hw-card{aspect-ratio:auto;max-height:none;min-height:240px;padding:22px}.hw-body h3{font-size:26px}.hw-body p{font-size:15px;line-height:22px}}
@@ -862,8 +873,10 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
   <!-- 9 PROCESS: how one shoot becomes a month of content -->
   <section class="hw" id="how">
     <div class="hw-stage">
+      <div class="hw-split" aria-hidden="true"><div class="hw-strip"><canvas></canvas></div><div class="hw-strip"><canvas></canvas></div><div class="hw-strip"><canvas></canvas></div><div class="hw-strip"><canvas></canvas></div><video class="hw-src" muted loop playsinline preload="none" data-src="m/hw_reel.mp4"></video></div>
       <div class="wrap">
         <div class="hw-head"><span class="eyebrow">Our Process</span><h2 class="h">One shoot, a month of content</h2></div>
+        <div class="hw-hero-m"><video class="lv" muted loop playsinline preload="none" poster="m/hw_reel.jpg" data-src="m/hw_reel.mp4" aria-hidden="true"></video></div>
         <div class="hw-grid">
         <article class="hw-card" tabindex="0">
           <video class="hw-vid" data-src="v/vn17.mp4" poster="v/vn17.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
@@ -1366,17 +1379,47 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   });
 
   // 9. how one shoot: appear
-  // 9. process: on desktop the section pins; the title starts in the middle and rises to the top left,
-  //    then the four steps slide in from the right one after another until they fill the width
+  // 9. process: on desktop the section pins. It opens with the title on the left and one 4:3 film on the right.
+  //    As you scroll, the film slices into four strips that travel one after another into the four step cards,
+  //    then each strip fades away to reveal its card and the step text rises in. Hover a card to play its clip.
   if(isD){
-    const hw=$('#how'), head=$('.hw-head'), grid=$('.hw-grid');
-    const tl=window._hwtl=gsap.timeline({scrollTrigger:{trigger:hw,start:'top top',end:'+=120%',pin:true,scrub:1,invalidateOnRefresh:true}});
-    tl.fromTo(head,{y:()=>innerHeight/2-(head.offsetTop+head.offsetHeight/2),scale:1.15,transformOrigin:'0% 50%'},{y:0,scale:1,ease:'power2.inOut',duration:1})
-      .fromTo('.hw-card',{x:(i,el)=>{const cards=grid.children, step=cards[1].offsetLeft-cards[0].offsetLeft; return i<2?step*2:innerWidth-(grid.getBoundingClientRect().left+el.offsetLeft)+(i-2)*80;},opacity:i=>i<2?1:0},{x:0,opacity:1,ease:'power3.inOut',duration:1.1,stagger:.12},.1)
-      .to({},{duration:.25});
+    const hw=$('#how'), stage=$('.hw-stage'), head=$('.hw-head'), cards=$$('.hw-card'), strips=$$('.hw-strip');
+    const cvs=strips.map(x=>x.querySelector('canvas')), ctx=cvs.map(c=>c.getContext('2d'));
+    const src=$('.hw-src'), poster=new Image(); poster.src='m/hw_reel.jpg';
+    let H={x:0,y:0,w:1,h:1};
+    const box=el=>{const a=el.getBoundingClientRect(), r=stage.getBoundingClientRect(); return {x:a.left-r.left,y:a.top-r.top,w:a.width,h:a.height};};
+    const calc=()=>{const g=box($('.hw-grid')), W=Math.round(g.w*.56), Hh=Math.round(W*.75);
+      H={x:g.x+g.w-W, y:Math.round((stage.offsetHeight-Hh)/2), w:W, h:Hh};};
+    calc(); ScrollTrigger.addEventListener('refreshInit',calc);
+    const S=i=>({left:H.x+i*H.w/4, top:H.y, width:H.w/4, height:H.h});
+    const C=i=>{const c=box(cards[i]); return {left:c.x, top:c.y, width:c.w, height:c.h};};
+    const R=['10px 0px 0px 10px','0px 0px 0px 0px','0px 0px 0px 0px','0px 10px 10px 0px'];
+    const tl=window._hwtl=gsap.timeline({scrollTrigger:{trigger:hw,start:'top top',end:'+=130%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    tl.fromTo(head,{y:()=>stage.offsetHeight/2-(head.offsetTop+head.offsetHeight/2)},{y:0,ease:'power3.inOut',duration:.75},0)
+      .fromTo(strips,{left:i=>S(i).left,top:i=>S(i).top,width:i=>S(i).width,height:i=>S(i).height,borderRadius:i=>R[i],opacity:1},
+                     {left:i=>C(i).left,top:i=>C(i).top,width:i=>C(i).width,height:i=>C(i).height,borderRadius:'10px 10px 10px 10px',ease:'power3.inOut',duration:1,stagger:.1},0)
+      .fromTo(cards,{opacity:0},{opacity:1,ease:'none',duration:.4,stagger:.1},.7)
+      .to(strips,{opacity:0,ease:'power1.in',duration:.35,stagger:.1},1.15)
+      .fromTo(cards,{'--in':0},{'--in':1,ease:'power2.out',duration:.45,stagger:.1},1.3)
+      .to({},{duration:.2});
     ScrollTrigger.sort();
+    // each strip draws its own slice of the one playing film, so all four stay in sync while they move
+    const draw=()=>{const s=src.readyState>=2?src:(poster.complete&&poster.naturalWidth?poster:null); if(!s) return;
+      const vw=s.videoWidth||s.naturalWidth, vh=s.videoHeight||s.naturalHeight, k=Math.max(H.w/vw,H.h/vh);
+      const sw0=H.w/k, sh0=H.h/k, sx0=(vw-sw0)/2, sy0=(vh-sh0)/2, dpr=Math.min(2,devicePixelRatio||1);
+      strips.forEach((el,i)=>{if(+gsap.getProperty(el,'opacity')<=0) return;
+        const w=el.offsetWidth, h=el.offsetHeight; if(!w||!h) return;
+        const c=cvs[i], cw=Math.round(w*dpr), ch=Math.round(h*dpr); if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;}
+        const A=w/h; let sh=sh0, sw=sh*A; if(sw>vw){sw=vw; sh=sw/A;}
+        const sx=Math.min(Math.max(sx0+sw0*(i+.5)/4-sw/2,0),vw-sw), sy=Math.min(Math.max(sy0+(sh0-sh)/2,0),vh-sh);
+        ctx[i].drawImage(s,sx,sy,sw,sh,0,0,cw,ch);});};
+    let live=false;
+    new IntersectionObserver(es=>{live=es[0].isIntersecting;
+      if(live){if(!src.src){src.preload='auto'; src.src=src.dataset.src;} const p=src.play(); p&&p.catch(()=>{});} else src.pause();},{rootMargin:'300px 0px'}).observe(hw);
+    poster.onload=draw;
+    gsap.ticker.add(()=>{if(live&&tl.progress()<.97) draw();});
   } else {
-    gsap.from('.hw-head>*',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#how',start:'top 80%'}});
+    gsap.from('.hw-head>*,.hw-hero-m',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#how',start:'top 80%'}});
     $$('.hw-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
   }
   // 11. testimonials: appear
