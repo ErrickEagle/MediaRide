@@ -710,13 +710,13 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
 .problem .eyebrow,.hw .eyebrow{color:var(--orange) !important}
 /* process cards: eye button top right opens the step's video */
 .hw-card{cursor:pointer}
-.hw-eye{position:absolute;top:20px;right:20px;z-index:3;width:40px;height:40px;border-radius:999px;border:1px solid #2E2E2E;background:rgba(5,5,5,.6);color:#F2F2F2;display:grid;place-items:center;padding:0;cursor:pointer;transition:background .3s,border-color .3s,color .3s,transform .35s cubic-bezier(.34,1.56,.64,1)}
-.hw-eye .ic{width:18px;height:18px;stroke-width:1.75;grid-area:1/1;transition:opacity .25s,transform .35s}
-.hw-eye .i-x{opacity:0;transform:rotate(-90deg)}
-.hw-card:hover .hw-eye,.hw-eye:focus-visible{background:var(--orange);border-color:var(--orange);color:#fff;transform:scale(1.06)}
-.hw-card.on .hw-eye{background:rgba(5,5,5,.6);border-color:rgba(255,255,255,.35)}
-.hw-card.on .hw-eye .i-eye{opacity:0;transform:rotate(90deg)}.hw-card.on .hw-eye .i-x{opacity:1;transform:none}
-@media (max-width:900px){.hw-eye{top:16px;right:16px;width:38px;height:38px}}
+.hw-eye{display:none}
+@media (max-width:900px){
+  .hw-eye{position:absolute;top:14px;right:14px;z-index:3;width:40px;height:40px;border:0;border-radius:999px;background:transparent;color:#F2F2F2;display:grid;place-items:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:0}
+  .hw-eye .ic{width:22px;height:22px;stroke-width:1.75;grid-area:1/1;transition:opacity .25s,transform .35s}
+  .hw-eye .i-x{opacity:0;transform:rotate(-90deg)}
+  .hw-card.on .hw-eye .i-eye{opacity:0;transform:rotate(90deg)}.hw-card.on .hw-eye .i-x{opacity:1;transform:none}
+}
 </style>
 
 
@@ -1157,7 +1157,11 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
     const off0=off; const on0=on;
     c._off=()=>{off0();setEye(false);};
     eye.addEventListener('click',e=>{e.stopPropagation(); if(c.classList.contains('on')) c._off(); else {cards.forEach(o=>o!==c&&o.classList.contains('on')&&o._off()); on0(); setEye(true);}});
-    c.addEventListener('click',()=>eye.click());
+    const mob=matchMedia('(max-width:900px)');
+    c.addEventListener('click',()=>{if(mob.matches||!hover) eye.click();});
+    // desktop keeps the original hover-to-play; the eye only exists on mobile
+    if(hover){c.addEventListener('mouseenter',()=>{if(!mob.matches){on0();setEye(true);}}); c.addEventListener('mouseleave',()=>{if(!mob.matches) c._off();});
+      c.addEventListener('focus',()=>{if(!mob.matches){on0();setEye(true);}}); c.addEventListener('blur',()=>{if(!mob.matches) c._off();});}
   });
 })();
 
