@@ -236,7 +236,7 @@ html.loading,html.loading body{overflow:hidden}
 .why-media::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.8)}
 .why-grid{position:absolute;left:50%;top:50%;width:1104px;height:816px;transform:translate(-50%,-50%);background-image:linear-gradient(#DCDCDC 1px,transparent 1px),linear-gradient(90deg,#DCDCDC 1px,transparent 1px);background-size:24px 24px;-webkit-mask-image:radial-gradient(closest-side,#000 40%,transparent);mask-image:radial-gradient(closest-side,#000 40%,transparent);opacity:.8}
 .why-stage{position:absolute;inset:0;display:grid;place-items:center}
-.why-card{position:absolute;inset:0;background:transparent;color:#fff;padding:32px;display:flex;flex-direction:column;justify-content:space-between;z-index:2}
+.why-card{position:absolute;inset:0;border-radius:10px;background:transparent;color:#fff;padding:32px;display:flex;flex-direction:column;justify-content:space-between;z-index:2}
 .why-card .k{display:flex;align-items:center;gap:8px;font:500 12px var(--heading);letter-spacing:.08em;color:#B3B3B3}
 .why-card .k i{width:5px;height:5px;border-radius:9px;background:var(--orange)}
 .why-card h2{font-size:48px;line-height:54px;margin-top:16px;max-width:306px}
@@ -1329,10 +1329,10 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   const countUp=b=>{if(!b)return; const final=b.dataset.final||(b.dataset.final=b.textContent); const m=final.match(/^([\d.]+)(.*)$/); if(!m)return;
     const to=parseFloat(m[1]), suf=m[2], dec=to<10?1:0, o={v:0};
     gsap.killTweensOf(o); gsap.to(o,{v:to,duration:1.6,ease:'power2.out',onUpdate:()=>{b.textContent=(o.v>=to?to:o.v.toFixed(dec).replace(/\.0$/,''))+suf;},onComplete:()=>{b.textContent=final;}});};
-  const clip={t:0,r:0,b:0,l:0}, blk=$('#whyBlack'), wm=$('#whyMedia');
-  const drawClip=()=>{blk.style.clipPath=`inset(${clip.t}px ${clip.r}px ${clip.b}px ${clip.l}px)`; wm.style.inset=`${clip.t}px ${clip.r}px ${clip.b}px ${clip.l}px`;};
+  const clip={t:0,r:0,b:0,l:0,k:0}, blk=$('#whyBlack'), wm=$('#whyMedia');
+  const drawClip=()=>{blk.style.clipPath=`inset(${clip.t}px ${clip.r}px ${clip.b}px ${clip.l}px round ${clip.k}px)`; wm.style.inset=`${clip.t}px ${clip.r}px ${clip.b}px ${clip.l}px`; wm.style.borderRadius=clip.k+'px';};
   drawClip();
-  why.fromTo(clip,{t:0,r:0,b:0,l:0},{t:()=>cardBox().t,r:()=>cardBox().r,b:()=>cardBox().b,l:()=>cardBox().l,duration:1,ease:'power2.inOut',onUpdate:drawClip})
+  why.fromTo(clip,{t:0,r:0,b:0,l:0,k:0},{k:10,t:()=>cardBox().t,r:()=>cardBox().r,b:()=>cardBox().b,l:()=>cardBox().l,duration:1,ease:'power2.inOut',onUpdate:drawClip})
      .fromTo('.why-grid',{opacity:0},{opacity:.8,duration:.4})
      .fromTo(['.stat.l:nth-of-type(1)','.stat.l:nth-of-type(2)','.stat.r:nth-of-type(3)','.stat.r:nth-of-type(4)'].map(s=>$('#whyBox '+s)),
         {y:30,opacity:0},{y:0,opacity:1,stagger:{each:.22,onStart(){countUp(this.targets()[0].querySelector('b'));}},duration:.4,ease:'power3.out'},'<')
