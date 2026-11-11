@@ -631,19 +631,19 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .pp-fix .ic{width:20px;height:20px;color:var(--orange);stroke-width:1.75;flex:none}
 /* why us: what sets us apart */
 .ws{position:relative;z-index:2;background:#fff;color:#111}
-.ws-stage{position:relative;height:calc(var(--vh,1vh) * 100);min-height:680px;overflow:hidden}
+.ws-stage{position:relative;padding:120px 0;overflow:hidden}
 .ws-head{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;z-index:3;pointer-events:none}
 .ws .eyebrow{color:var(--orange) !important;font:500 14px/20px var(--heading)}
 .ws-title{margin:0;display:flex;gap:.28em;white-space:nowrap;font-size:clamp(32px,3.4vw,48px);line-height:1.15;letter-spacing:-.04em;color:#111}
 .ws-title span{display:inline-block}
 .ws-title b{font-weight:inherit;color:var(--orange)}
-.ws-main{height:100%;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
+.ws-main{display:flex;align-items:center;justify-content:center;box-sizing:border-box}
 .ws-block{width:100%;max-width:1276px;display:flex;flex-direction:column;align-items:center;gap:32px}
 .ws-top{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .ws-tag{margin:0;max-width:780px;font-size:clamp(32px,3.4vw,48px);line-height:1.15;letter-spacing:-.04em;color:#111}
 /* bento: one tall card, two small ones and a wide one */
 .ws-grid{--gh:clamp(520px,calc(var(--vh,1vh) * 100 - 220px),740px);width:100%;height:var(--gh);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px}
-.ws-card{position:relative;background:#F2F2F2;border:1px solid #E5E5E5;border-radius:24px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);box-sizing:border-box;color:#050505}
+.ws-card{position:relative;background:#F2F2F2;border-radius:24px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);box-sizing:border-box;color:#050505}
 .ws-c1{grid-row:1 / span 2}
 .ws-c4{grid-column:2 / span 2}
 .ws-card h4{margin:0;font-weight:500;font-size:32px;line-height:40px;letter-spacing:-.04em;color:#050505}
@@ -721,7 +721,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 @media (max-height:820px) and (min-width:901px){.ws-p3{transform:scale(.8);top:88%}.ws-card h4{font-size:26px;line-height:32px}.wb-txt{padding-top:24px}.wb-txt p{margin-top:10px}.ws-c4 .wb-txt{padding-top:28px}.ws .wb-cta{margin-top:16px;padding:12px 20px}.wb-copy{top:13%}.wb-copy p{margin-top:10px}.wb-field{margin-top:16px}.ws-block{gap:24px}}
 @media (max-width:1200px) and (min-width:901px){.ws-card h4{font-size:24px;line-height:30px}.wb-txt{padding:24px 22px 0}.ws-c4 .wb-txt{padding:28px 0 0 28px;max-width:320px}.ws-p3{transform:scale(.78);top:90%}}
 @media (max-width:900px){
-  .ws-stage{height:auto;min-height:0;padding:80px 0}
+  .ws-stage{padding:80px 0}
   .ws-head{display:none}
   .ws-main{height:auto}
   .ws-block{gap:28px}
@@ -1025,7 +1025,6 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
   <!-- 10 WHY US: what sets us apart. The title splits, the block rises with the middle card, then the two other cards slide out from behind it -->
   <section class="ws" id="why-us">
     <div class="ws-stage">
-      <div class="ws-head"><h2 class="h ws-title"><span class="ws-a">What sets us <b>apart</b></span> <span class="ws-b">from others</span></h2></div>
       <div class="ws-main wrap"><div class="ws-block">
         <div class="ws-top"><span class="eyebrow">Why us</span><h3 class="h ws-tag">Why us over another crew.</h3></div>
         <div class="ws-grid">
@@ -1592,19 +1591,11 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
     gsap.from('.hw-head>*,.hw-hero-m',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#how',start:'top 80%'}});
     $$('.hw-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
   }
-  // 10. why us: on desktop the section pins. "What sets us apart from others" splits apart and fades,
-  //     then the Why us heading rises in and the four bento cards follow it one after another.
+  // 10. why us: a simple appear like the other sections. The heading fades up, then the bento cards come in together.
+  gsap.from('.ws-top>*',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#why-us',start:'top 80%'}});
   if(isD){
-    const wt=window._wstl=gsap.timeline({scrollTrigger:{trigger:'#why-us',start:'top top',end:'+=210%',pin:true,scrub:1,invalidateOnRefresh:true}});
-    wt.to('.ws-a',{x:()=>-innerWidth*.2,ease:'power2.inOut',duration:1},0)
-      .to('.ws-b',{x:()=>innerWidth*.2,ease:'power2.inOut',duration:1},0)
-      .to('.ws-head',{opacity:0,ease:'power1.in',duration:.45},.6)
-      .fromTo('.ws-top',{y:()=>innerHeight*.8},{y:0,ease:'power3.out',duration:1.2},.8)
-      .fromTo('.ws-card',{y:()=>innerHeight*.9},{y:0,ease:'power3.out',duration:1.2,stagger:.14},.9)
-      .to({},{duration:.4});
-    ScrollTrigger.sort();
+    gsap.from('.ws-card',{y:44,opacity:0,scale:.97,duration:1,ease:'power3.out',stagger:.07,clearProps:'transform',scrollTrigger:{trigger:'.ws-grid',start:'top 82%'}});
   } else {
-    gsap.from('.ws-top>*',{y:30,opacity:0,duration:.9,ease:'power3.out',stagger:.1,scrollTrigger:{trigger:'#why-us',start:'top 80%'}});
     $$('.ws-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
   }
   // 11. testimonials: appear
