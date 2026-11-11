@@ -117,17 +117,25 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .reel-play svg{width:26px;height:26px;fill:currentColor;stroke:none}
 .reel.live .reel-play{opacity:0;transform:scale(.6)}
 /* preloader: logo in the middle, a bar and a counter at the bottom, then the whole panel slides up */
-.loader{position:fixed;inset:0;z-index:200;background:#050505;color:#fff;display:grid;place-items:center;will-change:transform}
-.loader .wordmark{width:min(260px,58vw)}
-.loader .wordmark path[fill="#5C5955"]{fill:#fff}
+.loader{position:fixed;inset:0;z-index:200;background:#141414;color:#fff;display:grid;place-items:center;overflow:hidden}
+.loader .wordmark{width:100%}
+.ld-logo{position:relative;width:clamp(190px,22vw,320px);will-change:transform,opacity}
+.loader .wordmark path,.loader .wordmark circle{fill:#3A3A3A}
+.loader .ld-fill{position:absolute;left:0;top:0;clip-path:inset(100% 0 0 0)}
+.loader .ld-fill path{fill:#fff}
+.loader .ld-fill .ride{fill:var(--orange)}
+.ld-count{position:absolute;right:0;top:calc(100% + 10px);font:500 11px/1 var(--heading);letter-spacing:.02em;color:rgba(255,255,255,.55);white-space:nowrap}
+.ld-count b{display:inline-block;min-width:2.2ch;text-align:right;font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
+/* cursor: a small dot that trails the pointer and grows over anything clickable */
+.cur{position:fixed;left:0;top:0;z-index:300;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;opacity:0;will-change:transform}
+.cur.on{opacity:1}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.cur{display:none}}
 .ld-foot{position:absolute;left:0;right:0;bottom:0;padding:0 max(24px,env(safe-area-inset-right,0px)) max(28px,env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
 .ld-row{display:flex;justify-content:space-between;align-items:flex-end;font:500 14px var(--heading);color:rgba(255,255,255,.6)}
 .ld-num{font:500 clamp(40px,6vw,88px)/.9 var(--heading);letter-spacing:-.04em;color:#fff;font-variant-numeric:tabular-nums}
 .ld-bar{height:3px;background:rgba(255,255,255,.14);border-radius:3px;overflow:hidden}
 .ld-bar i{display:block;height:100%;width:100%;background:var(--orange);transform-origin:0 50%;transform:scaleX(0)}
 html.loading,html.loading body{overflow:hidden}
-.loader{transform-origin:50% 0;border-radius:0}
-.loader .wordmark{will-change:transform}
 html.ld-skip .loader{display:none}
 
 /* ---------- TRUSTED BY ---------- */
@@ -836,7 +844,8 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
 </style>
 
 
-<div class="loader" id="loader" aria-hidden="true"><svg class="wordmark" viewBox="0 0 152 24.6" aria-hidden="true"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg><div class="ld-foot"><div class="ld-row"><span>Loading</span><span class="ld-num" id="ldNum">0%</span></div><div class="ld-bar"><i id="ldBar"></i></div></div></div>
+<div class="loader" id="loader" aria-hidden="true"><div class="ld-logo" id="ldLogo"><svg class="wordmark" viewBox="0 0 152 24.6" aria-hidden="true"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg><span class="ld-count">Loading <b id="ldNum">0</b></span></div></div>
+<div class="cur" id="cur" aria-hidden="true"></div>
 <header class="site-head" id="head">
   <div class="nav-bar"><div class="wrap">
     <nav class="nav">
@@ -1351,7 +1360,7 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
 })();
 
 
-/* ---------- preloader: 1.25s, logo in the middle, bar and counter at the bottom, then it slides up ---------- */
+/* ---------- preloader: about 2s, the logo fills from the bottom with a small counter, then zooms away ---------- */
 const loaderEl=$('#loader'), onLoaded=[]; let loaded=false;
 const whenLoaded=f=>{loaded?f():onLoaded.push(f);};
 const finishLoad=()=>{if(loaded)return; loaded=true; document.documentElement.classList.remove('loading'); onLoaded.splice(0).forEach(f=>f());};
@@ -1360,28 +1369,42 @@ scrollTo(0,0);
 if(REDUCED || !window.gsap){ loaderEl.remove(); finishLoad(); $$('.tile,.rc').forEach(e=>e.style.opacity=1); return; }
 document.documentElement.classList.add('loading');
 (function(){
-  // 1.25s intro, every step overlaps the next so it never pauses:
-  // logo letters rise out of a mask (0 to .7), the counter and bar run 0 to 100 (0 to .9),
-  // the logo lifts away (.8 to 1), and the panel slides up with a curved bottom edge (.85 to 1.25).
+  // About 2s intro: the dim wordmark sits in the middle, a wave fills it from the bottom while the small
+  // counter runs 0 to 100, then the logo zooms toward the viewer and fades as the page shows through.
   // Smart: on a repeat visit in the same tab session it skips straight to the page.
   let seen=false; try{seen=sessionStorage.getItem('mr-seen')==='1'; sessionStorage.setItem('mr-seen','1');}catch(e){}
   if(seen){ document.documentElement.classList.add('ld-skip'); loaderEl.remove(); finishLoad(); return; }
-  const num=$('#ldNum'), bar=$('#ldBar'), mark=$('.wordmark',loaderEl), o={v:0};
-  const letters=$$('path',mark), dot=$('circle',mark);
-  gsap.set(mark,{overflow:'hidden'});
+  const num=$('#ldNum'), logo=$('#ldLogo'), mark=$('.wordmark',loaderEl), o={v:0};
+  const fill=mark.cloneNode(true); fill.classList.add('ld-fill'); logo.insertBefore(fill,mark.nextSibling);
+  const wave=()=>{const y=100-o.v*1.16+8, t=performance.now()/260, pts=[];   // wavy top edge that rises past the logo
+    for(let k=0;k<=12;k++){const x=k/12*100; pts.push(x.toFixed(1)+'% '+(y+Math.sin(k*.9+t)*7*Math.min(1,o.v/12)*Math.min(1,(100-o.v)/10+.001)).toFixed(2)+'%');}
+    fill.style.clipPath='polygon('+pts.join(',')+',100% 110%,0 110%)'; num.textContent=Math.round(o.v);};
   const lt=gsap.timeline();
-  lt.from(letters,{yPercent:120,duration:.45,ease:'power3.out',stagger:.035},0)
-    .from(letters,{opacity:0,duration:.25,ease:'none',stagger:.035},0)
-    .from(dot,{scale:0,transformOrigin:'50% 50%',duration:.3,ease:'back.out(3)'},.5)
-    .from('.ld-foot',{opacity:0,y:12,duration:.3,ease:'power2.out'},0)
-    .to(o,{v:100,duration:.9,ease:'power2.inOut',onUpdate:()=>{num.textContent=Math.round(o.v)+'%';bar.style.transform=`scaleX(${o.v/100})`;}},0)
-    .to(mark,{y:-30,opacity:0,duration:.25,ease:'power2.in'},.8)
-    .to('.ld-foot',{y:-16,opacity:0,duration:.2,ease:'power2.in'},.8)
-    .to(loaderEl,{yPercent:-100,borderBottomLeftRadius:'50% 140px',borderBottomRightRadius:'50% 140px',duration:.4,ease:'power3.inOut'},.85)
-    .add(finishLoad,1)
-    .add(()=>loaderEl.remove(),1.25);
+  lt.from(logo,{opacity:0,duration:.3,ease:'power1.out'},0)
+    .to(o,{v:100,duration:1.25,ease:'power1.inOut',onUpdate:wave},.1)
+    .to('.ld-count',{opacity:0,duration:.2,ease:'none'},1.35)
+    .to(logo,{scale:16,duration:.75,ease:'power3.in',transformOrigin:'50% 50%'},1.38)
+    .to(logo,{opacity:0,duration:.4,ease:'power1.in'},1.7)
+    .to(loaderEl,{opacity:0,duration:.45,ease:'power1.inOut'},1.7)
+    .add(finishLoad,1.7)
+    .add(()=>loaderEl.remove(),2.2);
 })();
 gsap.registerPlugin(ScrollTrigger);
+// cursor dot: trails the pointer, grows over links and buttons, hides when the pointer leaves the window
+(function(){
+  const c=$('#cur'); if(!c) return;
+  if(REDUCED || !matchMedia('(hover: hover) and (pointer: fine)').matches){ c.remove(); return; }
+  const qx=gsap.quickTo(c,'x',{duration:.35,ease:'power3.out'}), qy=gsap.quickTo(c,'y',{duration:.35,ease:'power3.out'});
+  let first=true, big=false;
+  addEventListener('pointermove',e=>{ if(e.pointerType==='touch') return;
+    if(first){gsap.set(c,{x:e.clientX,y:e.clientY}); first=false;} qx(e.clientX); qy(e.clientY); c.classList.add('on');
+    const h=!!(e.target.closest&&e.target.closest('a,button,[role="button"],summary,label,input,.hw-card,.ws-c4'));
+    if(h!==big){big=h; gsap.to(c,{scale:h?2.8:1,duration:.3,ease:'power3.out',overwrite:'auto'});}
+  },{passive:true});
+  document.documentElement.addEventListener('pointerleave',()=>c.classList.remove('on'));
+  addEventListener('pointerdown',()=>gsap.to(c,{scale:big?2.2:.6,duration:.15,overwrite:'auto'}));
+  addEventListener('pointerup',()=>gsap.to(c,{scale:big?2.8:1,duration:.25,overwrite:'auto'}));
+})();
 ScrollTrigger.config({ignoreMobileResize:true});
 const mm=gsap.matchMedia();
 
