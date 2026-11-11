@@ -126,9 +126,11 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .loader .ld-fill .ride{fill:var(--orange)}
 .ld-count{position:absolute;right:0;top:calc(100% + 10px);font:500 11px/1 var(--heading);letter-spacing:.02em;color:rgba(255,255,255,.55);white-space:nowrap}
 .ld-count b{display:inline-block;min-width:2.2ch;text-align:right;font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
-/* cursor: a small dot that trails the pointer and grows over anything clickable */
+/* cursor: a small dot that trails the pointer and hides over anything clickable */
 .cur{position:fixed;left:0;top:0;z-index:300;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;mix-blend-mode:difference;pointer-events:none;opacity:0;will-change:transform}
+.cur{transition:opacity .2s ease}
 .cur.on{opacity:1}
+.cur.on.off{opacity:0}
 @media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){.cur{display:none}}
 .ld-foot{position:absolute;left:0;right:0;bottom:0;padding:0 max(24px,env(safe-area-inset-right,0px)) max(28px,env(safe-area-inset-bottom,0px)) max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:14px}
 .ld-row{display:flex;justify-content:space-between;align-items:flex-end;font:500 14px var(--heading);color:rgba(255,255,255,.6)}
@@ -1390,7 +1392,7 @@ document.documentElement.classList.add('loading');
     .add(()=>loaderEl.remove(),2.2);
 })();
 gsap.registerPlugin(ScrollTrigger);
-// cursor dot: trails the pointer, grows over links and buttons, hides when the pointer leaves the window
+// cursor dot: trails the pointer at one size, hides over links and buttons and when the pointer leaves the window
 (function(){
   const c=$('#cur'); if(!c) return;
   if(REDUCED || !matchMedia('(hover: hover) and (pointer: fine)').matches){ c.remove(); return; }
@@ -1398,12 +1400,10 @@ gsap.registerPlugin(ScrollTrigger);
   let first=true, big=false;
   addEventListener('pointermove',e=>{ if(e.pointerType==='touch') return;
     if(first){gsap.set(c,{x:e.clientX,y:e.clientY}); first=false;} qx(e.clientX); qy(e.clientY); c.classList.add('on');
-    const h=!!(e.target.closest&&e.target.closest('a,button,[role="button"],summary,label,input,.hw-card,.ws-c4'));
-    if(h!==big){big=h; gsap.to(c,{scale:h?2.8:1,duration:.3,ease:'power3.out',overwrite:'auto'});}
+    const h=!!(e.target.closest&&e.target.closest('a,button,[role="button"],summary,label,input'));
+    if(h!==big){big=h; c.classList.toggle('off',h);}
   },{passive:true});
   document.documentElement.addEventListener('pointerleave',()=>c.classList.remove('on'));
-  addEventListener('pointerdown',()=>gsap.to(c,{scale:big?2.2:.6,duration:.15,overwrite:'auto'}));
-  addEventListener('pointerup',()=>gsap.to(c,{scale:big?2.8:1,duration:.25,overwrite:'auto'}));
 })();
 ScrollTrigger.config({ignoreMobileResize:true});
 const mm=gsap.matchMedia();
