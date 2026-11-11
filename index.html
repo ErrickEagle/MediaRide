@@ -627,6 +627,8 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 
 /* process (how) */
 .hw{position:relative;z-index:2;background:#050505;color:#F2F2F2}
+/* the page is scaled with zoom between 901 and 1439px; ScrollTrigger sizes the pinned section from zoomed rects, so keep its natural CSS size instead */
+.pin-spacer>.hw{width:100%!important;max-width:none!important;height:auto!important;max-height:none!important}
 .hw-stage{min-height:100vh;display:flex;align-items:center;padding:120px 0;box-sizing:border-box}
 .hw-stage>.wrap{width:100%}
 .hw .eyebrow{color:var(--orange);font:500 14px/20px var(--heading)}
@@ -763,9 +765,18 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 /* process: one 4:3 film that splits into the four step cards as you scroll (desktop) */
 .hw-stage{position:relative}
 .hw-split{display:none;position:absolute;inset:0;pointer-events:none;z-index:3}
-.hw-strip{position:absolute;overflow:hidden;background:#1E1E1E}
-.hw-strip canvas{display:block;width:100%;height:100%}
+.hw-strip{position:absolute}
+.hw-strip{display:flex;flex-direction:column}
+.hw-strip canvas{display:block;width:100%;flex:1 1 auto;min-height:0;background:#1E1E1E;border-radius:inherit}
+/* veil: as a strip lands in its card, the film darkens from the top into the card colour, so it melts away instead of switching off */
+.hw-strip::after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(180deg,#111 0%,rgba(17,17,17,.85) 45%,rgba(17,17,17,.35) 100%);opacity:var(--veil,0)}
 .hw-src{position:absolute;width:2px;height:2px;opacity:0;pointer-events:none}
+/* at rest the film is one canvas (no seams); blade lines, like an editor's razor cuts, drop through it before it splits */
+.hw-whole{position:absolute;border-radius:10px;overflow:hidden;background:#1E1E1E}
+.hw-whole canvas{display:block;width:100%;height:100%}
+.hw-blade{position:absolute;width:0;z-index:2;opacity:0}
+.hw-blade i{position:absolute;left:-1.5px;top:0;width:3px;height:100%;background:#E6E6E6;box-shadow:0 0 12px rgba(255,255,255,.45);transform-origin:50% 0;transform:scaleY(var(--cut,0))}
+.hw-blade b{position:absolute;left:-11px;top:-20px;width:22px;height:19px;border-radius:3px 3px 0 0;background:#E6E6E6;clip-path:polygon(0 0,100% 0,100% 55%,50% 100%,0 55%)}
 .hw-top,.hw-body{opacity:var(--in,1);transform:translateY(calc((1 - var(--in,1)) * 24px))}
 .hw-hero-m{display:none}
 @media (min-width:901px){.hw-split{display:block}.hw-head{position:relative;z-index:4}.hw-head h2{max-width:460px}}
@@ -841,11 +852,15 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 /* floating Book a call: white Calendly mark before the label (icon from Simple Icons) */
 .fab{display:inline-flex;align-items:center;gap:10px;padding-left:18px}
 .fab-ic{width:20px;height:20px;flex:none;fill:currentColor}
+/* nav Book a call: the same white Calendly mark */
+.menu .nav-cta{display:inline-flex;align-items:center;gap:10px;padding-left:18px !important}
+.cal-ic{width:20px;height:20px;flex:none;fill:currentColor}
 html.mm-lock .fab{opacity:0;pointer-events:none}
 @media (max-width:900px){.fab{right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px))}}
 .problem .eyebrow,.hw .eyebrow{color:var(--orange) !important}
 /* process cards: eye button top right opens the step's video */
 .hw-card{cursor:pointer}
+@media (min-width:901px){.hw-card,.hw-card:hover{cursor:default}}
 .hw-eye{display:none}
 @media (max-width:900px){
   .hw-eye{position:absolute;top:12px;right:12px;z-index:3;width:40px;height:40px;border:0;border-radius:999px;background:transparent;color:#F2F2F2;display:grid;place-items:center;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent;outline:0}
@@ -863,13 +878,11 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
     <nav class="nav">
       <a href="#top" aria-label="MediaRide home"><svg class="wordmark" viewBox="0 0 152 24.6" role="img" aria-label="MediaRide"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg></a>
       <div class="menu">
-        <a href="#top">Home</a>
         <button id="svcBtn" aria-expanded="false" aria-controls="mega">Services <svg class="ic chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
-        <a href="#about">About</a>
-        <a href="#work">Work</a>
-        <a href="#how">Process</a>
+        <a href="#">About</a>
+        <a href="#">Portfolio</a>
         <a href="#contact">Contact</a>
-        <a href="https://calendly.com/mediaride/luke" target="_blank" rel="noopener" class="btn-orange" data-flip>Book a call</a>
+        <a href="https://calendly.com/mediaride/luke" target="_blank" rel="noopener" class="btn-orange nav-cta" data-flip><svg class="cal-ic" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.655 14.262c.281 0 .557.023.828.064 0 .005-.005.01-.005.014-.105.267-.234.534-.381.786l-1.219 2.106c-1.112 1.936-3.177 3.127-5.411 3.127h-2.432c-2.23 0-4.294-1.191-5.412-3.127l-1.218-2.106a6.251 6.251 0 0 1 0-6.252l1.218-2.106C6.736 4.832 8.8 3.641 11.035 3.641h2.432c2.23 0 4.294 1.191 5.411 3.127l1.219 2.106c.147.252.271.519.381.786 0 .004.005.009.005.014-.267.041-.543.064-.828.064-1.816 0-2.501-.607-3.291-1.306-.764-.676-1.711-1.517-3.44-1.517h-1.029c-1.251 0-2.387.455-3.2 1.278-.796.805-1.233 1.904-1.233 3.099v1.411c0 1.196.437 2.295 1.233 3.099.813.823 1.949 1.278 3.2 1.278h1.034c1.729 0 2.676-.841 3.439-1.517.791-.703 1.471-1.306 3.287-1.301Zm.005-3.237c.399 0 .794-.036 1.179-.11-.002-.004-.002-.01-.002-.014-.073-.414-.193-.823-.349-1.218.731-.12 1.407-.396 1.986-.819 0-.004-.005-.013-.005-.018-.331-1.085-.832-2.101-1.489-3.03-.649-.915-1.435-1.719-2.331-2.395-1.867-1.398-4.088-2.138-6.428-2.138-1.448 0-2.855.28-4.175.841-1.273.543-2.423 1.315-3.407 2.299S2.878 6.552 2.341 7.83c-.557 1.324-.842 2.726-.842 4.175 0 1.448.281 2.855.842 4.174.542 1.274 1.314 2.423 2.298 3.407s2.129 1.761 3.407 2.299c1.324.556 2.727.841 4.175.841 2.34 0 4.561-.74 6.428-2.137a10.815 10.815 0 0 0 2.331-2.396c.652-.929 1.158-1.949 1.489-3.03 0-.004.005-.014.005-.018-.579-.423-1.255-.699-1.986-.819.161-.395.276-.804.349-1.218.005-.009.005-.014.005-.023.869.166 1.692.506 2.404 1.035.685.505.552 1.075.446 1.416C22.184 20.437 17.619 24 12.221 24c-6.625 0-12-5.375-12-12s5.37-12 12-12c5.398 0 9.963 3.563 11.471 8.464.106.341.239.915-.446 1.421-.717.529-1.535.873-2.404 1.034.128.716.128 1.45 0 2.166-.387-.074-.782-.11-1.182-.11-4.184 0-3.968 2.823-6.736 2.823h-1.029c-1.899 0-3.15-1.357-3.15-3.095v-1.411c0-1.738 1.251-3.094 3.15-3.094h1.034c2.768 0 2.552 2.823 6.731 2.827Z"/></svg><span class="lbl">Book a call</span></a>
       </div>
       <button class="mnav-btn" id="mnavBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu"><svg class="ic" viewBox="0 0 24 24"><path d="M5 9h14"/><path d="M5 15h14"/></svg></button>
     </nav>
@@ -904,12 +917,10 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
   <div class="mm-bar"><a href="#top" class="mm-logo" aria-label="MediaRide home"></a><button id="mmX" aria-label="Close menu"><svg class="ic" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button></div>
   <div class="mm-body">
     <nav class="mm-links">
-      <a href="#top">Home</a>
       <button class="mm-svc" id="mmSvc" aria-expanded="false" aria-controls="mmSub">Services <svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></button>
       <div class="mm-sub" id="mmSub"><div><a href="#work">Event coverage</a><a href="#work">Launch videos</a><a href="#work">Customer stories</a><a href="#work">Product stories</a><a href="#work">Social clips</a><a href="#work">Monthly support</a></div></div>
-      <a href="#about">About</a>
-      <a href="#work">Work</a>
-      <a href="#how">Process</a>
+      <a href="#">About</a>
+      <a href="#">Portfolio</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="mm-bottom"><a href="https://calendly.com/mediaride/luke" target="_blank" rel="noopener" class="mm-cta" data-flip>Book a call</a><div class="mm-contact"><span>luke@mediaride.com</span><span>415.504.2260</span></div></div>
@@ -1319,7 +1330,8 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
 /* ---------- process cards: a pure video plays over the card while it is hovered (tap on touch screens) ---------- */
 (()=>{const cards=$$('.hw-card'); if(!cards.length) return;
   const load=()=>cards.forEach(c=>{const v=c.querySelector('video'); if(!v.src){v.preload='auto'; v.src=v.dataset.src;}});
-  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){load();o.disconnect();}},{rootMargin:'600px 0px'}).observe($('#how'));
+  // the card clips are only used on phones now (eye button), so desktop never downloads them
+  new IntersectionObserver((es,o)=>{if(es[0].isIntersecting&&matchMedia('(max-width:900px)').matches){load();o.disconnect();}},{rootMargin:'600px 0px'}).observe($('#how'));
   const hover=matchMedia('(hover: hover)').matches;
   cards.forEach(c=>{const v=c.querySelector('video');
     const on=()=>{cards.forEach(o=>{if(o!==c&&o.classList.contains('on')){o.classList.remove('on');o.querySelector('video').pause();}});
@@ -1333,9 +1345,7 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
     eye.addEventListener('click',e=>{e.stopPropagation(); if(c.classList.contains('on')) c._off(); else {cards.forEach(o=>o!==c&&o.classList.contains('on')&&o._off()); on0(); setEye(true);}});
     const mob=matchMedia('(max-width:900px)');
     c.addEventListener('click',()=>{if(mob.matches||!hover) eye.click();});
-    // desktop keeps the original hover-to-play; the eye only exists on mobile
-    if(hover){c.addEventListener('mouseenter',()=>{if(!mob.matches){on0();setEye(true);}}); c.addEventListener('mouseleave',()=>{if(!mob.matches) c._off();});
-      c.addEventListener('focus',()=>{if(!mob.matches){on0();setEye(true);}}); c.addEventListener('blur',()=>{if(!mob.matches) c._off();});}
+    // desktop: no hover video any more, the cards simply show the process; the eye (and its video) only exists on mobile
   });
 })();
 
@@ -1583,43 +1593,75 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
   // 9. how one shoot: appear
   // 9. process: on desktop the section pins. It opens with the title on the left and one 4:3 film on the right.
   //    As you scroll, the film slices into four strips that travel one after another into the four step cards,
-  //    then each strip fades away to reveal its card and the step text rises in. Hover a card to play its clip.
+  //    It starts as one film; on scroll, three editor-style blade lines slice down through it, then it splits and
+  //    strips 2-4 cut to other moments of the same reel (one shoot, repurposed).
+  //    Once a strip lands, it darkens into the card colour and fades while the step text rises through it. Hover a card to play its clip.
   if(isD){
     const hw=$('#how'), stage=$('.hw-stage'), head=$('.hw-head'), cards=$$('.hw-card'), strips=$$('.hw-strip');
     const cvs=strips.map(x=>x.querySelector('canvas')), ctx=cvs.map(c=>c.getContext('2d'));
     const src=$('.hw-src'), poster=new Image(); poster.src='m/hw_reel.jpg';
+    // the reel is ~9s of different shots; each strip starts it at its own point (panel, keynote, crowd...) so no two strips show the same moment
+    const OFF=[0,1.9,3.4,6.3];
+    const srcs=OFF.map((o,i)=>{const v=i?src.cloneNode():src; if(i) src.after(v); return v;});
+    // the whole film (one canvas, so no seams at rest) and three blade lines at the cut points
+    const split=$('.hw-split'), whole=document.createElement('div'); whole.className='hw-whole'; whole.innerHTML='<canvas></canvas>'; split.prepend(whole);
+    const wcv=whole.firstChild, wctx=wcv.getContext('2d');
+    const blades=[1,2,3].map(()=>{const b=document.createElement('div'); b.className='hw-blade'; b.innerHTML='<b></b><i></i>'; split.appendChild(b); return b;});
     let H={x:0,y:0,w:1,h:1};
-    const box=el=>{const a=el.getBoundingClientRect(), r=stage.getBoundingClientRect(); return {x:a.left-r.left,y:a.top-r.top,w:a.width,h:a.height};};
+    const box=el=>{const a=el.getBoundingClientRect(), r=stage.getBoundingClientRect(); return {x:(a.left-r.left)/Z,y:(a.top-r.top)/Z,w:a.width/Z,h:a.height/Z};};
     const calc=()=>{const g=box($('.hw-grid')), W=Math.round(g.w*.56), Hh=Math.round(W*.75);
       H={x:g.x+g.w-W, y:Math.round((stage.offsetHeight-Hh)/2), w:W, h:Hh};};
     calc(); ScrollTrigger.addEventListener('refreshInit',calc);
     const S=i=>({left:H.x+i*H.w/4, top:H.y, width:H.w/4, height:H.h});
     const C=i=>{const c=box(cards[i]); return {left:c.x, top:c.y, width:c.w, height:c.h};};
     const R=['10px 0px 0px 10px','0px 0px 0px 0px','0px 0px 0px 0px','0px 10px 10px 0px'];
-    const tl=window._hwtl=gsap.timeline({scrollTrigger:Z!==1?{trigger:hw,start:'top 85%',end:'top 10%',scrub:1,invalidateOnRefresh:true}:{trigger:hw,start:'top top',end:'+=130%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    const CUT=.5, T=CUT+.02;   // blades finish by CUT; the film becomes four strips there, and everything after starts at T
+    const tl=window._hwtl=gsap.timeline({scrollTrigger:Z!==1?{trigger:hw,start:'top 85%',end:'top 10%',scrub:1,invalidateOnRefresh:true}:{trigger:hw,start:'top top',end:'+=195%',pin:true,scrub:1,invalidateOnRefresh:true}});
     // below 1440 the page is scaled with CSS zoom, and a pinned (fixed) section gets sized twice there and crops on iPad,
     // so on those screens the same animation plays while the section scrolls into view, without pinning
     tl.fromTo(head,{y:()=>stage.offsetHeight/2-(head.offsetTop+head.offsetHeight/2)},{y:0,ease:'power3.inOut',duration:.75},0)
-      .fromTo(strips,{left:i=>S(i).left,top:i=>S(i).top,width:i=>S(i).width,height:i=>S(i).height,borderRadius:i=>R[i],opacity:1},
-                     {left:i=>C(i).left,top:i=>C(i).top,width:i=>C(i).width,height:i=>C(i).height,borderRadius:'10px 10px 10px 10px',ease:'power3.inOut',duration:1,stagger:.1},0)
-      .fromTo(cards,{opacity:0},{opacity:1,ease:'none',duration:.4,stagger:.1},.7)
-      .to(strips,{opacity:0,ease:'power1.in',duration:.35,stagger:.1},1.15)
-      .fromTo(cards,{'--in':0},{'--in':1,ease:'power2.out',duration:.45,stagger:.1},1.3)
-      .to({},{duration:.2});
+      .fromTo(whole,{left:()=>H.x,top:()=>H.y,width:()=>H.w,height:()=>H.h,autoAlpha:1},{autoAlpha:0,duration:.001},CUT)
+      // the razor cuts: one after another, a playhead drops in and its line slices top to bottom through the film
+      .fromTo(blades,{left:i=>H.x+(i+1)*H.w/4,top:()=>H.y,height:()=>H.h,opacity:0},{opacity:1,duration:.06,stagger:.1},.04)
+      .fromTo(blades,{'--cut':0},{'--cut':1,ease:'power2.in',duration:.22,stagger:.1},.06)
+      .to(blades,{opacity:0,ease:'power1.out',duration:.12},CUT)
+      .fromTo(strips,{left:i=>S(i).left,top:i=>S(i).top,width:i=>S(i).width,height:i=>S(i).height,borderRadius:i=>R[i],opacity:1,visibility:'hidden'},
+                     {visibility:'visible',duration:.001},CUT)
+      .to(strips,{left:i=>C(i).left,top:i=>C(i).top,width:i=>C(i).width,height:i=>C(i).height,borderRadius:'10px 10px 10px 10px',ease:'power3.inOut',duration:1,stagger:.1},T)
+      .fromTo(cards,{opacity:0},{opacity:1,ease:'none',duration:.4,stagger:.1},T+.7)
+      // landed: each clip holds for a beat, darkens into the card colour and fades while the step text rises through it
+      .fromTo(strips,{'--veil':0},{'--veil':1,ease:'sine.inOut',duration:.45,stagger:.1},T+1.25)
+      .to(strips,{opacity:0,ease:'power2.inOut',duration:.55,stagger:.1},T+1.45)
+      .fromTo(cards,{'--in':0},{'--in':1,ease:'power3.out',duration:.6,stagger:.1},T+1.5)
+      .to({},{duration:.25});
     ScrollTrigger.sort();
-    // each strip draws its own slice of the one playing film, so all four stay in sync while they move
-    const draw=()=>{const s=src.readyState>=2?src:(poster.complete&&poster.naturalWidth?poster:null); if(!s) return;
-      const vw=s.videoWidth||s.naturalWidth, vh=s.videoHeight||s.naturalHeight, k=Math.max(H.w/vw,H.h/vh);
-      const sw0=H.w/k, sh0=H.h/k, sx0=(vw-sw0)/2, sy0=(vh-sh0)/2, dpr=Math.min(2,devicePixelRatio||1);
+    // At rest the four strips are neighbouring slices of ONE film, so it reads as a single video.
+    // As soon as scrolling starts, each strip cuts, one after another, to its own moment of the reel;
+    // strip 1 stays on its slice of the original film. Scrolling back to the top rejoins the film.
+    const ready=v=>v.readyState>=2?v:null, still=()=>poster.complete&&poster.naturalWidth?poster:null;
+    const film=()=>ready(src)||still();
+    const crop=(s,w,h,slice,i)=>{const vw=s.videoWidth||s.naturalWidth, vh=s.videoHeight||s.naturalHeight, k=Math.max(H.w/vw,H.h/vh);
+        const sw0=H.w/k, sh0=H.h/k, sx0=(vw-sw0)/2, sy0=(vh-sh0)/2, A=w/h; let sh=sh0, sw=sh*A; if(sw>vw){sw=vw; sh=sw/A;}
+        const mid=(vw-sw)/2, cut=sx0+sw0*(i+.5)/4-sw/2, x=mid+(cut-mid)*slice;
+        return [Math.min(Math.max(x,0),vw-sw), Math.min(Math.max(sy0+(sh0-sh)/2,0),vh-sh), sw, sh];};
+    const mix=i=>tl.time()>T+i*.06?1:0;   // 0 = one film, 1 = this strip's own moment (a clean cut, strip by strip)
+    const draw=()=>{const dpr=Math.min(2,devicePixelRatio||1);
+      if(tl.time()<CUT+.01){const f=film(), w=H.w, h=H.h, cw=Math.round(w*dpr), ch=Math.round(h*dpr);
+        if(wcv.width!==cw||wcv.height!==ch){wcv.width=cw;wcv.height=ch;}
+        if(f){const [sx,sy,sw,sh]=crop(f,w,h,0,0); wctx.drawImage(f,sx,sy,sw,sh,0,0,cw,ch);}}
       strips.forEach((el,i)=>{if(+gsap.getProperty(el,'opacity')<=0) return;
-        const w=el.offsetWidth, h=el.offsetHeight; if(!w||!h) return;
+        const c0=cvs[i], w=c0.clientWidth, h=c0.clientHeight; if(!w||!h) return;   // the video area (shrinks when the info panel opens)
         const c=cvs[i], cw=Math.round(w*dpr), ch=Math.round(h*dpr); if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;}
-        const A=w/h; let sh=sh0, sw=sh*A; if(sw>vw){sw=vw; sh=sw/A;}
-        const sx=Math.min(Math.max(sx0+sw0*(i+.5)/4-sw/2,0),vw-sw), sy=Math.min(Math.max(sy0+(sh0-sh)/2,0),vh-sh);
-        ctx[i].drawImage(s,sx,sy,sw,sh,0,0,cw,ch);});};
+        const m=mix(i), x=ctx[i], f=film(), own=i?ready(srcs[i]):f;
+        if(!i){ if(f){const [sx,sy,sw,sh]=crop(f,w,h,1,i); x.drawImage(f,sx,sy,sw,sh,0,0,cw,ch);} return; }
+        x.globalAlpha=1;
+        if(m<1&&f){const [sx,sy,sw,sh]=crop(f,w,h,1,i); x.drawImage(f,sx,sy,sw,sh,0,0,cw,ch);}
+        if(m>0&&own){x.globalAlpha=f?m:1; const [sx,sy,sw,sh]=crop(own,w,h,0,i); x.drawImage(own,sx,sy,sw,sh,0,0,cw,ch); x.globalAlpha=1;}});};
     let live=false;
     new IntersectionObserver(es=>{live=es[0].isIntersecting;
-      if(live){if(!src.src){src.preload='auto'; src.src=src.dataset.src;} const p=src.play(); p&&p.catch(()=>{});} else src.pause();},{rootMargin:'300px 0px'}).observe(hw);
+      srcs.forEach((v,i)=>{
+        if(live){if(!v.src){v.preload='auto'; if(i) v.addEventListener('playing',()=>{v.currentTime=((srcs[0].currentTime||0)+OFF[i])%(v.duration||9);},{once:true}); v.src=src.dataset.src;}
+          const p=v.play(); p&&p.catch(()=>{});} else v.pause();});},{rootMargin:'300px 0px'}).observe(hw);
     poster.onload=draw;
     gsap.ticker.add(()=>{if(live&&tl.progress()<.97) draw();});
   } else {
