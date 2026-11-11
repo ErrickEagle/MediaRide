@@ -631,78 +631,95 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .pp-fix .ic{width:20px;height:20px;color:var(--orange);stroke-width:1.75;flex:none}
 /* why us: what sets us apart */
 .ws{position:relative;z-index:2;background:#fff;color:#111}
-.ws-stage{position:relative;height:calc(var(--vh,1vh) * 100);min-height:720px;overflow:hidden}
+.ws-stage{position:relative;height:calc(var(--vh,1vh) * 100);min-height:680px;overflow:hidden}
 .ws-head{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;z-index:3;pointer-events:none}
 .ws .eyebrow{color:var(--orange) !important;font:500 14px/20px var(--heading)}
 .ws-title{margin:0;display:flex;gap:.28em;white-space:nowrap;font-size:clamp(32px,3.4vw,48px);line-height:1.15;letter-spacing:-.04em;color:#111}
 .ws-title span{display:inline-block}
 .ws-title b{font-weight:inherit;color:var(--orange)}
 .ws-main{height:100%;display:flex;align-items:center;justify-content:center;box-sizing:border-box}
-.ws-block{width:100%;max-width:1200px;display:flex;flex-direction:column;align-items:center;gap:36px}
+.ws-block{width:100%;max-width:1276px;display:flex;flex-direction:column;align-items:center;gap:32px}
 .ws-top{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .ws-tag{margin:0;max-width:780px;font-size:clamp(32px,3.4vw,48px);line-height:1.15;letter-spacing:-.04em;color:#111}
-.ws-grid{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.ws-card{position:relative;height:min(540px,calc(var(--vh,1vh) * 100 - 290px));min-height:440px;background:#fff;border:1px solid #EAEAEA;border-radius:10px;padding:6px;box-sizing:border-box;display:flex;flex-direction:column;color:#111;box-shadow:0 1px 2px rgba(0,0,0,.03)}
-.ws-c2{z-index:2}
-.ws-art{position:relative;flex:1;min-height:0;background:#F2F2F2;border-radius:10px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black)}
-.ws-txt{padding:20px 16px 14px}
-.ws-n{display:block;font:500 13px/1 var(--heading);letter-spacing:-.01em;color:#8F8F8F}
-.ws-n i{font-style:normal;color:var(--orange)}
-.ws-txt h4{margin:10px 0 6px;font-size:22px;line-height:1.2;letter-spacing:-.03em;color:#111}
-.ws-txt p{margin:0;font:400 15px/22px var(--body);color:#6B6B6B;max-width:290px;min-height:44px}
-/* 01: rounded honeycomb of platforms, a plan button with rings, then the tasks it kicks off */
-.ws-p1,.ws-p2,.ws-p3{position:absolute;inset:0}
-.ws-ring{position:absolute;left:50%;top:254px;border:1px solid #E4E4E4;border-radius:50%;transform:translate(-50%,-50%)}
-.ws-ring.r1{width:250px;height:250px}.ws-ring.r2{width:430px;height:430px}
-.ws-fork{position:absolute;left:50%;top:0;width:1px;height:20px;background:#D2D2D2}
-.ws-fork::before,.ws-fork::after{content:"";position:absolute;top:19px;width:9px;height:1px;background:#D2D2D2;transform-origin:0 50%}
-.ws-fork::before{left:0;transform:rotate(28deg)}.ws-fork::after{left:0;transform:rotate(152deg)}
-.ws-hex{position:absolute;left:50%;top:30px;width:0;height:0}
-.hx{position:absolute;left:calc(var(--x) - 31px);top:var(--y);width:62px;height:70px;filter:drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 1px 2px rgba(0,0,0,.04))}
-.hx i{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,#EFEFEF,#E9E9E9);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 62 70'%3E%3Cpolygon points='31,6 56,20.5 56,49.5 31,64 6,49.5 6,20.5' stroke='%23000' stroke-width='11' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 62 70'%3E%3Cpolygon points='31,6 56,20.5 56,49.5 31,64 6,49.5 6,20.5' stroke='%23000' stroke-width='11' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-.hx.on{filter:drop-shadow(0 1px 1px rgba(0,0,0,.06)) drop-shadow(0 10px 14px rgba(0,0,0,.10));z-index:1}
-.hx.on i{background:linear-gradient(180deg,#fff,#F6F6F6)}
-.hx .bi{width:22px;height:22px;fill:#111}
-.ws-go{position:absolute;left:50%;top:236px;transform:translateX(-50%);height:38px;padding:0 22px;display:flex;align-items:center;border-radius:999px;background:linear-gradient(180deg,#E8793F,var(--orange));color:#fff;font:600 13px/1 var(--heading);letter-spacing:-.01em;white-space:nowrap;box-shadow:0 0 0 4px #F2F2F2,0 0 0 5px rgba(212,99,40,.35),0 0 0 9px #F2F2F2,0 0 0 10px rgba(212,99,40,.16),0 10px 20px rgba(212,99,40,.25);animation:wsPulse 3.2s ease-in-out infinite}
-@keyframes wsPulse{0%,100%{box-shadow:0 0 0 4px #F2F2F2,0 0 0 5px rgba(212,99,40,.35),0 0 0 9px #F2F2F2,0 0 0 10px rgba(212,99,40,.16),0 10px 20px rgba(212,99,40,.25)}50%{box-shadow:0 0 0 5px #F2F2F2,0 0 0 6px rgba(212,99,40,.45),0 0 0 11px #F2F2F2,0 0 0 12px rgba(212,99,40,.22),0 12px 24px rgba(212,99,40,.3)}}
-.ws-task{position:absolute;left:26px;right:26px;top:298px;height:56px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 16px;background:#F8F8F8;border:1px solid #fff;border-radius:10px;box-shadow:0 1px 2px rgba(0,0,0,.05),0 8px 20px rgba(0,0,0,.06)}
-.ws-task.t2{top:362px;opacity:.6;box-shadow:0 1px 2px rgba(0,0,0,.04)}
-.ws-radio{width:20px;height:20px;border-radius:50%;box-sizing:border-box;border:6px solid #D9D9D9;background:#fff;flex:none}
-.ws-task p{flex:1;margin:0;font:500 12px/16px var(--body);color:#111;max-width:none;min-height:0}
-.ws-task p s{display:block;height:5px;border-radius:99px;background:#E2E2E2;margin:5px 0;text-decoration:none}
-.ws-caret{display:inline-block;width:2px;height:13px;margin-left:2px;vertical-align:-2px;background:var(--orange);animation:wsBlink 1s steps(2,start) infinite}
-@keyframes wsBlink{to{visibility:hidden}}
-.ws-task em{display:flex;align-items:center;gap:8px;font:500 11px/1 var(--body);font-style:normal;color:#6B6B6B;flex:none}
-.ws-task em u{width:7px;height:7px;border-radius:50%;background:var(--orange);text-decoration:none}
-.ws-task em.ok{color:#8F8F8F}.ws-task em.ok u{background:#5DBB7B}
-/* 02: client logo tiles funnel down between two lobes into the MediaRide tile */
-.ws-p2{background:radial-gradient(60% 55% at 50% 100%,rgba(212,99,40,.30),rgba(212,99,40,0) 70%),linear-gradient(180deg,#F2F2F2 30%,#F6E7DF)}
-.ws-lobe{position:absolute;bottom:-120px;width:360px;height:360px;border-radius:50%;background:#fff}
-.ws-lobe.l{right:calc(50% + 46px)}.ws-lobe.r{left:calc(50% + 46px)}
-.ws-lrow{position:absolute;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:1}
-.ws-lrow.a{top:26px}.ws-lrow.b{top:98px}
-.ws-lt{width:60px;height:60px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.6));border:1px solid #fff;box-sizing:border-box;display:grid;place-items:center;flex:none;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 18px rgba(0,0,0,.05)}
-.ws-lt img{max-width:44px;max-height:20px;width:auto;height:auto}
-.ws-flow{position:absolute;left:50%;top:170px;bottom:118px;width:0}
-.ws-flow i{position:absolute;left:-3px;top:0;width:6px;height:6px;border-radius:50%;background:var(--orange);opacity:0;animation:wsDrop 2.4s ease-in infinite}
-.ws-flow i:nth-child(2){animation-delay:.8s}.ws-flow i:nth-child(3){animation-delay:1.6s}
-@keyframes wsDrop{0%{top:0;opacity:0;transform:scale(.6)}20%{opacity:.9}80%{opacity:.9}100%{top:100%;opacity:0;transform:scale(1)}}
-.ws-mr{position:absolute;left:50%;bottom:24px;width:84px;height:84px;margin-left:-42px;border-radius:10px;background:linear-gradient(160deg,#EE8A52,var(--orange) 60%,#B94F1C);display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.45),0 16px 30px rgba(212,99,40,.4);z-index:1}
-.ws-mr svg{width:56px;height:56px}
-/* 03: the team on orbit rings around one core, with the four jobs as dark pills */
+/* bento: one tall card, two small ones and a wide one */
+.ws-grid{--gh:clamp(520px,calc(var(--vh,1vh) * 100 - 220px),740px);width:100%;height:var(--gh);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px}
+.ws-card{position:relative;background:#F2F2F2;border:1px solid #E5E5E5;border-radius:24px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);box-sizing:border-box;color:#050505}
+.ws-c1{grid-row:1 / span 2}
+.ws-c4{grid-column:2 / span 2}
+.ws-card h4{margin:0;font-weight:500;font-size:32px;line-height:40px;letter-spacing:-.04em;color:#050505}
+.ws-card p{margin:0;font:400 14px/20px var(--body);color:#737373}
+.wb-txt{position:relative;z-index:2;padding:32px 32px 0}
+.wb-txt p{margin-top:14px;max-width:348px}
+/* 01: a browser bar, the promise, a planning field and a slider of vertical clips */
+.wb-fade{position:absolute;left:0;right:0;top:32%;bottom:0;background:linear-gradient(180deg,rgba(242,242,242,0),rgba(232,150,110,.55) 42%,var(--orange));z-index:0}
+.wb-bar{position:absolute;left:10px;right:10px;top:10px;height:36px;box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:0 10px 0 12px;background:#fff;border:1px solid #E5E5E5;border-radius:999px;z-index:2}
+.wb-bar span{flex:1;font:500 12px/1 var(--body);color:#1A1A1A}
+.wb-send{width:18px;height:18px;fill:var(--orange)}
+.wb-bar .ic{width:18px;height:18px;color:#C9C9C9;stroke-width:1.5}
+.wb-copy{position:absolute;left:0;right:0;top:15%;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 24px}
+.wb-copy h4{max-width:300px}
+.wb-copy p{margin-top:16px;max-width:280px}
+.wb-field{margin-top:24px;width:272px;max-width:100%;height:38px;box-sizing:border-box;display:flex;align-items:center;padding:0 4px 0 14px;background:#fff;border-radius:999px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 10px 24px rgba(0,0,0,.10)}
+.wb-type{font:400 12px/1 var(--body);color:#1A1A1A;white-space:nowrap}
+.wb-caret{width:1.5px;height:14px;margin-left:2px;background:var(--orange);animation:wsBlink 1s steps(1) infinite}
+@keyframes wsBlink{50%{opacity:0}}
+.wb-field i{margin-left:auto;width:30px;height:30px;border-radius:50%;background:var(--orange);display:grid;place-items:center;flex:none}
+.wb-field .ic{width:14px;height:14px;color:#fff;stroke-width:2.25}
+.wb-slider{position:absolute;left:50%;top:52.5%;width:0;height:0;z-index:1}
+.wb-clip{position:absolute;left:-104px;top:0;width:208px;height:369px;border-radius:17px;overflow:hidden;background:#D9D9D9;transform:translate(calc(var(--d,0) * 225px),var(--y,25px));transition:transform .9s cubic-bezier(.65,0,.35,1);box-shadow:0 18px 40px rgba(120,45,10,.22);-webkit-mask-image:-webkit-radial-gradient(white,black)}
+.wb-clip.jump{transition:none}
+.wb-clip video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.wb-chip{position:absolute;left:10px;top:10px;height:26px;padding:0 9px 0 8px;display:flex;align-items:center;gap:6px;border-radius:999px;background:rgba(17,17,17,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font:600 11px/1 var(--body);color:#fff}
+.wb-chip .bi{width:12px;height:12px;fill:#fff}
+.wb-chip em{font-style:normal;font-weight:400;opacity:.75}
+/* 02: client logos in two rows that slide opposite ways over a working shot */
+.wb-cloud{position:absolute;left:0;right:0;top:46%;bottom:0;background:#101418;overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:13px}
+.wb-cloud video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5}
+.wb-cloud::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#101418,rgba(16,20,24,0) 22%,rgba(16,20,24,0) 78%,#101418);pointer-events:none;z-index:2}
+.wb-row{position:relative;z-index:1;overflow:hidden}
+.wb-run{display:flex;gap:8px;width:max-content;animation:wsLeft 34s linear infinite}
+.wb-row.b .wb-run{animation-name:wsRight}
+@keyframes wsLeft{from{transform:translateX(0)}to{transform:translateX(calc(-25% - 2px))}}
+@keyframes wsRight{from{transform:translateX(calc(-25% - 2px))}to{transform:translateX(0)}}
+.wb-pill{height:40px;padding:0 16px;display:grid;place-items:center;flex:none;border-radius:999px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.wb-pill img{height:13px;width:auto;max-width:64px;filter:brightness(0) invert(1)}
+.wb-pill img[src*="row1_4"],.wb-pill img[src*="row1_5"]{height:19px}
+.ws-c2:hover .wb-run{animation-play-state:paused}
+/* 03: the team around one brief; the pointer moves between roles and the icons float */
+.ws-p3{position:absolute;left:0;right:0;top:85%;height:0;z-index:1}
 .ws-glow{position:absolute;left:50%;top:50%;width:300px;height:220px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(212,99,40,.16),rgba(212,99,40,0))}
 .ws-orb{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #DCDCDC;border-radius:999px}
-.ws-orb.o1{width:170px;height:64px;border-color:#D2D2D2}.ws-orb.o2{width:250px;height:138px}.ws-orb.o3{width:330px;height:216px;border-color:#E2E2E2}.ws-orb.o4{width:410px;height:296px;border-color:#E8E8E8}
+.ws-orb.o1{width:170px;height:64px;border-color:#D2D2D2}.ws-orb.o2{width:250px;height:138px}.ws-orb.o3{width:330px;height:216px;border-color:#E2E2E2}
 .ws-av{position:absolute;left:calc(50% + var(--x));top:calc(50% + var(--y));width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;object-fit:cover;border:3px solid #fff;box-sizing:border-box;background:#E2E2E2;box-shadow:0 1px 2px rgba(0,0,0,.08),0 10px 22px rgba(0,0,0,.12);animation:wsBob 6s ease-in-out infinite;animation-delay:var(--d)}
 @keyframes wsBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
 .ws-role{position:absolute;left:calc(50% + var(--x));top:calc(50% + var(--y));width:42px;height:30px;margin:-15px 0 0 -21px;border-radius:999px;background:#111;color:#fff;display:grid;place-items:center;box-shadow:0 8px 16px rgba(0,0,0,.18)}
 .ws-role .ic{width:15px;height:15px;stroke-width:1.9}
 .ws-core{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:38px;padding:0 18px 0 14px;display:flex;align-items:center;gap:8px;border-radius:999px;background:linear-gradient(180deg,#E8793F,var(--orange));color:#fff;font:600 13px/1 var(--heading);letter-spacing:-.01em;white-space:nowrap;box-shadow:0 0 0 5px rgba(212,99,40,.14),0 10px 22px rgba(212,99,40,.3)}
 .ws-core .ic{width:16px;height:16px;stroke-width:2}
-.ws-ptr{position:absolute;left:calc(50% + 46px);top:calc(50% + 12px);width:24px;height:24px;fill:#111;stroke:#fff;stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));animation:wsPtr 5s ease-in-out infinite}
-@keyframes wsPtr{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,8px)}}
-@media (prefers-reduced-motion:reduce){.ws-go,.ws-caret,.ws-flow i,.ws-av,.ws-ptr{animation:none}}
-@media (max-width:1200px) and (min-width:901px){.ws-txt h4{font-size:20px}.ws-txt p{font-size:14px;line-height:21px}}
+.ws-role{animation:wsBob 5s ease-in-out infinite;transition:background-color .3s}
+.ws-role:nth-of-type(odd){animation-delay:-2.2s}
+.ws-role .ic{transition:transform .35s cubic-bezier(.3,1.4,.5,1)}
+.ws-c3:hover .ws-role{background:var(--orange)}
+.ws-c3:hover .ws-role .ic{transform:scale(1.18)}
+.ws-ptr{position:absolute;left:50%;top:50%;width:24px;height:24px;fill:#111;stroke:#fff;stroke-width:1.5;stroke-linejoin:round;filter:drop-shadow(0 4px 6px rgba(0,0,0,.25));animation:wsPtr 9s cubic-bezier(.65,0,.35,1) infinite;z-index:3}
+@keyframes wsPtr{0%,12%{transform:translate(46px,12px)}26%,36%{transform:translate(-128px,-2px)}50%,60%{transform:translate(46px,12px)}74%,84%{transform:translate(142px,-8px)}100%{transform:translate(46px,12px)}}
+/* 04: the wide card: the promise, a button and a screen with our logo (the reel plays on hover) */
+.ws-c4{background:linear-gradient(100deg,#F2F2F2 38%,#EDB79C 70%,var(--orange))}
+.wb-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.22) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.22) 1px,transparent 1px);background-size:68px 68px;-webkit-mask-image:linear-gradient(90deg,transparent 40%,#000);mask-image:linear-gradient(90deg,transparent 40%,#000)}
+.ws-c4 .wb-txt{padding:40px 0 0 40px;max-width:400px;box-sizing:border-box}
+.ws-c4 .wb-txt p{margin-top:16px}
+.ws .wb-cta{display:inline-block;margin-top:24px;background:var(--orange);color:#fff;font:600 16px var(--body);padding:14px 22px;border-radius:999px;text-decoration:none}
+.wb-mon{position:absolute;right:5%;bottom:0;width:min(44%,360px);height:86%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;perspective:1100px}
+.wb-screen{position:relative;width:100%;aspect-ratio:16/10;background:#fff;border:7px solid #151515;border-radius:10px;box-sizing:border-box;overflow:hidden;display:grid;place-items:center;transform:rotateY(-14deg) rotateX(3deg);transform-origin:50% 100%;box-shadow:0 30px 50px rgba(90,35,8,.35);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.ws-c4:hover .wb-screen{transform:rotateY(-6deg) rotateX(1deg)}
+.wb-wm{width:56%;height:auto}
+.wb-screen video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s}
+.wb-screen.wb-on video{opacity:1}
+.wb-neck{width:15%;height:17%;background:linear-gradient(90deg,#8E8E8E,#DADADA 45%,#9A9A9A);flex:none}
+.wb-base{width:38%;height:9px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#D5D5D5,#8C8C8C);flex:none}
+@media (prefers-reduced-motion:reduce){.wb-caret,.wb-run,.ws-av,.ws-role,.ws-ptr{animation:none}.wb-clip{transition:none}}
+@media (max-height:820px) and (min-width:901px){.ws-p3{transform:scale(.8);top:88%}.ws-card h4{font-size:26px;line-height:32px}.wb-txt{padding-top:24px}.wb-txt p{margin-top:10px}.ws-c4 .wb-txt{padding-top:28px}.ws .wb-cta{margin-top:16px;padding:12px 20px}.wb-copy{top:13%}.wb-copy p{margin-top:10px}.wb-field{margin-top:16px}.ws-block{gap:24px}}
+@media (max-width:1200px) and (min-width:901px){.ws-card h4{font-size:24px;line-height:30px}.wb-txt{padding:24px 22px 0}.ws-c4 .wb-txt{padding:28px 0 0 28px;max-width:320px}.ws-p3{transform:scale(.78);top:90%}}
 @media (max-width:900px){
   .ws-stage{height:auto;min-height:0;padding:80px 0}
   .ws-head{display:none}
@@ -710,9 +727,21 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
   .ws-block{gap:28px}
   .ws-top{gap:14px}
   .ws-tag{font-size:30px;line-height:36px;max-width:350px}
-  .ws-grid{grid-template-columns:1fr;gap:16px}
-  .ws-card{height:540px;min-height:0}
-  .ws-lrow{gap:8px}.ws-lt{width:54px;height:54px}.ws-lt img{max-width:40px;max-height:18px}.ws-lrow.b{top:90px}
+  .ws-grid{height:auto;grid-template-columns:1fr;grid-template-rows:none;gap:16px}
+  .ws-c1,.ws-c4{grid-row:auto;grid-column:auto}
+  .ws-card{border-radius:20px}
+  .ws-card h4{font-size:26px;line-height:32px}
+  .wb-txt{padding:24px 22px 0}
+  .ws-c1{height:660px}
+  .ws-c2,.ws-c3{height:350px}
+  .wb-copy{top:88px}
+  .wb-slider{top:auto;bottom:290px}
+  .wb-clip{left:-92px;width:184px;height:326px;transform:translate(calc(var(--d,0) * 198px),var(--y,22px))}
+  .ws-c4{background:linear-gradient(180deg,#F2F2F2 45%,#EDB79C 78%,var(--orange))}
+  .wb-lines{-webkit-mask-image:linear-gradient(180deg,transparent 45%,#000);mask-image:linear-gradient(180deg,transparent 45%,#000)}
+  .ws-c4 .wb-txt{padding:24px 22px 0;max-width:none}
+  .wb-mon{position:relative;right:auto;width:74%;height:auto;margin:36px auto 0}
+  .wb-neck{height:34px}
 }
 /* process: one 4:3 film that splits into the four step cards as you scroll (desktop) */
 .hw-stage{position:relative}
@@ -998,19 +1027,30 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
     <div class="ws-stage">
       <div class="ws-head"><h2 class="h ws-title"><span class="ws-a">What sets us <b>apart</b></span> <span class="ws-b">from others</span></h2></div>
       <div class="ws-main wrap"><div class="ws-block">
-        <div class="ws-top"><span class="eyebrow">Why us</span><h3 class="h ws-tag">We don’t settle for average, and neither should you.</h3></div>
+        <div class="ws-top"><span class="eyebrow">Why us</span><h3 class="h ws-tag">Why us over another crew.</h3></div>
         <div class="ws-grid">
           <article class="ws-card ws-c1">
-            <div class="ws-art"><div class="ws-p1"><span class="ws-ring r1"></span><span class="ws-ring r2"></span><span class="ws-fork"></span><div class="ws-hex"><span class="hx on" style="--x:0px;--y:0px"><i><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></i></span><span class="hx on" style="--x:-35px;--y:59px"><i><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></i></span><span class="hx on" style="--x:35px;--y:59px"><i><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></i></span><span class="hx on" style="--x:0px;--y:119px"><i><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></i></span><span class="hx" style="--x:-70px;--y:0px"><i></i></span><span class="hx" style="--x:70px;--y:0px"><i></i></span><span class="hx" style="--x:-105px;--y:59px"><i></i></span><span class="hx" style="--x:105px;--y:59px"><i></i></span><span class="hx" style="--x:-70px;--y:119px"><i></i></span><span class="hx" style="--x:70px;--y:119px"><i></i></span></div><span class="ws-go">Plan the week</span><div class="ws-task t1"><i class="ws-radio"></i><p>Cut the keynote into<br>12 clips for the feed<b class="ws-caret"></b></p><em>Working<u></u></em></div><div class="ws-task t2"><i class="ws-radio"></i><p><s style="width:44px"></s><s style="width:110px"></s></p><em class="ok">Done<u></u></em></div></div></div>
-            <div class="ws-txt"><span class="ws-n">01<i>.</i></span><h4 class="h">Planned for the feed</h4><p>Every clip is planned for social before we film.</p></div>
+            <span class="wb-fade"></span>
+            <div class="wb-bar"><svg class="wb-send" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/></svg><span>MediaRide.com</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="4"/><path d="M12 3v18"/><path d="M3 12h18"/></svg></div>
+            <div class="wb-copy">
+              <h4 class="h">Planned for social before we film.</h4>
+              <p>Every clip gets a platform, a format and a hook before the camera rolls.</p>
+              <div class="wb-field"><span class="wb-type" id="wbType">One keynote, 12 clips</span><b class="wb-caret"></b><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></i></div>
+            </div>
+            <div class="wb-slider" id="wbSlider"><div class="wb-clip"><video class="lv" data-src="v/pn7.mp4" poster="v/pn7.jpg" muted loop playsinline preload="none"></video><span class="wb-chip"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>Reel<em>0:24</em></span></div><div class="wb-clip"><video class="lv" data-src="v/pn1.mp4" poster="v/pn1.jpg" muted loop playsinline preload="none"></video><span class="wb-chip"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TikTok<em>0:18</em></span></div><div class="wb-clip"><video class="lv" data-src="v/pn8.mp4" poster="v/pn8.jpg" muted loop playsinline preload="none"></video><span class="wb-chip"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Short<em>0:31</em></span></div><div class="wb-clip"><video class="lv" data-src="v/pn11.mp4" poster="v/pn11.jpg" muted loop playsinline preload="none"></video><span class="wb-chip"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>LinkedIn<em>0:42</em></span></div><div class="wb-clip"><video class="lv" data-src="v/pn24.mp4" poster="v/pn24.jpg" muted loop playsinline preload="none"></video><span class="wb-chip"><svg class="bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>Story<em>0:12</em></span></div></div>
           </article>
           <article class="ws-card ws-c2">
-            <div class="ws-art"><div class="ws-p2"><span class="ws-lobe l"></span><span class="ws-lobe r"></span><div class="ws-lrow a"><span class="ws-lt"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="ws-lt"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="ws-lt"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="ws-lt"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="ws-lt"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span></div><div class="ws-lrow b"><span class="ws-lt"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="ws-lt"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="ws-lt"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span></div><span class="ws-flow"><i></i><i></i><i></i></span><span class="ws-mr"><svg viewBox="0 0 64 64" aria-hidden="true"><g transform="translate(14 13) scale(1.6)"><path fill="#fff" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/></g></svg></span></div></div>
-            <div class="ws-txt"><span class="ws-n">02<i>.</i></span><h4 class="h">Trusted by the best</h4><p>Social video for LinkedIn, Apollo, Cisco, Docker and many others.</p></div>
+            <div class="wb-txt"><h4 class="h">Social video</h4><p>Trusted by teams at LinkedIn, Apollo, Cisco and Docker to keep their feeds moving.</p></div>
+            <div class="wb-cloud"><video class="lv" data-src="m/svc_social.mp4" poster="m/svc_social.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><div class="wb-row a"><div class="wb-run"><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span></div></div><div class="wb-row b"><div class="wb-run"><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span></div></div></div>
           </article>
           <article class="ws-card ws-c3">
-            <div class="ws-art"><div class="ws-p3"><span class="ws-glow"></span><span class="ws-orb o1"></span><span class="ws-orb o2"></span><span class="ws-orb o3"></span><span class="ws-orb o4"></span><img class="ws-av" src="m/av1.jpg" alt="" loading="lazy" style="--x:-104px;--y:-98px;--s:66px;--d:-0.0s"><img class="ws-av" src="m/av2.jpg" alt="" loading="lazy" style="--x:108px;--y:96px;--s:64px;--d:-1.3s"><img class="ws-av" src="m/av3.jpg" alt="" loading="lazy" style="--x:26px;--y:-62px;--s:46px;--d:-2.6s"><img class="ws-av" src="m/av4.jpg" alt="" loading="lazy" style="--x:118px;--y:-112px;--s:48px;--d:-3.9s"><img class="ws-av" src="m/av5.jpg" alt="" loading="lazy" style="--x:-112px;--y:84px;--s:54px;--d:-5.2s"><span class="ws-role" style="--x:-136px;--y:-8px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><span class="ws-role" style="--x:136px;--y:-14px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span><span class="ws-role" style="--x:16px;--y:82px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg></span><span class="ws-role" style="--x:-34px;--y:-122px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg></span><span class="ws-core"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>One team</span><svg class="ws-ptr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/></svg></div></div>
-            <div class="ws-txt"><span class="ws-n">03<i>.</i></span><h4 class="h">One team, start to finish</h4><p>One team plans, shoots, edits and cuts. No handoffs, nothing lost.</p></div>
+            <div class="wb-txt"><h4 class="h">One team plans</h4><p>Plans, shoots, edits and cuts under one roof. No handoffs, nothing lost.</p></div>
+            <div class="ws-p3"><span class="ws-glow"></span><span class="ws-orb o1"></span><span class="ws-orb o2"></span><span class="ws-orb o3"></span><img class="ws-av" src="m/av1.jpg" alt="" loading="lazy" style="--x:-104px;--y:-98px;--s:66px;--d:-0.0s"><img class="ws-av" src="m/av2.jpg" alt="" loading="lazy" style="--x:108px;--y:96px;--s:64px;--d:-1.3s"><img class="ws-av" src="m/av3.jpg" alt="" loading="lazy" style="--x:26px;--y:-62px;--s:46px;--d:-2.6s"><img class="ws-av" src="m/av4.jpg" alt="" loading="lazy" style="--x:118px;--y:-112px;--s:48px;--d:-3.9s"><img class="ws-av" src="m/av5.jpg" alt="" loading="lazy" style="--x:-112px;--y:84px;--s:54px;--d:-5.2s"><span class="ws-role" style="--x:-136px;--y:-8px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg></span><span class="ws-role" style="--x:136px;--y:-14px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span><span class="ws-role" style="--x:16px;--y:82px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg></span><span class="ws-role" style="--x:-34px;--y:-122px"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg></span><span class="ws-core"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>One team</span><svg class="ws-ptr" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/></svg></div>
+          </article>
+          <article class="ws-card ws-c4">
+            <span class="wb-lines"></span>
+            <div class="wb-txt"><h4 class="h">We know what marketing teams need, and we deliver it fast.</h4><p>Brief us once. We plan, shoot and edit, and the first clips land while the event is still fresh.</p><a href="https://calendly.com/mediaride/luke" target="_blank" rel="noopener" class="btn-orange wb-cta" data-flip>Book a call</a></div>
+            <div class="wb-mon"><div class="wb-screen"><svg class="wb-wm" viewBox="0 0 152 24.6" aria-hidden="true"><path fill="#5C5955" d="M19.7832 24.1784L19.6687 6.2572L11.7455 21.8797H10.2535L2.36215 6.2572L2.44574 24.1784H0.0835873L9.74166e-07 2.437H3.07681L11.0309 18.0896L18.954 2.437H21.9982L22.0818 24.1784H19.7824H19.7832Z"/><path fill="#5C5955" d="M40.1574 16.9416H26.7969C27.2324 20.1393 29.5628 22.1597 32.7316 22.1597C34.751 22.1597 36.523 21.4452 37.7969 20.1092L39.1334 21.538C37.5796 23.2776 35.2801 24.2711 32.546 24.2711C27.7298 24.2711 24.4047 20.8863 24.4047 16.0099C24.4047 11.1336 27.7615 7.74868 32.5142 7.74868C37.7969 7.71777 40.4073 11.3826 40.1574 16.9424V16.9416ZM37.9833 14.9538C37.8278 11.817 35.7156 9.82924 32.5142 9.82924C29.3129 9.82924 27.1706 11.848 26.7969 14.9538H37.9833Z"/><path fill="#5C5955" d="M58.7018 24.1784H56.2787V20.669C55.0658 22.9676 52.829 24.3037 49.9094 24.3037C45.2486 24.3037 42.0163 20.8553 42.0163 15.9798C42.0163 11.1043 45.2486 7.68685 49.8776 7.68685C52.799 7.68685 55.0658 9.02292 56.2787 11.3516V1.13269H58.7018V24.1784ZM56.2787 16.0417C56.2787 12.4696 53.8237 9.8919 50.3741 9.8919C46.9245 9.8919 44.4403 12.4696 44.4403 16.0417C44.4403 19.6137 46.8953 22.1279 50.3741 22.1279C53.853 22.1279 56.2787 19.5811 56.2787 16.0417Z"/><path fill="#5C5955" d="M65.3804 3.12049C65.3804 4.0839 64.6966 4.79747 63.7956 4.79747C62.8945 4.79747 62.2108 4.0839 62.2108 3.12049C62.2108 2.15709 62.8945 1.44352 63.7956 1.44352C64.6966 1.44352 65.3804 2.15792 65.3804 3.12049ZM62.6145 24.1784V7.81051H65.0067V24.1784H62.6145Z"/><path fill="#5C5955" d="M79.1754 21.6617C77.8707 23.4331 75.7885 24.3029 73.179 24.3029C69.792 24.3029 67.6171 22.1279 67.6171 19.302C67.6171 16.4761 69.8857 14.6429 73.7382 14.6128H79.1136V13.6503C79.1136 11.2581 77.6224 9.82924 74.7328 9.82924C72.9307 9.82924 71.2523 10.5127 69.5446 11.6925L68.519 9.92198C70.6321 8.52409 72.4024 7.71693 75.1992 7.71693C79.2381 7.71693 81.4757 9.86015 81.5058 13.3695L81.5368 24.1775H79.1754V21.6608V21.6617ZM79.1445 18.525V16.5681H74.0491C71.315 16.5681 69.8857 17.407 69.8857 19.2084C69.8857 21.0099 71.3459 22.1897 73.6454 22.1897C76.4104 22.1897 78.5226 20.7918 79.1445 18.525Z"/><path class="ride" fill="#D46328" d="M94.2753 18.2626H89.9246V24.3814H84.3946V2.64004H94.119C99.8664 2.64004 103.161 5.37317 103.161 10.2186C103.161 13.5425 101.763 15.9339 99.2153 17.2064L103.782 24.3806H97.5059L94.2753 18.2617V18.2626ZM94.1198 13.9143C96.5121 13.9143 97.9113 12.7036 97.9113 10.4049C97.9113 8.1063 96.5129 6.98832 94.1198 6.98832H89.9246V13.9143H94.1198Z"/><path class="ride" fill="#D46328" d="M106.079 24.3814V7.6409H111.423V24.3814H106.079Z"/><path class="ride" fill="#D46328" d="M132.178 24.3814H126.803V22.1755C125.622 23.7288 123.912 24.5987 121.77 24.5987C117.047 24.5987 113.941 21.1194 113.941 15.9339C113.941 10.7484 117.016 7.42281 121.645 7.42281C123.851 7.42281 125.622 8.29263 126.803 9.84511V1.33573H132.178V24.3814ZM126.803 16.0575C126.803 13.4798 125.311 11.7093 123.074 11.7093C120.837 11.7093 119.345 13.4798 119.315 16.0575C119.346 18.6352 120.837 20.4359 123.074 20.4359C125.311 20.4359 126.803 18.6352 126.803 16.0575Z"/><path class="ride" fill="#D46328" d="M151.968 17.4554H140.193C140.722 19.4432 142.15 20.5612 144.139 20.5612C145.598 20.5612 147.027 19.9713 148.147 18.8525L150.974 21.6174C149.265 23.4815 146.749 24.5677 143.672 24.5677C138.205 24.5677 134.785 21.1511 134.785 16.0584C134.785 10.9656 138.328 7.4554 143.517 7.4554C149.42 7.4554 152.341 11.3383 151.967 17.4563L151.968 17.4554ZM146.812 14.5677C146.812 12.5172 145.506 11.182 143.58 11.182C141.653 11.182 140.442 12.5482 140.099 14.5677H146.811H146.812Z"/><circle class="ride" fill="#D46328" cx="108.783" cy="2.84" r="2.83"/></svg><video id="wbReel" data-src="v/reel.mp4" muted loop playsinline preload="none" aria-hidden="true"></video></div><i class="wb-neck"></i><i class="wb-base"></i></div>
           </article>
         </div>
       </div></div>
@@ -1292,6 +1332,26 @@ $('.arrows .prev').addEventListener('click',()=>show(-1)); $('.arrows .next').ad
   if(REDUCED) $$('video.lv').forEach(v=>v.removeAttribute('loop'));
 })();
 
+/* ---------- why us bentos: clip slider, typing field, reel on the screen ---------- */
+(()=>{
+  const sl=document.getElementById('wbSlider'); if(!sl) return;
+  const cl=[...sl.children], n=cl.length; let cur=0;
+  const place=()=>cl.forEach((c,i)=>{let d=((i-cur)%n+n)%n; if(d>n/2) d-=n; const was=+c.dataset.d; c.classList.toggle('jump',Math.abs(d-was)>1); c.dataset.d=d; c.style.setProperty('--d',d); c.style.setProperty('--y',d===0?'0px':'');});
+  cl.forEach(c=>c.dataset.d=0); place(); requestAnimationFrame(()=>cl.forEach(c=>c.classList.remove('jump')));
+  let on=false; new IntersectionObserver(es=>on=es[0].isIntersecting).observe(sl.parentNode);
+  if(!REDUCED) setInterval(()=>{if(on&&!document.hidden){cur=(cur+1)%n; place();}},2800);
+  const ty=document.getElementById('wbType'), lines=['One keynote, 12 clips','Launch day, 8 reels','Booth tour, 6 shorts','Founder story, 5 cuts']; let li=0;
+  const type=async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));
+    for(;;){await w(2600); if(!on) continue; const t=lines[li]; for(let k=t.length;k>=0;k--){ty.textContent=t.slice(0,k); await w(22);} li=(li+1)%lines.length; const u=lines[li]; for(let k=1;k<=u.length;k++){ty.textContent=u.slice(0,k); await w(46);}}};
+  if(!REDUCED) type();
+  const c4=document.querySelector('.ws-c4'), rv=document.getElementById('wbReel'), sc=rv.parentNode;
+  if(matchMedia('(hover: hover)').matches){
+    c4.addEventListener('mouseenter',()=>{if(!rv.src) rv.src=rv.dataset.src; const p=rv.play(); p&&p.catch(()=>{}); sc.classList.add('wb-on');});
+    c4.addEventListener('mouseleave',()=>{sc.classList.remove('wb-on'); rv.pause();});
+  }
+})();
+
+
 /* ---------- preloader: 1.25s, logo in the middle, bar and counter at the bottom, then it slides up ---------- */
 const loaderEl=$('#loader'), onLoaded=[]; let loaded=false;
 const whenLoaded=f=>{loaded?f():onLoaded.push(f);};
@@ -1533,17 +1593,14 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
     $$('.hw-card').forEach(c=>gsap.from(c,{y:50,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:c,start:'top 88%'}}));
   }
   // 10. why us: on desktop the section pins. "What sets us apart from others" splits apart and fades,
-  //     the Why us block (eyebrow, line and middle card) rises in as one piece, then the two other cards slide out from behind the middle one.
+  //     then the Why us heading rises in and the four bento cards follow it one after another.
   if(isD){
-    const c1=$('.ws-c1'), c2=$('.ws-c2'), dx=()=>c2.offsetLeft-c1.offsetLeft;
-    const wt=window._wstl=gsap.timeline({scrollTrigger:{trigger:'#why-us',start:'top top',end:'+=240%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    const wt=window._wstl=gsap.timeline({scrollTrigger:{trigger:'#why-us',start:'top top',end:'+=210%',pin:true,scrub:1,invalidateOnRefresh:true}});
     wt.to('.ws-a',{x:()=>-innerWidth*.2,ease:'power2.inOut',duration:1},0)
       .to('.ws-b',{x:()=>innerWidth*.2,ease:'power2.inOut',duration:1},0)
       .to('.ws-head',{opacity:0,ease:'power1.in',duration:.45},.6)
-      .fromTo('.ws-block',{y:()=>innerHeight*.8},{y:0,ease:'power3.out',duration:1.2},.8)
-      .fromTo('.ws-c1,.ws-c3',{opacity:0},{opacity:1,ease:'none',duration:.15},2.15)
-      .fromTo('.ws-c1',{x:()=>dx(),scale:.94},{x:0,scale:1,ease:'power3.inOut',duration:1.1},2.15)
-      .fromTo('.ws-c3',{x:()=>-dx(),scale:.94},{x:0,scale:1,ease:'power3.inOut',duration:1.1},2.15)
+      .fromTo('.ws-top',{y:()=>innerHeight*.8},{y:0,ease:'power3.out',duration:1.2},.8)
+      .fromTo('.ws-card',{y:()=>innerHeight*.9},{y:0,ease:'power3.out',duration:1.2,stagger:.14},.9)
       .to({},{duration:.4});
     ScrollTrigger.sort();
   } else {
