@@ -20,6 +20,7 @@
 }
 *{box-sizing:border-box}
 html{scroll-behavior:auto}
+html{overflow-x:clip}
 body{margin:0;background:var(--white);color:var(--ink);font-family:var(--body);overflow-x:clip;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -258,9 +259,9 @@ html.ld-skip .loader{display:none}
 .sv-label{display:inline-flex;align-items:center;gap:10px;font:500 14px/20px var(--heading);color:var(--orange-text);padding:0;margin-bottom:12px}
 .sv-head h2{font-size:48px;line-height:1.05;margin-bottom:24px}
 .sv-head p{margin:0;font:400 16px/24px var(--body);color:var(--ink-soft);max-width:400px}
-.sv-cards{display:flex;flex-direction:column;gap:24px}
+.sv-cards{display:flex;flex-direction:column;gap:24px;min-width:0}
 .sv-card{display:flex;gap:16px;justify-content:space-between;background:#fff;border-radius:10px;padding:12px}
-.sv-text{flex:1;max-width:340px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
+.sv-text{flex:1 1 0;min-width:0;max-width:340px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:48px}
 .sv-n{display:block;font:500 12px/14px var(--heading);color:var(--ink-soft);margin-bottom:8px}
 .sv-top h3{font-size:32px;line-height:1.2;margin-bottom:10px}
 .sv-top p{margin:0;font:400 16px/22px var(--body);color:var(--ink-soft)}
@@ -408,7 +409,13 @@ html.ld-skip .loader{display:none}
   .menu{gap:22px}
   .mega-grid{grid-template-columns:320px 1fr}
   .feat{grid-template-columns:1fr 1fr;gap:40px}
-  .sv{grid-template-columns:320px 1fr;gap:48px}.sv-media{width:280px}
+  .sv{grid-template-columns:minmax(240px,300px) minmax(0,1fr);gap:40px}.sv-media{width:44%;flex:none}.sv-top h3{font-size:26px}.sv-text{padding:12px;gap:32px}
+}
+@media (min-width:600px) and (max-width:900px){
+  .wwm .sv-card{flex-direction:row;padding:12px}
+  .wwm .sv-media{width:46%}
+  .wwm .sv-img{aspect-ratio:auto;min-height:280px;height:100%}
+  .wwm .sv-text{padding:12px;gap:28px}
 }
 /* mobile pieces that only exist below 900 */
 .mnav-btn,.fcol a.m-only,.orbit.m{display:none}
@@ -652,7 +659,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .ws-top{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
 .ws-tag{margin:0;max-width:780px;font-size:clamp(32px,3.4vw,48px);line-height:1.15;letter-spacing:-.04em;color:#111}
 /* bento: one tall card, two small ones and a wide one */
-.ws-grid{--gh:clamp(520px,calc(var(--vh,1vh) * 100 - 220px),740px);width:100%;height:var(--gh);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px}
+.ws-grid{--gh:clamp(560px,calc(var(--vh,1vh) * 100 - 220px),740px);width:100%;height:var(--gh);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:20px}
 .ws-card{position:relative;background:#F2F2F2;border-radius:24px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);box-sizing:border-box;color:#050505}
 .ws-c1{grid-row:1 / span 2}
 .ws-c4{grid-column:2 / span 2}
@@ -729,7 +736,7 @@ html.mm-lock,html.mm-lock body{overflow:hidden}
 .wb-base{width:38%;height:9px;border-radius:6px 6px 0 0;background:linear-gradient(180deg,#D5D5D5,#8C8C8C);flex:none}
 @media (prefers-reduced-motion:reduce){.wb-caret,.wb-run,.ws-av,.ws-role,.ws-ptr{animation:none}.wb-clip{transition:none}}
 @media (max-height:820px) and (min-width:901px){.ws-p3{transform:scale(.8);top:88%}.ws-card h4{font-size:26px;line-height:32px}.wb-txt{padding-top:24px}.wb-txt p{margin-top:10px}.ws-c4 .wb-txt{padding-top:28px}.ws .wb-cta{margin-top:16px;padding:12px 20px}.wb-copy{top:13%}.wb-copy p{margin-top:10px}.wb-field{margin-top:16px}.ws-block{gap:24px}}
-@media (max-width:1200px) and (min-width:901px){.ws-card h4{font-size:24px;line-height:30px}.wb-txt{padding:24px 22px 0}.ws-c4 .wb-txt{padding:28px 0 0 28px;max-width:320px}.ws-p3{transform:scale(.78);top:90%}}
+@media (max-width:1200px) and (min-width:901px){.ws .ws-c4 h4{font-size:22px;line-height:28px}.ws-c4 .wb-txt p{margin-top:10px}.ws .wb-cta{margin-top:16px;padding:12px 20px}.ws-card h4{font-size:24px;line-height:30px}.wb-txt{padding:24px 22px 0}.ws-c4 .wb-txt{padding:28px 0 0 28px;max-width:320px}.ws-p3{transform:scale(.78);top:90%}}
 @media (max-width:900px){
   .ws-stage{padding:80px 0}
   .ws-head{display:none}
@@ -1589,7 +1596,9 @@ mm.add({isD:'(min-width: 901px)', isM:'(max-width: 900px)'},ctx=>{
     const S=i=>({left:H.x+i*H.w/4, top:H.y, width:H.w/4, height:H.h});
     const C=i=>{const c=box(cards[i]); return {left:c.x, top:c.y, width:c.w, height:c.h};};
     const R=['10px 0px 0px 10px','0px 0px 0px 0px','0px 0px 0px 0px','0px 10px 10px 0px'];
-    const tl=window._hwtl=gsap.timeline({scrollTrigger:{trigger:hw,start:'top top',end:'+=130%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    const tl=window._hwtl=gsap.timeline({scrollTrigger:Z!==1?{trigger:hw,start:'top 85%',end:'top 10%',scrub:1,invalidateOnRefresh:true}:{trigger:hw,start:'top top',end:'+=130%',pin:true,scrub:1,invalidateOnRefresh:true}});
+    // below 1440 the page is scaled with CSS zoom, and a pinned (fixed) section gets sized twice there and crops on iPad,
+    // so on those screens the same animation plays while the section scrolls into view, without pinning
     tl.fromTo(head,{y:()=>stage.offsetHeight/2-(head.offsetTop+head.offsetHeight/2)},{y:0,ease:'power3.inOut',duration:.75},0)
       .fromTo(strips,{left:i=>S(i).left,top:i=>S(i).top,width:i=>S(i).width,height:i=>S(i).height,borderRadius:i=>R[i],opacity:1},
                      {left:i=>C(i).left,top:i=>C(i).top,width:i=>C(i).width,height:i=>C(i).height,borderRadius:'10px 10px 10px 10px',ease:'power3.inOut',duration:1,stagger:.1},0)
