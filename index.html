@@ -868,6 +868,21 @@ html.mm-lock .fab{opacity:0;pointer-events:none}
   .hw-eye .i-x{opacity:0;transform:rotate(-90deg)}
   .hw-card.on .hw-eye .i-eye{opacity:0;transform:rotate(90deg)}.hw-card.on .hw-eye .i-x{opacity:1;transform:none}
 }
+/* why us on tablet portrait (600 to 900): the four bentos sit 2 by 2 instead of one long column */
+@media (min-width:600px) and (max-width:900px){
+  .ws .ws-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none;gap:16px}
+  .ws .ws-c1,.ws .ws-c2{height:600px}
+  .ws .ws-c3,.ws .ws-c4{height:460px}
+  .ws .ws-card h4{font-size:24px;line-height:30px}
+  .ws .wb-copy{top:76px}
+  .ws .wb-slider{top:auto;bottom:250px}
+  .ws .wb-clip{left:-80px;width:160px;height:284px;transform:translate(calc(var(--d,0) * 172px),var(--y,20px))}
+  .ws .wb-cloud{top:44%}
+  .ws .ws-p3{top:72%}
+  .ws .ws-c4 .wb-txt{padding:24px 22px 0}
+  .ws .wb-mon{width:72%;margin:24px auto 0}
+  .ws .wb-neck{height:26px}
+}
 </style>
 
 
