@@ -1142,6 +1142,124 @@ html.cur-fine .reel-ctl{display:none}
   .feat-foot .arrows{gap:8px}.feat-foot .arrows button{width:40px;height:40px}
 }   /* phones: card 3 fits its text and the track, no empty band */
 @media (prefers-reduced-motion:reduce){.wc-ptr{display:none}}
+/* ===== 18 Nov fixes ===== */
+/* stats: one orange disc follows you across the whole grid, so it no longer flashes white between cards */
+.cur.disc .c{transition:width .34s cubic-bezier(.65,0,.35,1),height .34s cubic-bezier(.65,0,.35,1),margin .34s cubic-bezier(.65,0,.35,1),transform .22s cubic-bezier(.4,0,.2,1)}
+/* card 1: shot plan pill, copy and plan card stack in a column; the plan sits as far from the bottom as the pill from the top */
+.ws .ws-c1{display:flex;flex-direction:column;--gap:24px}
+.ws .ws-c1 .wb-bar{position:relative;left:auto;right:auto;top:auto;margin:var(--gap) var(--wp) 0;flex:none}
+.ws .ws-c1 .wb-copy{position:relative;top:auto;flex:1;justify-content:center;padding:28px 24px}
+.ws .ws-c1 .wp{position:relative;left:auto;right:auto;bottom:auto;flex:none;margin:0 var(--wp) var(--gap);height:340px;padding:16px;border-radius:14px;box-shadow:0 0 0 1px #E8E8E8,0 18px 40px rgba(41,41,41,.10)}
+.wp .ic{stroke-width:1.75}
+.wp-tile{width:30px;height:30px;flex:none;border-radius:8px;background:#FBEDE5;color:var(--orange);display:grid;place-items:center}
+.wp-tile .ic{width:16px;height:16px}
+.wp-head{gap:10px}
+.wp-head span.wp-tile{margin-left:0}
+.wp-head .ic{width:16px;height:16px;color:var(--orange)}
+.wp-ttl{display:flex;flex-direction:column;gap:3px;min-width:0}
+.wp-ttl b{font:600 13px/1.1 var(--heading);color:#1A1A1A}
+.wp-ttl small,.wp-head span.wp-ttl small{font:400 11px/1 var(--heading);color:#8C8C8C;margin:0}
+.wp-head span.wp-ttl{margin-left:0;color:inherit;font:inherit}
+.wp-head .wp-due{margin-left:auto;display:flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:#F4F4F4;font:500 11px/1 var(--heading);color:#5C5955}
+.wp-head .wp-due .ic{width:12px;height:12px;color:#8C8C8C}
+.wp-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:14px;padding:4px;border:0;border-radius:10px;background:#F4F4F4}
+.wp-tab{display:flex;align-items:center;justify-content:center;gap:5px;height:28px;padding:0;border-radius:7px;font:500 11.5px/1 var(--heading);color:#8C8C8C;transition:color .3s,background-color .3s,box-shadow .3s}
+.wp-tab::after{display:none}
+.wp-tab .ic{width:13px;height:13px}
+.wp-tab.on{background:#fff;color:#1A1A1A;box-shadow:0 1px 2px rgba(41,41,41,.08),0 0 0 1px #EAEAEA}
+.wp-tab.on .ic{color:var(--orange)}
+.wp-body{margin-top:12px}
+.wp-pane{display:flex;flex-direction:column;gap:8px}
+.wp-row,.wp-cut{display:flex;align-items:center;gap:10px;height:auto;padding:8px 10px 8px 8px;border:1px solid #EFEFEF;border-radius:10px;background:#FAFAFA;font-size:12px}
+.wp-nm{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.wp-nm b{font:600 12px/1.15 var(--heading);color:#1A1A1A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wp-nm small{font:400 10.5px/1 var(--heading);color:#8C8C8C}
+.wp-row span.wp-nm{color:inherit}
+.wp-st{flex:none}
+.wp-cut i{flex:none;width:56px}
+.wp-cut s{flex:none;width:40px;text-align:right}
+.wp-scard{padding:10px 12px;border:1px solid #EFEFEF;border-radius:10px;background:#FAFAFA}
+.wp-scard .wp-sc{display:flex;align-items:center;gap:6px;margin:0}
+.wp-scard .wp-sc .ic{width:13px;height:13px}
+.wp-scard .wp-sc em{margin-left:auto;font-style:normal;letter-spacing:0;color:#9A9A9A;font-weight:500}
+.wp-scard .wp-ln{margin-top:7px;font-size:12.5px}
+.wp-step{height:auto;padding:8px 10px;border:1px solid #EFEFEF;border-radius:10px;background:#FAFAFA;gap:10px}
+.wp-steps{gap:6px}
+.wp-step em{padding:3px 7px;border-radius:999px;background:#fff;border:1px solid #EDEDED;font-size:10.5px}
+@media (max-width:900px){.ws .ws-c1 .wp{height:316px;padding:14px}.ws .ws-c1 .wb-copy{padding:20px 20px}}
+@media (max-width:599px){.ws .ws-c1{--gap:16px;height:640px}.ws .ws-c1 .wb-copy{padding:16px}.ws .ws-c1 .wp{height:360px}.wp-scard .wp-ln{font-size:12px}.wp-cut i{width:40px}.wp-tab{font-size:11px;gap:4px}.wp-tab .ic{width:12px;height:12px}}
+/* card 2: Salesforce word sits inside the cloud */
+.wb-pill img[src*="salesforce"]{height:26px;max-width:none}
+/* card 3: icons at the site-wide Lucide weight, crisp at every zoom */
+.wc-step .ic{width:16px;height:16px;stroke-width:1.75;shape-rendering:geometricPrecision}
+.wc-ptr{transition:opacity .3s;will-change:transform;transform-origin:4px 4px}
+/* ===== 18 Nov round 2: plan bento ===== */
+/* icon tiles: white chips with an orange icon, the same treatment as the selected tab */
+.wp-tile{background:#fff;box-shadow:0 1px 2px rgba(41,41,41,.08),0 0 0 1px #EAEAEA;color:var(--orange)}
+.wp-tile .ic{display:block;width:15px;height:15px}
+/* brand fonts: Montserrat for names and labels, Open Sans for the small supporting text */
+.wp .wp-nm small,.wp .wp-ttl small,.wp .wp-due,.wp .wp-st,.wp .wp-cut s,.wp .wp-step span,.wp .wp-step em,.wp .wp-cap small{font-family:var(--body)!important}
+/* tabs: icon and label share one centre line */
+.wp-tab{gap:6px;line-height:1}
+.wp-tab .ic{display:block;width:14px;height:14px}
+.wp-tl{display:block;font:500 12px/14px var(--heading);transform:translateY(.5px)}
+.wp-head .wp-due{line-height:1}
+.wp-head .wp-due .ic{display:block}
+/* status chips and day pills: fixed height, text centred both ways */
+.wp-st{display:inline-flex;align-items:center;justify-content:center;height:22px;padding:0 9px;box-sizing:border-box;line-height:1}
+.wp-step em{display:inline-flex;align-items:center;justify-content:center;flex:none;min-width:40px;height:22px;padding:0 8px;box-sizing:border-box;line-height:1;font-size:11px}
+.wp-step span{font-size:12.5px;line-height:1.2}
+.wp-step i{display:grid;place-items:center}
+.wp-step i .ic{display:block}
+.wp-cut s{line-height:1}
+/* script: a storyboard, four frames from the plan with shot number, framing and length */
+.wp-script{display:grid!important;grid-template-columns:1fr 1fr;gap:8px 10px!important}
+.wp-fr{display:flex;flex-direction:column;gap:6px;min-width:0}
+.wp-img{position:relative;display:block;aspect-ratio:2.35/1;border-radius:8px;overflow:hidden;background:#EEE}
+.wp-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.wp-img b{position:absolute;left:6px;top:6px;display:grid;place-items:center;min-width:24px;height:20px;padding:0 6px;box-sizing:border-box;border-radius:6px;background:#fff;color:var(--orange);font:600 10.5px/1 var(--heading)}
+.wp-cap{display:flex;flex-direction:column;gap:3px;min-width:0;padding:0 2px}
+.wp-cap b{font:600 12px/1.15 var(--heading);color:#1A1A1A;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wp-cap small{font:400 10.5px/1 var(--body);color:#8C8C8C}
+@media (max-width:599px){.wp-tl{font-size:11px}.wp-script{gap:8px!important}}
+/* ===== 18 Nov round 3: icon sizes and matched corners ===== */
+/* rows: 14px outer corner, 8px padding, so the tile inside gets a 6px corner and the two curves run parallel; no ring on the tile */
+.wp-row,.wp-cut{border-radius:14px;padding:8px 12px 8px 8px;background:#F4F4F4;border-color:#F4F4F4}
+.wp-row .wp-tile,.wp-cut .wp-tile{width:32px;height:32px;border-radius:6px;box-shadow:none}
+.wp-tile .ic{width:16px;height:16px}
+/* head: a taller row so the file tile carries an 18px icon */
+.wp-head{min-height:40px}
+.wp-head .wp-tile{width:40px;height:40px;border-radius:10px;box-shadow:none;background:#F4F4F4}
+.wp-head .wp-tile .ic{width:18px;height:18px}
+.wp-ttl b{font-size:14px}
+.wp-ttl small,.wp-head span.wp-ttl small{font-size:12px}
+/* 4 clips: 30px tall, the clock sits 8px from the top, bottom and left edge */
+.wp-head .wp-due{height:30px;box-sizing:border-box;padding:0 12px 0 8px;gap:6px;font-size:12px}
+.wp-head .wp-due .ic{width:14px;height:14px}
+/* tabs: 16px icons in a taller bar */
+.wp-tab{height:34px;gap:7px}
+.wp-tab .ic{width:16px;height:16px}
+.wp-tl{font-size:12.5px;line-height:16px}
+/* shoot: 20px check boxes with a 14px tick */
+.wp-step i{width:20px;height:20px;border-radius:6px}
+.wp-step i .ic{width:14px;height:14px;stroke-width:3}
+.wp-step{border-radius:14px}
+/* one crew: 18px icons in the stage pills */
+.wc-step{height:40px;min-width:40px}
+.wc-step .ic{width:18px;height:18px}
+.ws .ws-c1 .wp{height:372px}
+.wp-db,.wp-edit{gap:6px!important}
+.ws .ws-c1 .wb-copy{padding:20px 24px}
+@media (max-width:900px){.ws .ws-c1 .wp{height:366px}}
+@media (min-width:600px) and (max-width:900px){.ws .ws-c1,.ws .ws-c2{height:640px}}
+@media (max-width:599px){.ws .ws-c1{height:680px}.ws .ws-c1 .wp{height:370px}.wp-tab{gap:5px}.wp-tl{font-size:11px}.wp-row .wp-tile,.wp-cut .wp-tile{width:30px;height:30px}}
+/* shot plan pill: taller, 18px document icon and 16px tick, padding matched to the icon */
+.ws .ws-c1 .wb-bar{height:46px;padding:0 16px 0 14px;gap:10px}
+.wb-bar span{font-size:14px}
+.wb-bar .wb-doc{width:18px;height:18px}
+.wb-ok{gap:6px;font-size:13px}
+.wb-bar .wb-ok .ic{width:16px;height:16px;stroke-width:2}
+@media (max-width:599px){.ws .ws-c1 .wb-bar{height:42px}.wb-bar span{font-size:13px}.wb-ok{font-size:12px}}
 </style>
 
 
@@ -1291,11 +1409,11 @@ html.cur-fine .reel-ctl{display:none}
               <h4 class="h">We plan before we film.</h4>
               <p>Briefs organised, scripts written and every shoot and edit step mapped before the camera rolls.</p>
             </div>
-            <div class="wp" id="wpPlan" aria-hidden="true"><div class="wp-head"><svg class="ic" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M8 13h8"/><path d="M8 17h5"/></svg><b>Acme DevCon</b><span>Content plan</span></div><div class="wp-tabs"><span class="wp-tab on">Board</span><span class="wp-tab">Script</span><span class="wp-tab">Shoot</span><span class="wp-tab">Edit</span></div><div class="wp-body"><div class="wp-pane wp-db on"><div class="wp-row wp-th"><span>Clip</span><span>Format</span><span>Status</span></div><div class="wp-row"><span>Keynote recap</span><span>Reel</span><span class="wp-st" data-s0="Scripted" data-v="scripted">Scripted</span></div><div class="wp-row"><span>Booth tour</span><span>TikTok</span><span class="wp-st" data-s0="Draft" data-v="draft">Draft</span></div><div class="wp-row"><span>Founder Q&amp;A</span><span>YouTube</span><span class="wp-st" data-s0="Draft" data-v="draft">Draft</span></div><div class="wp-row"><span>Speaker cuts</span><span>LinkedIn</span><span class="wp-st" data-s0="Draft" data-v="draft">Draft</span></div></div><div class="wp-pane wp-script"><div class="wp-sc">Scene 1 · Hook</div><div class="wp-ln">Wide on the stage. The room goes quiet.</div><div class="wp-ln"><b>VO</b>“Three things we learned at DevCon.”</div><div class="wp-sc">Scene 2 · Booth</div><div class="wp-ln">Slow push through the crowd to the demo.</div><div class="wp-ln"><b>On screen</b>Live demo, 2pm</div></div><div class="wp-pane wp-steps"><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Shot list locked</span><em>Mon</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Crew call, 8:00</span><em>Tue</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Film the keynote</span><em>Tue</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Booth tour and interviews</span><em>Tue</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Crowd b-roll</span><em>Tue</em></div></div><div class="wp-pane wp-edit"><div class="wp-cut"><span>Keynote recap</span><em>Reel</em><i><b></b></i><s>Editing</s></div><div class="wp-cut"><span>Booth tour</span><em>TikTok</em><i><b></b></i><s>Editing</s></div><div class="wp-cut"><span>Founder Q&amp;A</span><em>YouTube</em><i><b></b></i><s>Editing</s></div><div class="wp-cut"><span>Speaker cuts</span><em>LinkedIn</em><i><b></b></i><s>Editing</s></div></div></div></div>
+            <div class="wp" id="wpPlan" aria-hidden="true"><div class="wp-head"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span><span class="wp-ttl"><b>Acme DevCon</b><small>Content plan</small></span><span class="wp-due"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>4 clips</span></div><div class="wp-tabs"><span class="wp-tab on"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg><span class="wp-tl">Board</span></span><span class="wp-tab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg><span class="wp-tl">Script</span></span><span class="wp-tab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg><span class="wp-tl">Shoot</span></span><span class="wp-tab"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></svg><span class="wp-tl">Edit</span></span></div><div class="wp-body"><div class="wp-pane wp-db on"><div class="wp-row"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg></span><span class="wp-nm"><b>Keynote recap</b><small>Reel</small></span><span class="wp-st" data-s0="Scripted" data-v="scripted">Scripted</span></div><div class="wp-row"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span><span class="wp-nm"><b>Booth tour</b><small>TikTok</small></span><span class="wp-st" data-s0="Draft" data-v="draft">Draft</span></div><div class="wp-row"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 7.75a.75.75 0 0 1 1.142-.638l3.664 2.249a.75.75 0 0 1 0 1.278l-3.664 2.25a.75.75 0 0 1-1.142-.64z"/><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/></svg></span><span class="wp-nm"><b>Founder Q&amp;A</b><small>YouTube</small></span><span class="wp-st" data-s0="Draft" data-v="draft">Draft</span></div><div class="wp-row"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></span><span class="wp-nm"><b>Speaker cuts</b><small>LinkedIn</small></span><span class="wp-st" data-s0="Draft" data-v="draft">Draft</span></div></div><div class="wp-pane wp-script"><div class="wp-fr"><span class="wp-img"><img src="v/wn7.jpg" alt="" loading="lazy"><b>01</b></span><span class="wp-cap"><b>Open on the crowd</b><small>Wide · 0:03</small></span></div><div class="wp-fr"><span class="wp-img"><img src="v/wn12.jpg" alt="" loading="lazy"><b>02</b></span><span class="wp-cap"><b>Keynote close up</b><small>Close · 0:08</small></span></div><div class="wp-fr"><span class="wp-img"><img src="v/wn21.jpg" alt="" loading="lazy"><b>03</b></span><span class="wp-cap"><b>Booth conversations</b><small>Medium · 0:06</small></span></div><div class="wp-fr"><span class="wp-img"><img src="v/w26.jpg" alt="" loading="lazy"><b>04</b></span><span class="wp-cap"><b>Founder Q&amp;A</b><small>Two shot · 0:12</small></span></div></div><div class="wp-pane wp-steps"><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Shot list locked</span><em>Mon</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Crew call, 8:00</span><em>Tue</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Film the keynote</span><em>Tue</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Booth tour and interviews</span><em>Tue</em></div><div class="wp-step"><i><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></i><span>Crowd b-roll</span><em>Tue</em></div></div><div class="wp-pane wp-edit"><div class="wp-cut"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18"/><path d="M3 7.5h4"/><path d="M3 12h18"/><path d="M3 16.5h4"/><path d="M17 3v18"/><path d="M17 7.5h4"/><path d="M17 16.5h4"/></svg></span><span class="wp-nm"><b>Keynote recap</b><small>Reel</small></span><i><b></b></i><s>Editing</s></div><div class="wp-cut"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span><span class="wp-nm"><b>Booth tour</b><small>TikTok</small></span><i><b></b></i><s>Editing</s></div><div class="wp-cut"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 7.75a.75.75 0 0 1 1.142-.638l3.664 2.249a.75.75 0 0 1 0 1.278l-3.664 2.25a.75.75 0 0 1-1.142-.64z"/><path d="M12 17v4"/><path d="M8 21h8"/><rect x="2" y="3" width="20" height="14" rx="2"/></svg></span><span class="wp-nm"><b>Founder Q&amp;A</b><small>YouTube</small></span><i><b></b></i><s>Editing</s></div><div class="wp-cut"><span class="wp-tile"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg></span><span class="wp-nm"><b>Speaker cuts</b><small>LinkedIn</small></span><i><b></b></i><s>Editing</s></div></div></div></div>
           </article>
           <article class="ws-card ws-c2">
             <div class="wb-txt"><h4 class="h">Trusted by GTM teams</h4><p>Teams at LinkedIn, Apollo, Cisco and Docker bring us their events, stories and channels.</p></div>
-            <div class="wb-cloud"><video class="lv" data-src="m/svc_social.mp4" poster="m/svc_social.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><div class="wb-row a"><div class="wb-run"><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_5.svg" alt="Salesforce" loading="lazy"></span></div></div><div class="wb-row b"><div class="wb-run"><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span></div></div></div>
+            <div class="wb-cloud"><video class="lv" data-src="m/svc_social.mp4" poster="m/svc_social.jpg" muted loop playsinline preload="none" aria-hidden="true"></video><div class="wb-row a"><div class="wb-run"><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/salesforce-knockout.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/salesforce-knockout.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/salesforce-knockout.svg" alt="Salesforce" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_1.svg" alt="LinkedIn" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_2.svg" alt="Apollo" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/salesforce-knockout.svg" alt="Salesforce" loading="lazy"></span></div></div><div class="wb-row b"><div class="wb-run"><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_1.svg" alt="Hook" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_3.svg" alt="SaphoBio" loading="lazy"></span><span class="wb-pill"><img src="logos/row2_4.svg" alt="Suncoast Ventures" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_4.svg" alt="Cisco" loading="lazy"></span><span class="wb-pill"><img src="logos/row1_3.svg" alt="Docker" loading="lazy"></span></div></div></div>
           </article>
           <article class="ws-card ws-c3">
             <div class="wb-txt"><h4 class="h">One crew, start to finish.</h4><p>Plans, shoots, edits and cuts under one roof. No handoffs, nothing lost.</p></div>
@@ -1710,11 +1828,18 @@ fv.addEventListener('ended',()=>{if(inView&&!userStopped) show(1);});   // ring 
     const go=n=>{at=n; st.forEach((e,i)=>{e.classList.toggle('on',i===n); e.classList.toggle('done',i<n);});
       requestAnimationFrame(()=>{const r=pos(st[n]), cw=crew.offsetWidth, x=Math.max(0,Math.min(fl.offsetWidth-cw,r.x+r.w/2-cw/2)), a=pos(st[0]);
         crew.style.transform=`translateX(${x}px)`; line.style.width=Math.max(0,r.x+r.w/2-(a.x+a.w/2))+'px';});};
-    const aim=n=>{const r=pos(st[n]); ptr.style.transform=`translate(${r.x+r.w*.6}px,${r.y+r.h*.55}px)`;};
+    // the pointer eases toward the live position of the target pill every frame, so pills growing or shrinking never make it jump
+    const P={x:0,y:0,s:1}, T={n:0}; let pinit=false;
+    const aim=n=>{T.n=n;};
+    const tgt=()=>{const r=pos(st[T.n]); return {x:r.x+Math.min(22,r.w*.5), y:r.y+r.h*.55};};
+    const tick=()=>{const t=tgt(); if(!pinit){P.x=t.x;P.y=t.y;pinit=true;} P.x+=(t.x-P.x)*.085; P.y+=(t.y-P.y)*.085;
+      ptr.style.transform=`translate3d(${P.x.toFixed(2)}px,${P.y.toFixed(2)}px,0) scale(${P.s})`;};
+    if(window.gsap) gsap.ticker.add(()=>{if(live) tick();}); else {const f=()=>{tick();requestAnimationFrame(f);}; requestAnimationFrame(f);}
+    const tap=()=>{if(window.gsap) gsap.timeline().to(P,{s:.82,duration:.12,ease:'power2.out'}).to(P,{s:1,duration:.22,ease:'power2.out'});};
     go(0); aim(1);
     new IntersectionObserver(es=>live=es[0].isIntersecting).observe(fl);
     if(!REDUCED) setInterval(()=>{if(!live||held||document.hidden) return; const n=(at+1)%st.length; aim(n);
-      setTimeout(()=>{if(held) return; ptr.classList.add('tap'); go(n); setTimeout(()=>ptr.classList.remove('tap'),180);},950);},2600);
+      setTimeout(()=>{if(held) return; tap(); go(n);},1150);},2800);
     if(matchMedia('(hover: hover)').matches){
       st.forEach((e,i)=>e.addEventListener('mouseenter',()=>{held=true; fl.classList.add('held'); go(i);}));
       fl.closest('.ws-card').addEventListener('mouseleave',()=>{held=false; fl.classList.remove('held'); aim((at+1)%st.length);});
@@ -1781,7 +1906,7 @@ if(window.Lenis){
   document.documentElement.classList.add('cur-fine');
   const label=c.querySelector('span');
   // labelled discs: "text|or" makes the disc orange
-  [['#reelMedia','Play'],['#featMedia','Watch'],['.stx-card','View|or']].forEach(([s,l])=>$$(s).forEach(e=>e.dataset.c=l));
+  [['#reelMedia','Play'],['#featMedia','Watch'],['.stx-card','View|or'],['.stx-grid','View|or']].forEach(([s,l])=>$$(s).forEach(e=>e.dataset.c=l));
   const LINK='.nav a:not(.btn-orange):not(.btn-dark), .mm-links a, .ft-col a, .ft-mail, .ft-tel, .btn-text';
   const P={x:innerWidth/2,y:innerHeight/2}, A={...P}, C={...P}, ease=(dt,tau)=>1-Math.exp(-dt/tau);
   let last=performance.now(), seen=false, state='';
@@ -2074,7 +2199,9 @@ ScrollTrigger.create({trigger:'#foot',start:'top 75%',once:true,onEnter:()=>{
   const svg=fab.querySelector('.fab-ring'), rects=[...svg.querySelectorAll('rect')], pr=svg.querySelector('.pr');
   const size=()=>{const w=fab.offsetWidth, h=fab.offsetHeight; if(!w) return; svg.setAttribute('viewBox',`0 0 ${w} ${h}`);
     rects.forEach(r=>{r.setAttribute('x',1);r.setAttribute('y',1);r.setAttribute('width',w-2);r.setAttribute('height',h-2);r.setAttribute('rx',(h-2)/2);});};
-  const upd=()=>{const max=document.documentElement.scrollHeight-innerHeight, p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+  const foot=document.getElementById('foot');
+  // progress runs from the top of the page to the moment the footer's top edge enters the screen, then holds at 100%
+  const upd=()=>{const t=foot?foot.getBoundingClientRect().top:0, end=foot?scrollY+t-innerHeight:document.documentElement.scrollHeight-innerHeight, p=end>0?Math.min(1,Math.max(0,scrollY/end)):1;
     pr.style.strokeDashoffset=(1-p).toFixed(4); fab.classList.toggle('on',scrollY>innerHeight*1.2);};
   size(); document.fonts&&document.fonts.ready.then(size);
   addEventListener('scroll',upd,{passive:true}); addEventListener('resize',()=>{size();upd();}); upd();})();
